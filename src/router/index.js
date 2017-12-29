@@ -50,6 +50,18 @@ export default new Router({
           component: r => require.ensure([], () => r(require(`../views/Home/picGroup.vue`)), 'home_pic')
         }
       ]
+    },
+    // --- 消息
+    {
+      path: '/info',
+      name: 'Info',
+      component: r => require.ensure([], () => r(require(`../views/Info/index.vue`)), 'info')
+    },
+    // --- 个人主页
+    {
+      path: '/personal',
+      name: 'Personal',
+      component: r => require.ensure([], () => r(require(`../views/Personal/index.vue`)), 'personal')
     }
   ]
 })

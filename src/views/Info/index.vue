@@ -1,8 +1,7 @@
-<!-- 默认首页头条 -->
+<!-- 消息中心 -->
 <template>
   <div>
-    {{msg}}新闻
-    <i class="iconfont icon-VS"></i>
+    {{msg}}
     <router-view/>
   </div>
 </template>
@@ -10,7 +9,7 @@
   export default {
     data () {
       return {
-        msg: '头条'
+        msg: '消息中心'
       }
     }
   }

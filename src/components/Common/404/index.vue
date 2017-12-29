@@ -1,6 +1,6 @@
 <template>
   <div class="not-found">
-    <img :src="img" alt="404">
+    <img :src="img" alt="404" class="img-responsive">
   </div>
 </template>
 

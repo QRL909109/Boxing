@@ -2,7 +2,6 @@
 <template>
   <div>
     {{msg}}新闻
-    <i class="iconfont icon-VS"></i>
     <router-view/>
   </div>
 </template>

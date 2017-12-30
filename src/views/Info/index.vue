@@ -1,7 +1,14 @@
 <!-- 消息中心 -->
 <template>
   <div>
-    {{msg}}
+    <div class="info-wrap">
+      <div class="info-left"></div>
+      <div class="info-right">
+        <p>{{ msg1 }}</p>
+        <p>{{ msg2 }}}</p>
+        <span>{{ time }}</span>
+      </div>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -9,8 +16,14 @@
   export default {
     data () {
       return {
-        msg: '消息中心'
+        msg1: '消息中心',
+        msg2: '来拳击队训练',
+        time: '晚上8:00'
       }
     }
   }
 </script>
+<style scope lang="sass">
+.info-wrap
+
+</style>

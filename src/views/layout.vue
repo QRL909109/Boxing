@@ -1,13 +1,14 @@
 <!-- 基本布局-底部布局 -->
 <template>
-  <div class="app-wrapper">
+  <view-box ref="viewBox">
     <!-- 展示主体界面 -->
     <router-view/>
     <footer-nav />
-  </div>
+  </view-box>
 </template>
 <script>
 import footerNav from '@/components/FooterNav'
+import { ViewBox } from 'vux'
 export default {
   data () {
     return {
@@ -15,7 +16,8 @@ export default {
     }
   },
   components: {
-    footerNav
+    footerNav,
+    ViewBox
   }
 }
 </script>

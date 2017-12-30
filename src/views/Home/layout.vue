@@ -4,15 +4,11 @@
     <tab :line-width=2 active-color='#F44336' v-model="index">
       <tab-item class="vux-center" :selected="demo2 === item" v-for="(item, index) in list2" @click="demo2 = item" :key="index">{{item}}</tab-item>
     </tab>
-    <swiper v-model="index" height="100px" :show-dots="false">
-      <swiper-item>
-        <router-view/>
-      </swiper-item>
-    </swiper>
+    <router-view/>
   </div>
 </template>
 <script>
-import { Tab, TabItem, Swiper, SwiperItem } from 'vux'
+import { Tab, TabItem } from 'vux'
 export default {
   data () {
     return {
@@ -23,9 +19,7 @@ export default {
   },
   components: {
     Tab,
-    TabItem,
-    Swiper,
-    SwiperItem
+    TabItem
   }
 }
 </script>

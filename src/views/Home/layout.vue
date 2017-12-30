@@ -13,12 +13,13 @@
 </template>
 <script>
 import { Tab, TabItem, Swiper, SwiperItem } from 'vux'
+import { list2 } from '../../config/homeList.js'
 export default {
   data () {
     return {
       index: 0,
-      list2: ['精选', '美食', '电影', '酒店', '外卖'],
-      demo2: '美食'
+      list2,
+      demo2: '头条'
     }
   },
   components: {

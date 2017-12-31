@@ -11,10 +11,16 @@
         </div>
       </div>
     </scroller>
+    <panel 
+      header="名人推荐"  
+      :list="list" 
+      type="5">
+      </panel>
+  </div>
   </section>
 </template>
 <script>
-import { Swiper, Scroller, Divider } from 'vux'
+import { Swiper, Scroller, Divider, Panel } from 'vux'
 import vsModel from '@/components/VSModel'
 // 测试图片 后面删除
 import pic1 from '@/assets/img/1.jpeg'
@@ -98,6 +104,21 @@ export default {
           name: '谢俊鹏',
           img: xjp
         }]
+      }],
+      list: [{
+        src: bq,
+        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
+        title: '播求',
+        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
+        url: '/component/cell'
+      }, {
+        src: xjp,
+        title: '谢俊鹏',
+        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
+        url: {
+          path: '/component/radio',
+          replace: false
+        }
       }]
     }
   },
@@ -105,7 +126,8 @@ export default {
     Swiper,
     Scroller,
     vsModel,
-    Divider
+    Divider,
+    Panel
   },
   methods: {
     handleWidth () {

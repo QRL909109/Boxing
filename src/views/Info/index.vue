@@ -1,29 +1,36 @@
 <!-- 消息中心 -->
 <template>
   <div>
-    <div class="info-wrap">
-      <div class="info-left"></div>
-      <div class="info-right">
-        <p>{{ msg1 }}</p>
-        <p>{{ msg2 }}}</p>
-        <span>{{ time }}</span>
-      </div>
-    </div>
+    <group>
+      <cell :title="msg1" inline-desc="来自拳击队训练" value="昨天">
+        <i slot="icon" class="iconfont icon-xinxi"></i>
+      </cell>
+      <cell :title="msg2" inline-desc="恭喜您获奖了" value="早上9:00">
+        <i slot="icon" class="iconfont icon-geren"></i>
+      </cell>
+    </group>
     <router-view/>
   </div>
 </template>
 <script>
+  import { Group, Cell } from 'vux'
   export default {
     data () {
       return {
         msg1: '消息中心',
-        msg2: '来拳击队训练',
-        time: '晚上8:00'
+        msg2: '会员中心'
       }
+    },
+    components: {
+      Group,
+      Cell
     }
   }
 </script>
-<style scope lang="sass">
-.info-wrap
-
+<style scoped>
+i {
+  font-size: 31px;
+  color: #fdae2d;
+}
+  
 </style>

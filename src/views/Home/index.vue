@@ -11,9 +11,9 @@
         </div>
       </div>
     </scroller>
+     <divider>名人推荐</divider>
     <div class="man-wrap">
-      <panel 
-        header="名人推荐"  
+      <panel  
         :list="list" 
         type="5">
       </panel>

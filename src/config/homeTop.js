@@ -1,4 +1,3 @@
-// export const topList = ['头条', '赛事视频', '竞猜', '精彩视频', '图集']
 export const topList = [{
   name: '头条',
   link: '/home/main/index'

@@ -1,6 +1,6 @@
 <!-- 默认首页头条 -->
 <template>
-  <section class="">
+  <section>
     <!-- 轮播图 -->
     <swiper :list="swiperList" auto loop :aspect-ratio="300/800" height="180px" dots-class="custom-bottom" />
     <divider>赛事预告</divider>
@@ -11,11 +11,13 @@
         </div>
       </div>
     </scroller>
-    <panel 
-      header="名人推荐"  
-      :list="list" 
-      type="5">
+    <div class="man-wrap">
+      <panel 
+        header="名人推荐"  
+        :list="list" 
+        type="5">
       </panel>
+    </div>
   </div>
   </section>
 </template>
@@ -110,15 +112,33 @@ export default {
         fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
         title: '播求',
         desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: '/component/cell'
+        url: '/home'
+      }, {
+        src: sbsda,
+        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
+        title: '播求',
+        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
+        url: '/home'
+      }, {
+        src: wjr,
+        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
+        title: '播求',
+        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
+        url: '/home'
       }, {
         src: xjp,
         title: '谢俊鹏',
         desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
         url: {
-          path: '/component/radio',
+          path: '/home',
           replace: false
         }
+      }, {
+        src: bq,
+        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
+        title: '播求',
+        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
+        url: '/home'
       }]
     }
   },
@@ -132,7 +152,7 @@ export default {
   methods: {
     handleWidth () {
       this.scrollerWidth = this.$refs.vsModel.map(item => item.$el.clientWidth)
-        .reduce((x, y) => x + y + 5)
+        .reduce((x, y) => x + y + 10)
     }
   },
   mounted () {
@@ -151,4 +171,8 @@ export default {
     float: left
     &:first-child
       margin-left: 0
+.man-wrap
+  height: 300px
+  margin: 0.3rem 0 1rem
+  overflow-y: auto
 </style>

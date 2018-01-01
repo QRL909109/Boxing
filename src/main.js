@@ -11,6 +11,8 @@ import 'normalize.css'
 import 'lib-flexible'
 import 'inobounce'
 import FastClick from 'fastclick'
+ // filters
+import * as filters from '@/lib/filter'
 import {
   WechatPlugin,
   AlertPlugin,
@@ -36,6 +38,11 @@ router.beforeEach(function (to, from, next) {
 router.afterEach(function (to) {
   store.commit('updateLoadingStatus', {isLoading: false})
 })
+
+Object.keys(filters).forEach(filter => {
+  Vue.filter(filter, filters[filter])
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -7,11 +7,11 @@
     <scroller lock-y scrollbar-x>
       <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
         <div class="scroller-box-item" v-for="(item, index) in trailerList">
-          <vs-model :data="item" ref="vsModel"></vs-model>
+          <vs-model :data="item" ref="vsModel" :statusShow=false></vs-model>
         </div>
       </div>
     </scroller>
-     <divider>名人推荐</divider>
+    <divider>名人推荐</divider>
     <div class="man-wrap">
       <panel  
         :list="list" 
@@ -59,6 +59,7 @@ export default {
       trailerList: [{
         link: '',
         date: '2018-1-2',
+        status: 1,
         palyer: [{
           name: '金东秀',
           img: jdx
@@ -69,6 +70,7 @@ export default {
       }, {
         link: '',
         date: '2018-1-4',
+        status: 0,
         palyer: [{
           name: '谢俊鹏',
           img: xjp
@@ -79,6 +81,7 @@ export default {
       }, {
         link: '',
         date: '2018-1-12',
+        status: 1,
         palyer: [{
           name: '西川智之',
           img: xczz
@@ -89,6 +92,7 @@ export default {
       }, {
         link: '',
         date: '2018-1-20',
+        status: 0,
         palyer: [{
           name: '金东秀',
           img: jdx
@@ -98,6 +102,7 @@ export default {
         }]
       }, {
         link: '',
+        status: 1,
         date: '2018-1-22',
         palyer: [{
           name: '维吉尔',
@@ -162,10 +167,10 @@ export default {
 </script>
 <style lang="sass">
 .scroller-box
-  height: 100px
+  height: 110px
   position: relative
   .scroller-box-item
-    height: 100px
+    height: 110px
     display: inline-block
     margin-left: 5px
     float: left

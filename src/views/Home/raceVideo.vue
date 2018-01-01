@@ -1,6 +1,7 @@
 <!-- 赛事视频 -->
 <template>
-  <div>{{msg}}</div>
+  <div class="race-wrap">
+  {{msg}}</div>
 </template>
 <script>
   export default {

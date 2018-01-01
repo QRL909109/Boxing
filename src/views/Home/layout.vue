@@ -26,6 +26,14 @@ export default {
     TabItem,
     ViewBox
   },
+  watch: {
+    $route: {
+      handler (val, old) {
+        this.currentIndex = val.meta.index
+      },
+      immediate: true
+    }
+  },
   methods: {
     handleLink (item, index) {
       this.currentIndex = index

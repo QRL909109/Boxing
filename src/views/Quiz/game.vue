@@ -3,7 +3,7 @@
   <div class="quiz-game">
     <div class="game-title">
       <h2 class="title">
-        城市英雄151大足站
+        {{analysisList.articleTitle}}
       </h2>
       <div class="all-money">
         <i class="iconfont icon-jinbi jinbi"></i>
@@ -17,9 +17,9 @@
         <i class="iconfont icon-faqibisai red-font"></i>
       </div>
       <div class="intro text-center">
-        <p>冠军赛 - 大足站</p>
-        <p>65kg自由搏击</p>
-        <p>比赛时间: 1-12 12:00</p>
+        <p> {{analysisList.title}} </p>
+        <p> {{analysisList.type}} </p>
+        <p>比赛时间: {{analysisList.time}}</p>
       </div>
       <div class="bule-rival rival-item">
         <img :src="bq" alt="" class="img-radio">
@@ -29,11 +29,10 @@
     <!-- 资料 -->
     <div class="analysis">
       <div class="name">
-        <p class="peo">张智鹏</p>
-        <p class="peo">播求</p>
+        <p class="peo" v-for="item in analysisList.opponent">{{item.name}}</p>
       </div>
       <div class="data">
-        <div class="progress" v-for="(item, index) in analysisList">
+        <div class="progress" v-for="(item, index) in playerInfo">
           <progress-bar :data="item"/>
         </div>
       </div>
@@ -48,43 +47,25 @@
           <span class="money">325</span>
         </div>
         <div class="time">
-          截止时间: 2018-1-23 18:40
+          截止时间: {{analysisList.time}}
         </div>
       </div>
       <div class="result">
-        <div class="btn text-center active" @click="handleGuess">
-          <p>1.55</p>
-          <p>张智鹏</p>
-        </div>
-        <div class="btn text-center">
-          <p>1.65</p>
-          <p>播求</p>
+        <div class="btn text-center" v-for="item in analysisList.opponent" @click="handleGuess">
+          <p>{{item.magnification}}</p>
+          <p>{{item.name}}</p>
         </div>
       </div>
     </div>
     <!-- 竞猜投钱 -->
-    <popup v-model="guessActive" position="bottom">
-      <div class="guess-vertical-wrap">
-        <div class="note">
-          <section-title title="请选择金币"></section-title>
-          <div class="red-font">*多次点击可重复参与</div>
-        </div>
-        <div class="monoey-list">
-          <ul>
-            <li v-for="(item, index) in moneyList" class="bin" @click="handleGuessMoney(item)">
-              {{item}}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </popup>
+    <betting :active="guessActive" @on-hide="handleHideBetting"/>
   </div>
 </template>
 <script>
   import progressBar from '@/components/ProgressBar'
-  import { Divider, Popup } from 'vux'
-  import { moneyList } from '@/config/money'
+  import { Divider } from 'vux'
   import sectionTitle from '@/components/section/title'
+  import betting from '@/components/Betting'
   // 待删除
   import bq from '@/assets/img/bq.jpg'
   import jdx from '@/assets/img/jdx.jpg'
@@ -94,8 +75,22 @@
         bq,
         jdx,
         guessActive: false,
-        moneyList,
-        analysisList: [{
+        analysisList: {
+          articleTitle: '城市英雄151大足站',
+          title: '冠军赛 - 大足站',
+          type: '65kg自由搏击',
+          time: '2018-1-12 12:00',
+          opponent: [{
+            name: '张志鹏',
+            img: jdx,
+            magnification: 1.67
+          }, {
+            name: '播求',
+            img: bq,
+            magnification: 2.67
+          }]
+        },
+        playerInfo: [{
           man1: {
             name: '身高',
             value: 110
@@ -156,24 +151,16 @@
       handleGuess () {
         this.guessActive = true
       },
-      handleGuessMoney (num) {
-        this.$vux.alert.show({
-          title: '竞猜成功',
-          content: `投注${num}`,
-          onShow () {
-            console.log('Plugin: I\'m show now')
-          },
-          onHide () {
-            console.log('Plugin: I\'m hiding now')
-          }
-        })
+      handleHideBetting () {
+        this.guessActive = false
+        console.log(33333, this.guessActive)
       }
     },
     components: {
       progressBar,
       Divider,
-      Popup,
-      sectionTitle
+      sectionTitle,
+      betting
     }
   }
 </script>
@@ -253,26 +240,5 @@
         line-height: 0.6rem
         &.active
           background: $blue-grey-500
-.guess-vertical-wrap
-  height: 1.5rem
-  display: flex
-  flex-direction: row
-  padding: 0.3rem
-  justify-content: space-between
-  .monoey-list
-    ul
-      list-style: none
-      display: flex
-      padding: 0
-      margin: 0
-      li
-        width: 1.5rem
-        height: 1.5rem
-        margin-left: 0.08rem
-        border: 1px solid $orange
-        border-radius: 50%
-        line-height: 1.5rem
-        text-align: center
-        background: $orange
-        color: $white
+
 </style>

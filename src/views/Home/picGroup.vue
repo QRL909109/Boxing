@@ -6,7 +6,7 @@
   export default {
     data () {
       return {
-        msg: '图片'
+        msg: '图片111'
       }
     }
   }

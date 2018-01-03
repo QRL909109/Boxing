@@ -12,8 +12,8 @@
     </div>
     <!-- 双方 -->
     <div class="rival">
-      <div class="red-rival rival-item">
-        <img :src="jdx" alt="" class="img-radio">
+      <div class="red-rival rival-item" @click="handleIntro">
+        <img :src="analysisList.opponent[0].img" alt="" class="img-radio">
         <i class="iconfont icon-faqibisai red-font"></i>
       </div>
       <div class="intro text-center">
@@ -21,13 +21,13 @@
         <p> {{analysisList.type}} </p>
         <p>比赛时间: {{analysisList.time}}</p>
       </div>
-      <div class="bule-rival rival-item">
-        <img :src="bq" alt="" class="img-radio">
+      <div class="bule-rival rival-item" @click="handleIntro">
+        <img :src="analysisList.opponent[1].img" alt="" class="img-radio">
         <i class="iconfont icon-faqibisai bule-font"></i>
       </div>
     </div>
     <!-- 资料 -->
-    <div class="analysis">
+    <div class="analysis box-shadow-model">
       <div class="name">
         <p class="peo" v-for="item in analysisList.opponent">{{item.name}}</p>
       </div>
@@ -154,6 +154,11 @@
       handleHideBetting () {
         this.guessActive = false
         console.log(33333, this.guessActive)
+      },
+      handleIntro () {
+        this.$router.push({
+          path: '/quiz/introduction'
+        })
       }
     },
     components: {
@@ -189,17 +194,15 @@
       position: relative
       img
         width: 2rem
+        max-height: 2rem
       i
         position: absolute
         bottom: 0
         +font-dpr(20px)
     .intro
       +font-dpr(14px)
-      line-height: 0.7rem
+      line-height: 0.6rem
   .analysis
-    padding: 0.2rem 0.3rem
-    margin: 0.3rem
-    box-shadow: $shadow-4db
     .name
       display: flex
       justify-content: space-between
@@ -212,7 +215,7 @@
         margin-bottom: $spacing
   .guess-wrap
     padding: 0.1rem 0.3rem
-    margin-bottom: $spacing
+    margin-bottom: 0.8rem
     .title
       border-left: 0.1rem solid $orange
       padding-left: 0.2rem

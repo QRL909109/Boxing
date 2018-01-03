@@ -5,12 +5,17 @@
       <div class="self-maony">
         <i class="iconfont icon-jinbi jinbi"></i> 
         <span class="money"> 325</span>
-        <i class="iconfont icon-add_c add"></i>
+        <i class="iconfont icon-add_c add" @click="handleAddMoney"></i>
       </div>
       <div class="quiz-tab">
         <ul>
-          <li v-for="(item, index) in headerList">
-            {{item}}
+          <li v-for="(item, index) in headerList" class="text-center">
+            <router-link :to="item.link">
+              <i class="iconfont" :class="item.icon"></i>
+              <p class="name">
+                {{item.name}}
+              </p>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -25,7 +30,26 @@
   export default {
     data () {
       return {
-        headerList: ['首页', '充值', '记录']
+        headerList: [{
+          name: '首页',
+          icon: 'icon-shouye',
+          link: '/home'
+        }, {
+          name: '充值',
+          icon: 'icon-chongzhi',
+          link: '/recharge'
+        }, {
+          name: '记录',
+          icon: 'icon-jilu',
+          link: '/quiz/recording'
+        }]
+      }
+    },
+    methods: {
+      handleAddMoney () {
+        this.$router.push({
+          path: '/recharge'
+        })
       }
     },
     components: {
@@ -41,6 +65,7 @@
     display: flex
     justify-content: space-between
     align-self: center
+    align-items: center
     margin: 0.4rem 0
     .self-maony
       height: 0.7rem
@@ -64,4 +89,6 @@
         margin: 0
         li
           padding: 0.15rem 0.5rem
+          .iconfont
+            +font-dpr(18px)
 </style>

@@ -33,7 +33,7 @@
         bgColor: '#fff',
         quizList: [{
           title: '城市英雄赛',
-          link: '/quiz/index',
+          link: '/quiz/game',
           date: '2018-1-2',
           status: 1,
           palyer: [{
@@ -45,7 +45,7 @@
           }]
         }, {
           title: '城市英雄赛',
-          link: '/quiz/index',
+          link: '/quiz/game',
           date: '2018-1-2',
           status: 1,
           palyer: [{
@@ -57,7 +57,7 @@
           }]
         }, {
           title: '城市英雄赛',
-          link: '/quiz/index',
+          link: '/quiz/game',
           date: '2018-1-2',
           status: 1,
           palyer: [{

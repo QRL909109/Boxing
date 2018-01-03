@@ -80,6 +80,12 @@ export default new Router({
         component: r => require.ensure([], () => r(require(`../views/Personal/index.vue`)), 'personal_index')
       }]
     },
+    // --- 充值界面
+    {
+      path: '/recharge',
+      name: 'Recharge',
+      component: r => require.ensure([], () => r(require(`../views/Recharge/index.vue`)), 'recharge_index')
+    },
     // --- 竞猜界面
     {
       path: '/quiz',
@@ -102,6 +108,10 @@ export default new Router({
         path: 'introduction',
         name: 'quiz_introduction',
         component: r => require.ensure([], () => r(require(`../views/Quiz/introduction.vue`)), 'quiz_introduction')
+      }, {
+        path: 'recording',
+        name: 'quiz_recording',
+        component: r => require.ensure([], () => r(require(`../views/Quiz/recording.vue`)), 'quiz_recording')
       }]
     }
   ]

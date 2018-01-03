@@ -1,6 +1,6 @@
 export const footerNav = [{
   text: '首页',
-  iconClass: 'icon-shouye-copy-copy-copy',
+  iconClass: 'icon-shouye',
   link: '/home'
 }, {
   text: '信息',

@@ -2,7 +2,7 @@
 <template>
   <div class="home-wrap height100"> 
     <view-box ref="viewBox">
-      <tab :line-width=2 active-color='#F44336' slot="header">
+      <tab :line-width=2 active-color='#D43C33' slot="header">
         <tab-item class="vux-center" v-for="(item, index) in topList" :selected="currentIndex === index" @on-item-click="handleLink(item, index)" :key="index">
           {{item.name}}
         </tab-item>

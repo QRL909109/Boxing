@@ -33,6 +33,7 @@
   @import '~assets/sass/mixin'
   @import '~assets/sass/color'
   .pic-group-wrap
+    margin-bottom: 1.5rem
     .pic-group
       img
         max-height: 200px

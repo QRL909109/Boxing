@@ -33,6 +33,7 @@
 <style lang="sass">
   @import '~assets/sass/mixin'
   .super-wrap
+    margin-bottom: 1.5rem
     .video
       position: relative
       color: #fff

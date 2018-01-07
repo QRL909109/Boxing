@@ -1,29 +1,49 @@
 <!-- 默认首页头条 -->
 <template>
-  <section>
+  <section class="home-index-wrap">
     <!-- 轮播图 -->
-    <swiper :list="swiperList" auto loop :aspect-ratio="300/800" height="180px" dots-class="custom-bottom" />
-    <divider>赛事预告</divider>
-    <scroller lock-y scrollbar-x>
-      <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
-        <div class="scroller-box-item" v-for="(item, index) in trailerList">
-          <vs-model :data="item" ref="vsModel" :statusShow=false></vs-model>
-        </div>
-      </div>
-    </scroller>
-    <divider>名人推荐</divider>
-    <div class="man-wrap">
-      <panel  
-        :list="list" 
-        type="5">
-      </panel>
+    <swiper :list="swiperList" 
+    auto loop 
+    :aspect-ratio="300/800" 
+    height="200px" 
+    dots-class="custom-bottom"/>
+
+    <div class="mg-b-2">
+      <announcement :data="announcementList"/>
     </div>
+    <div class="mg-b-2">
+      <title-model title="赛事预告" path="/home">
+        <span slot="right">sss</span>
+        <scroller lock-y scrollbar-x class="pd-l-2">
+          <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
+            <div class="scroller-box-item" v-for="(item, index) in trailerList">
+              <vs-model :data="item" ref="vsModel" :statusShow=false></vs-model>
+            </div>
+          </div>
+        </scroller>
+      </title-model>
+    </div>
+    
+     <div class="mg-b-2">
+      <title-model title="名人介绍" path="/info">
+        <div class="man-wrap pd-l-2">
+          <panel-model  
+            :list="list"
+            path="/quiz/introduction"
+            type="left">
+          </panel-model>
+        </div>
+      </title-model>
+     </div>
   </div>
   </section>
 </template>
 <script>
-import { Swiper, Scroller, Divider, Panel } from 'vux'
+import { Swiper, Scroller, Divider } from 'vux'
 import vsModel from '@/components/VSModel'
+import announcement from '@/components/Announcement'
+import titleModel from '@/components/titleModel'
+import panelModel from '@/components/panelModel'
 // 测试图片 后面删除
 import pic1 from '@/assets/img/1.jpeg'
 import pic2 from '@/assets/img/2.png'
@@ -55,6 +75,17 @@ export default {
         url: 'javascript:',
         img: pic4,
         title: '擂台上“踹脸狂魔”,台下爱看悬疑小说,她是中国最有气势女拳手！'
+      }],
+      announcementList: [{
+        name: '恭喜会员求真相竞猜中奖，获得20W现金！'
+      }, {
+        name: '恭喜会员裏XX竞猜中奖，获得20W现金！'
+      }, {
+        name: '恭喜会员ppW竞猜中奖，获得20W现金，5万竞猜币！5万竞猜币！'
+      }, {
+        name: '恭喜会员求真相竞猜中奖，获得20W现金！'
+      }, {
+        name: '恭喜会员求真相竞猜中奖，获得20W现金！'
       }],
       trailerList: [{
         link: '',
@@ -114,36 +145,30 @@ export default {
       }],
       list: [{
         src: bq,
-        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
         title: '播求',
         desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: '/home'
+        id: 123
       }, {
         src: sbsda,
-        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
         title: '播求',
         desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: '/home'
+        id: 234
       }, {
         src: wjr,
-        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
         title: '播求',
         desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: '/home'
+        id: 345
       }, {
         src: xjp,
         title: '谢俊鹏',
         desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: {
-          path: '/home',
-          replace: false
-        }
+        id: 678
       }, {
         src: bq,
         fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
         title: '播求',
         desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: '/home'
+        id: 567
       }]
     }
   },
@@ -152,7 +177,9 @@ export default {
     Scroller,
     vsModel,
     Divider,
-    Panel
+    announcement,
+    titleModel,
+    panelModel
   },
   methods: {
     handleWidth () {
@@ -166,18 +193,29 @@ export default {
 }
 </script>
 <style lang="sass">
-.scroller-box
-  height: 110px
-  position: relative
-  .scroller-box-item
+@import '~assets/sass/color'
+.home-index-wrap
+  margin-bottom: 50px
+  .vux-slider 
+    .vux-indicator-right 
+      > a 
+        > .vux-icon-dot.active
+          background-color: $red
+  .mg-b-2
+    margin-bottom: 0.2rem
+  .pd-l-2
+    padding: 0.2rem 0 0.2rem 0.2rem
+  .scroller-box
     height: 110px
-    display: inline-block
-    margin-left: 5px
-    float: left
-    &:first-child
-      margin-left: 0
-.man-wrap
-  height: 300px
-  margin: 0.3rem 0 1rem
-  overflow-y: auto
+    position: relative
+    .scroller-box-item
+      height: 110px
+      display: inline-block
+      margin-left: 5px
+      float: left
+      &:first-child
+        margin-left: 0
+  .man-wrap
+    height: 300px
+    overflow-y: auto
 </style>

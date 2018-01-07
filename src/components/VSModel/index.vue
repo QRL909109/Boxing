@@ -5,21 +5,32 @@
       <div class="wrap">
         <div class="player">
           <img :src="data.palyer[0].img" class="img-radio" :alt="data.palyer[0].name">
-          <div class="name">{{data.palyer[0].name}}</div>
+          <div class="vs-model__name">
+            <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
+            {{data.palyer[0].name}}
+          </div>
         </div>
         <div class="center">
-          <i class="iconfont icon-VS"></i>
+          <!-- <i class="iconfont icon-VS"></i> -->
+          <div class="vs-block_1" v-if="vsType == 1">VS</div>
+          <div class="vs-block_2" v-if="vsType == 2">
+            <span>V</span><span>S</span>
+          </div>
           <slot name="time"> 
             <time class="time">{{ data.date }}</time>
           </slot>
           <div v-show="statusShow" class="status text-center" :class="{'active': data.status === 1}">{{ fiterStatus(data.status) }}</div>
+          <slot name="footer"></slot>
         </div>
         <div class="player">
           <img :src="data.palyer[1].img" class="img-radio" :alt="data.palyer[1].name">
-          <div class="name">{{data.palyer[1].name}}</div>
+          <div class="vs-model__name">
+            <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
+            {{data.palyer[1].name}}
+          </div>
         </div>
       </div>
-      <slot name="footer"></slot>
+      
     </router-link>
   </div>
 </template>
@@ -38,10 +49,13 @@
         default: {}
       },
       bgColor: {
-        default: '#f5f5f5'
+        default: '#fff'
       },
       statusShow: {
         default: false
+      },
+      vsType: {
+        default: 1
       }
     },
     methods: {
@@ -55,6 +69,8 @@
 .vs-model
   padding: 0.2rem
   background: $grey-100
+  border-radius: 4px;
+  border: 1px solid #E4E4E4
   .wrap
     display: flex
     .player
@@ -62,23 +78,42 @@
       text-align: center
       img
         width: 2rem
-      .name
+      .vs-model__name
         +text-overflow
+        margin-top: 0.05rem
+        .icon-countries
+          width: 20px
     .center
       display: flex
       flex-direction: column
       justify-content: center
       align-items: center
-      margin: -0.4rem 0.1rem 0
+      margin: 0 0.25rem 0
       .time
-        font-size: 14px
+        font-size: 12px
         font-family: Arial
+        color: #666
+      .vs-block_1
+        padding: 0.1rem 0.3rem
+        border-radius: 2px
+        background: $red
+        color: $white
+        +font-dpr(14px)
+        font-weight: 600
+        margin-bottom: 0.2rem
+      .vs-block_2
+        +font-dpr(24px)
+        font-weight: 600
+        span
+          &:first-child
+            color: $blue-600
+          &:last-child
+            color: $red
       .iconfont
         font-size: 30px
         color: $red
       .status
         margin-top: 5px
+        margin-bottom: 0.5rem
         color: $grey-600
-        &.active
-          color: $red
 </style>

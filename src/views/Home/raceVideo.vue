@@ -84,6 +84,7 @@ export default {
 }
 </script>
 <style lang="sass">
+.race-wrap
   h3
     text-align: center
     background-color: #CFD8DC

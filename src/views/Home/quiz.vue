@@ -1,12 +1,13 @@
 <!-- 竞猜 -->
 <template>
   <div class="quiz-wrap">
-    <div class="quiz-model" v-for="(item, index) in quizList"> 
-      <card :header="{title: item.title }" :footer="{title: '立即竞猜 >', link: item.link}">
-        <div slot="content" class="card-padding">
-           <vs-model :data="item" :statusShow=true :bgColor="bgColor">
+    <div class="quiz-model" v-for="(item, index) in quizList">
+      <title-model :title="item.date" path="/home">
+        <div class="card-padding">
+           <vs-model :data="item" :statusShow=true vsType="2">
+            <span slot="time"></span>
              <div slot="footer" class="win-model">
-               <div class="bule-bg bule">
+               <div class="deep-bule-bg bule">
                  <p>1.68</p>
                  <p>蓝胜</p>
                </div>
@@ -17,23 +18,24 @@
              </div>
            </vs-model>
         </div>
-      </card>
+      </title-model>
+      
     </div>
   </div>
 </template>
 <script>
   import { Card } from 'vux'
   import vsModel from '@/components/VSModel'
+  import titleModel from '@/components/titleModel'
   // 待删除
   import bq from '@/assets/img/bq.jpg'
   import jdx from '@/assets/img/jdx.jpg'
   export default {
     data () {
       return {
-        bgColor: '#fff',
         quizList: [{
           title: '城市英雄赛',
-          link: '/quiz/index',
+          link: '/quiz/game',
           date: '2018-1-2',
           status: 1,
           palyer: [{
@@ -45,7 +47,7 @@
           }]
         }, {
           title: '城市英雄赛',
-          link: '/quiz/index',
+          link: '/quiz/game',
           date: '2018-1-2',
           status: 1,
           palyer: [{
@@ -57,7 +59,7 @@
           }]
         }, {
           title: '城市英雄赛',
-          link: '/quiz/index',
+          link: '/quiz/game',
           date: '2018-1-2',
           status: 1,
           palyer: [{
@@ -72,23 +74,28 @@
     },
     components: {
       Card,
-      vsModel
+      vsModel,
+      titleModel
     }
   }
 </script>
 <style lang="sass">
+@import '~assets/sass/color'
 .quiz-wrap
-  padding: 0.4rem
+  padding-top: 0.4rem
   background-color: #fafafa
   margin-bottom: 1rem
   .quiz-model
-    margin-bottom: 0.5rem
+    margin-bottom: 0.3rem
     .win-model
       display: flex
       justify-content: center
       flex-direction: row
       color: #fff
+      .deep-bule-bg
+        background-color: $blue-600
       .bule, .red
+        border-radius: 2px
         padding: 0.1rem 0.35rem
         margin-left: 0.2rem
         p

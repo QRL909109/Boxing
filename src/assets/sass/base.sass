@@ -10,6 +10,7 @@ html, body
   letter-spacing: 1px
   font-family: "Source Sans Pro", Arial, sans-serif
   overflow: hidden
+  background: $grey-200
   >div 
     width: inherit
     height: inherit
@@ -75,14 +76,23 @@ input
 .swiper-pagination-bullet-active
   background-color: $grey-400 !important
 .img-responsive
-  max-width: 100%
+  width: 100%
   display: block
+  margin: 0 auto
 .img-radio
   border-radius: 50%
 .height100
   height: 100%
 .text-center
   text-align: center
+.text-left
+  text-align: left
+.text-right
+  text-align: right
+.pull-right
+  float: right
+.pull-left
+  float: left
 .bule-bg
   background-color: $blue
 .bule-font
@@ -96,6 +106,7 @@ input
 .money
   color: $deep-orange
   font-weight: bold
+
 .table 
   background-color: $white
   border: 0
@@ -103,7 +114,11 @@ input
   margin-top: 16px
   margin-bottom: 16px
   width: 100%
-
+.box-shadow-model
+  padding: 0.3rem
+  margin: 0.3rem
+  box-shadow: $shadow-4db
+  border: 1px solid $grey-300
       
   tbody 
     &:first-child > tr:first-child 

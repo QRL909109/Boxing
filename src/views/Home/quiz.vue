@@ -3,7 +3,7 @@
   <div class="quiz-wrap">
     <div class="quiz-model" v-for="(item, index) in quizList">
       <title-model :title="item.date" path="/home">
-         <div class="card-padding">
+        <div class="card-padding">
            <vs-model :data="item" :statusShow=true vsType="2">
             <span slot="time"></span>
              <div slot="footer" class="win-model">

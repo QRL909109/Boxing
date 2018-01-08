@@ -48,6 +48,7 @@
       flex: 1;
       margin-right: 15px;
       padding-left: 15px;
+      border-bottom: 1px solid #c8c8c8;
 
       &::before {
         position: absolute;

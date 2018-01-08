@@ -1,44 +1,44 @@
 <!-- 具体选手比赛 -->
 <template>
   <div class="quiz-game">
-    <div class="game-title">
-      <h2 class="title">
-        {{analysisList.articleTitle}}
-      </h2>
-      <div class="all-money">
-        <i class="iconfont icon-jinbi jinbi"></i>
-        <span class="money">325</span>
-      </div>
-    </div>
-    <!-- 双方 -->
-    <div class="rival">
-      <div class="red-rival rival-item" @click="handleIntro">
-        <img :src="analysisList.opponent[0].img" alt="" class="img-radio">
-        <i class="iconfont icon-faqibisai red-font"></i>
-      </div>
-      <div class="intro text-center">
-        <p> {{analysisList.title}} </p>
-        <p> {{analysisList.type}} </p>
-        <p>比赛时间: {{analysisList.time}}</p>
-      </div>
-      <div class="bule-rival rival-item" @click="handleIntro">
-        <img :src="analysisList.opponent[1].img" alt="" class="img-radio">
-        <i class="iconfont icon-faqibisai bule-font"></i>
-      </div>
-    </div>
-    <!-- 资料 -->
-    <div class="analysis box-shadow-model">
-      <div class="name">
-        <p class="peo" v-for="item in analysisList.opponent">{{item.name}}</p>
-      </div>
-      <div class="data">
-        <div class="progress" v-for="(item, index) in playerInfo">
-          <progress-bar :data="item"/>
-        </div>
-      </div>
+    <div class="game-header">
+      <flexbox class="header-content" :gutter="0">
+        <flexbox-item :span="1/3">
+          <div class="flex-demo">
+            <div class="box">
+              <img class="header-img" :src="analysisList.opponent[0].img" alt="">
+              <p>
+                <span>红方</span>
+                <span> | </span>
+                <span>张志鹏</span>
+              </p>
+            </div>
+          </div>
+        </flexbox-item>
+        <flexbox-item :span="1/3">
+          <div class="flex-demo box-center">
+            <div class="box">
+              <p class="vs">VS</p>
+              <p>冠军赛-大足站</p>
+              <p>70KG自由搏击</p>
+            </div>
+          </div>
+        </flexbox-item>
+        <flexbox-item :span="1/3">
+          <div class="flex-demo">
+            <div class="box">
+              <img class="header-img" :src="analysisList.opponent[1].img" alt="">
+              <p>
+                <span>蓝方</span>
+                <span> | </span>
+                <span>播求</span>
+              </p>
+            </div>
+          </div>
+        </flexbox-item>
+      </flexbox>
     </div>
     <!-- 竞猜 -->
-    <divider>竞猜</divider>
     <div class="guess-wrap">
       <section-title title="猜胜负"></section-title>
       <div class="bg">
@@ -57,13 +57,29 @@
         </div>
       </div>
     </div>
+
+    <!-- 数据 -->
+    <div class="guess-wrap">
+      <section-title title="数据"></section-title>
+        <div class="analysis">
+          <!-- <div class="name">
+            <p class="peo" v-for="item in analysisList.opponent">{{item.name}}</p>
+          </div> -->
+          <div class="data">
+            <div class="progress" v-for="(item, index) in playerInfo">
+              <progress-bar :data="item"/>
+            </div>
+          </div>
+        </div>
+    </div>
+
     <!-- 竞猜投钱 -->
     <betting :active="guessActive" @on-hide="handleHideBetting"/>
   </div>
 </template>
 <script>
   import progressBar from '@/components/ProgressBar'
-  import { Divider } from 'vux'
+  import { Divider, Flexbox, FlexboxItem } from 'vux'
   import sectionTitle from '@/components/section/title'
   import betting from '@/components/Betting'
   // 待删除
@@ -165,7 +181,9 @@
       progressBar,
       Divider,
       sectionTitle,
-      betting
+      betting,
+      Flexbox,
+      FlexboxItem
     }
   }
 </script>
@@ -174,53 +192,35 @@
 @import '~assets/sass/color'
 @import '~assets/sass/var'
 .quiz-game
-  .game-title
-    display: flex
-    justify-content: space-between
-    align-items: center
-    margin: $spacing
-    .title
-      color: $blue
-    .all-money
-      +font-dpr(20px)
-      .jinbi
-        +font-dpr(22px)
-  .rival
-    display: flex
-    justify-content: space-between
-    padding: 0.1rem 0.3rem
-    margin-bottom: $spacing
-    .rival-item
-      position: relative
-      img
-        width: 2rem
-        max-height: 2rem
-      i
-        position: absolute
-        bottom: 0
-        +font-dpr(20px)
-    .intro
-      +font-dpr(14px)
-      line-height: 0.6rem
-  .analysis
-    .name
-      display: flex
-      justify-content: space-between
-      margin-bottom: $spacing
-      .peo
-        margin: 0 0.3rem
-        +font-dpr(16px)
-    .data
-      .progress
-        margin-bottom: $spacing
+  .game-header
+    width: 100%
+    height: 5rem
+    background-image: url("../../assets/img/quiz_bg@2x.png")
+    background-size: 100% 5rem
+    background-repeat: no-repeat
+    .header-content
+      height: 5rem
+      line-height: 5rem
+      .flex-demo
+        text-align: center
+        color: #fff
+        border-radius: 4px
+        background-clip: padding-box
+        color: #fff
+        .box
+          line-height: 1.5
+          .header-img
+            width: 2.66rem
+            height: 2.66rem
+            border-radius: 50%
+            vertical-align: middle
+      .flex-demo.box-center
+        .box>p:first-child
+          font-size: 1.5rem
   .guess-wrap
     padding: 0.1rem 0.3rem
-    margin-bottom: 0.8rem
-    .title
-      border-left: 0.1rem solid $orange
-      padding-left: 0.2rem
-      margin-bottom: $spacing
-      +font-dpr(16px)
+    margin-bottom: 0.4rem
+    background-color: #fff
     .bg
       display: flex
       justify-content: space-between
@@ -232,6 +232,7 @@
       display: flex
       justify-content: center
       margin-top: $spacing
+      margin-bottom: $spacing
       .btn
         width: 2rem
         color: $white
@@ -243,5 +244,52 @@
         line-height: 0.6rem
         &.active
           background: $blue-grey-500
+    .analysis
+      .data
+        .progress
+          margin-bottom: $spacing    
+
+
+  // .analysis
+  //   .name
+  //     display: flex
+  //     justify-content: space-between
+  //     margin-bottom: $spacing
+  //     .peo
+  //       margin: 0 0.3rem
+  //       +font-dpr(16px)
+  //   .data
+  //     .progress
+  //       margin-bottom: $spacing
+  // .guess-wrap
+  //   padding: 0.1rem 0.3rem
+  //   margin-bottom: 0.8rem
+  //   .title
+  //     border-left: 0.1rem solid $orange
+  //     padding-left: 0.2rem
+  //     margin-bottom: $spacing
+  //     +font-dpr(16px)
+  //   .bg
+  //     display: flex
+  //     justify-content: space-between
+  //     align-items: center
+  //     +font-dpr(13px)
+  //     .all-money
+  //       +font-dpr(20px)
+  //   .result
+  //     display: flex
+  //     justify-content: center
+  //     margin-top: $spacing
+  //     .btn
+  //       width: 2rem
+  //       color: $white
+  //       padding: 0.15rem $spacing
+  //       background: rgba(0,0,0,.35)
+  //       margin: 0 0.3rem
+  //       border-radius: 0.2rem
+  //       +font-dpr(16px)
+  //       line-height: 0.6rem
+  //       &.active
+  //         background: $blue-grey-500
 
 </style>

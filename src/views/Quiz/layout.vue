@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <div class="header">
       <div class="self-maony">
-        <i class="iconfont icon-jinbi jinbi"></i> 
+        <img class="glod-icon" src="../../assets/img/gold@2x.png" alt="">
         <span class="money"> 325</span>
         <i class="iconfont icon-add_c add" @click="handleAddMoney"></i>
       </div>
@@ -12,9 +12,9 @@
           <li v-for="(item, index) in headerList" class="text-center">
             <router-link :to="item.link">
               <i class="iconfont" :class="item.icon"></i>
-              <p class="name">
+              <span class="name">
                 {{item.name}}
-              </p>
+              </span>
             </router-link>
           </li>
         </ul>
@@ -66,15 +66,19 @@
     justify-content: space-between
     align-self: center
     align-items: center
-    margin: 0.4rem 0
+    height: 1.06rem
+    background-color: #262626
+    color: #fdc72f
     .self-maony
       height: 0.7rem
-      background-color: rgba(0,0,0,.1)
+      background-color: #000
       border-radius: 0.3rem
-      margin-left: 0.8rem
+      margin-left: 0.1rem
       padding: 0 0.2rem
       display: flex
       align-items: center
+      .glod-icon
+        width: 0.5rem
       .money
         margin-left: 0.1rem
         +font-dpr(18px)
@@ -91,4 +95,6 @@
           padding: 0.15rem 0.5rem
           .iconfont
             +font-dpr(18px)
+          span
+            color: #fdc72f
 </style>

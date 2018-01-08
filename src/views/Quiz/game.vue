@@ -248,48 +248,4 @@
       .data
         .progress
           margin-bottom: $spacing    
-
-
-  // .analysis
-  //   .name
-  //     display: flex
-  //     justify-content: space-between
-  //     margin-bottom: $spacing
-  //     .peo
-  //       margin: 0 0.3rem
-  //       +font-dpr(16px)
-  //   .data
-  //     .progress
-  //       margin-bottom: $spacing
-  // .guess-wrap
-  //   padding: 0.1rem 0.3rem
-  //   margin-bottom: 0.8rem
-  //   .title
-  //     border-left: 0.1rem solid $orange
-  //     padding-left: 0.2rem
-  //     margin-bottom: $spacing
-  //     +font-dpr(16px)
-  //   .bg
-  //     display: flex
-  //     justify-content: space-between
-  //     align-items: center
-  //     +font-dpr(13px)
-  //     .all-money
-  //       +font-dpr(20px)
-  //   .result
-  //     display: flex
-  //     justify-content: center
-  //     margin-top: $spacing
-  //     .btn
-  //       width: 2rem
-  //       color: $white
-  //       padding: 0.15rem $spacing
-  //       background: rgba(0,0,0,.35)
-  //       margin: 0 0.3rem
-  //       border-radius: 0.2rem
-  //       +font-dpr(16px)
-  //       line-height: 0.6rem
-  //       &.active
-  //         background: $blue-grey-500
-
 </style>

@@ -1,23 +1,27 @@
 <template>
   <popup :value="active" position="bottom" @on-hide="hidding">
     <div class="guess-vertical-wrap">
-      <div class="note">
+      <!-- <div class="note">
         <section-title title="请选择金币" titleTip="*多次点击可重复参与"></section-title>
-        <!-- <div class="red-font">*多次点击可重复参与</div> -->
-      </div>
-      <div class="monoey-list">
-        <ul>
-          <li v-for="(item, index) in moneyList" class="bin" @click="handleGuessMoney(item)">
-            <img :src="item.src" alt="">
-          </li>
-        </ul>
-      </div>
+        <div class="red-font">*多次点击可重复参与</div>
+      </div> -->
+     <title-model title="请选择金币" :showBottomBorder=true>
+      <span slot="right">*多次点击可重复参与</span>
+        <div class="monoey-list">
+          <ul>
+            <li v-for="(item, index) in moneyList" class="bin" @click="handleGuessMoney(item.value)">
+              <img :src="item.src" alt="">
+            </li>
+          </ul>
+        </div>
+     </title-model>
+     
     </div>
   </popup>
 </template>
 <script>
   import { Popup } from 'vux'
-  import sectionTitle from '@/components/section/title'
+  import titleModel from '@/components/titleModel'
   import { moneyList } from '@/config/money'
   export default {
     data () {
@@ -49,15 +53,15 @@
     },
     components: {
       Popup,
-      sectionTitle
+      titleModel
     }
   }
 </script>
 <style lang="sass">
 @import '~assets/sass/color'
 .guess-vertical-wrap
-  padding: 0.3rem
   .monoey-list
+    padding: 0.5rem 0
     ul
       list-style: none
       padding: 0

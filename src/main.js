@@ -29,6 +29,8 @@ FastClick.attach(document.body)
 
 // 使用ajax库
 Vue.use(VueResource)
+// 配置以application/x-www-form-urlencoded方式
+Vue.http.options.emulateJSON = true
 // 全局改变 loading
 router.beforeEach(function (to, from, next) {
   store.commit('updateLoadingStatus', {isLoading: true})

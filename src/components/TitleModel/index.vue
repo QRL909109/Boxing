@@ -1,7 +1,7 @@
 <!-- 模板标题 -->
 <template>
   <div class="title-model-wrap">
-    <div @click="handleLink(path)">
+    <div :class="[showBottomBorder ? 'title-model__header' : '']" @click="handleLink(path)">
       <cell-box>
         <div lass="title-model__left">
           <span class="title-model__title">{{title}}</span>
@@ -24,6 +24,9 @@
       title: {},
       path: {
         default: ''
+      },
+      showBottomBorder: {
+        default: false
       }
     },
     methods: {
@@ -46,6 +49,8 @@
 @import '~assets/sass/mixin'
 .title-model-wrap
   background: $white
+  .title-model__header
+    border-bottom: 1px solid $grey-300
   .weui-cell
     padding: 5px 0
     justify-content: space-between
@@ -56,4 +61,6 @@
   .title-model__right
     color: #999
     margin-right: 0.4rem
+  .title-model__content
+    padding-top: 0.15rem
 </style>

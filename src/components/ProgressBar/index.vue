@@ -43,7 +43,7 @@ $radius: 0.1rem
   .progress-right
     margin-left: 0.2rem
   .bj-progress__bar
-    background-color: $orange
+    background-color: $red-50
     height: 0.6rem
     flex: 1
     border-radius: $radius

@@ -40,37 +40,38 @@
     </div>
     <!-- 竞猜 -->
     <div class="guess-wrap">
-      <section-title title="猜胜负"></section-title>
-      <div class="bg">
-        <div class="all-money">
-          <i class="iconfont icon-jinbi jinbi"></i>
-          <span class="money">325</span>
+      <title-model title="猜胜负" :showBottomBorder=true>
+        <div class="bg">
+          <div class="all-money">
+            <i class="iconfont icon-jinbi jinbi"></i>
+            <span class="money">325</span>
+          </div>
+          <div class="time">
+            截止时间: {{analysisList.time}}
+          </div>
         </div>
-        <div class="time">
-          截止时间: {{analysisList.time}}
+        <div class="result">
+          <div class="btn text-center" v-for="item in analysisList.opponent" @click="handleGuess" 
+          :class="[item.status === 0 ? 'red-50-bg' : 'bule-bg']">
+            <p>{{item.magnification}}</p>
+            <p>{{item.name}}</p>
+          </div>
         </div>
-      </div>
-      <div class="result">
-        <div class="btn text-center" v-for="item in analysisList.opponent" @click="handleGuess">
-          <p>{{item.magnification}}</p>
-          <p>{{item.name}}</p>
-        </div>
-      </div>
+      </title-model>
+      
     </div>
 
     <!-- 数据 -->
     <div class="guess-wrap">
-      <section-title title="数据"></section-title>
+      <title-model title="数据" :showBottomBorder=true>
         <div class="analysis">
-          <!-- <div class="name">
-            <p class="peo" v-for="item in analysisList.opponent">{{item.name}}</p>
-          </div> -->
           <div class="data">
             <div class="progress" v-for="(item, index) in playerInfo">
               <progress-bar :data="item"/>
             </div>
           </div>
         </div>
+      </title-model>
     </div>
 
     <!-- 竞猜投钱 -->
@@ -80,8 +81,8 @@
 <script>
   import progressBar from '@/components/ProgressBar'
   import { Divider, Flexbox, FlexboxItem } from 'vux'
-  import sectionTitle from '@/components/section/title'
   import betting from '@/components/Betting'
+  import titleModel from '@/components/titleModel'
   // 待删除
   import bq from '@/assets/img/bq.jpg'
   import jdx from '@/assets/img/jdx.jpg'
@@ -99,11 +100,13 @@
           opponent: [{
             name: '张志鹏',
             img: jdx,
-            magnification: 1.67
+            magnification: 1.67,
+            status: 0
           }, {
             name: '播求',
             img: bq,
-            magnification: 2.67
+            magnification: 2.67,
+            status: 1
           }]
         },
         playerInfo: [{
@@ -180,7 +183,7 @@
     components: {
       progressBar,
       Divider,
-      sectionTitle,
+      titleModel,
       betting,
       Flexbox,
       FlexboxItem
@@ -218,7 +221,7 @@
         .box>p:first-child
           font-size: 1.5rem
   .guess-wrap
-    padding: 0.1rem 0.3rem
+    padding: 0.1rem 0 0.3rem 0
     margin-bottom: 0.4rem
     background-color: #fff
     .bg
@@ -237,7 +240,6 @@
         width: 2rem
         color: $white
         padding: 0.15rem $spacing
-        background: rgba(0,0,0,.35)
         margin: 0 0.3rem
         border-radius: 0.2rem
         +font-dpr(16px)
@@ -245,6 +247,7 @@
         &.active
           background: $blue-grey-500
     .analysis
+      padding: 0.2rem 0.3rem
       .data
         .progress
           margin-bottom: $spacing    

@@ -30,19 +30,21 @@
   export default {
     data () {
       return {
-        headerList: [{
-          name: '首页',
-          icon: 'icon-shouye',
-          link: '/home'
-        }, {
-          name: '充值',
-          icon: 'icon-chongzhi',
-          link: '/recharge'
-        }, {
-          name: '记录',
-          icon: 'icon-jilu',
-          link: '/quiz/recording'
-        }]
+        headerList: [
+        // {
+        //   name: '首页',
+        //   icon: 'icon-shouye',
+        //   link: '/home'
+        // },
+          {
+            name: '充值',
+            icon: 'icon-chongzhi1',
+            link: '/recharge'
+          }, {
+            name: '记录',
+            icon: 'icon-jilu1',
+            link: '/quiz/recording'
+          }]
       }
     },
     methods: {
@@ -67,7 +69,7 @@
     align-self: center
     align-items: center
     height: 1.06rem
-    background-color: #262626
+    background-color: #161616
     color: #fdc72f
     .self-maony
       height: 0.7rem
@@ -83,8 +85,9 @@
         margin-left: 0.1rem
         +font-dpr(18px)
       .add
-        color: $blue
+        color: $orange-50
         margin-left: 0.1rem
+        font-size: 12px
     .quiz-tab
       ul
         list-style: none
@@ -92,9 +95,10 @@
         padding: 0
         margin: 0
         li
-          padding: 0.15rem 0.5rem
+          padding: 0.15rem 0.2rem
           .iconfont
-            +font-dpr(18px)
-          span
-            color: #fdc72f
+            +font-dpr(16px)
+            color: $orange-50
+          .name
+            color: $orange-50
 </style>

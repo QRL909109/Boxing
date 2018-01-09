@@ -8,10 +8,11 @@
             <div class="box left">
               <img class="header-img" :src="analysisList.opponent[1].img" alt="">
               <p>
-                <span>蓝方</span>
+                <span class="bule-font">蓝方</span>
                 <span> | </span>
                 <span>播求</span>
               </p>
+              <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
             </div>
           </div>
         </flexbox-item>
@@ -27,12 +28,13 @@
         <flexbox-item :span="1/3">
           <div class="flex-demo">
             <div class="box right">
-            <img class="header-img" :src="analysisList.opponent[0].img" alt="">
+              <img class="header-img" :src="analysisList.opponent[0].img" alt="">
               <p>
-                <span>红方</span>
+                <span class="red-font">红方</span>
                 <span> | </span>
                 <span>张志鹏</span>
               </p>
+              <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
             </div>
           </div>
         </flexbox-item>
@@ -43,7 +45,7 @@
       <title-model title="猜胜负" :showBottomBorder=true>
         <div class="bg">
           <div class="all-money">
-            <i class="iconfont icon-jinbi jinbi"></i>
+            <img class="glod-icon" src="~/assets/img/gold@2x.png" alt="">
             <span class="money">325</span>
           </div>
           <div class="time">
@@ -219,24 +221,28 @@
             vertical-align: middle
           span
             font-size: 0.4rem
-          &.left
-            color: $blue-600
-          &.right
-            color: $red
+            font-weight: 600
+          .icon-countries
+            margin-top: 0.2rem
+            width: 30px
       .flex-demo.box-center
         .box>p:first-child
-          font-size: 1.5rem
+          font-size: 0.7rem
   .guess-wrap
     padding: 0.1rem 0 0.3rem 0
     margin-bottom: 0.4rem
     background-color: #fff
     .bg
       display: flex
-      justify-content: space-between
       align-items: center
       +font-dpr(13px)
       .all-money
         +font-dpr(20px)
+        margin-right: $spacing
+        .glod-icon
+          width: 20px
+      .time
+        color: $grey-600
     .result
       display: flex
       justify-content: center

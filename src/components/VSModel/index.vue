@@ -7,7 +7,7 @@
           <img :src="data.palyer[0].img" class="img-radio" :alt="data.palyer[0].name">
           <div class="vs-model__name">
             <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
-            {{data.palyer[0].name}}
+            <p class="player__name">{{data.palyer[0].name}}</p>
           </div>
         </div>
         <div class="center">
@@ -26,7 +26,7 @@
           <img :src="data.palyer[1].img" class="img-radio" :alt="data.palyer[1].name">
           <div class="vs-model__name">
             <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
-            {{data.palyer[1].name}}
+            <p class="player__name">{{data.palyer[1].name}}</p>
           </div>
         </div>
       </div>
@@ -76,13 +76,16 @@
     .player
       flex: 1
       text-align: center
-      img
+      .img-radio
         width: 2rem
       .vs-model__name
+        display: flex
+        justify-content: center
+        align-items: center
         +text-overflow
         margin-top: 0.05rem
-        .icon-countries
-          width: 20px
+        .player__name
+          margin-left: 0.15rem
     .center
       display: flex
       flex-direction: column

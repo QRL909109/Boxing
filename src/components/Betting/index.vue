@@ -8,7 +8,7 @@
       <div class="monoey-list">
         <ul>
           <li v-for="(item, index) in moneyList" class="bin" @click="handleGuessMoney(item)">
-            {{item}}
+            <img :src="item.src" alt="">
           </li>
         </ul>
       </div>
@@ -56,22 +56,21 @@
 <style lang="sass">
 @import '~assets/sass/color'
 .guess-vertical-wrap
-  height: 1.5rem
   padding: 0.3rem
   .monoey-list
     ul
       list-style: none
-      display: flex
       padding: 0
       margin: 0
+      text-align: center
       li
-        width: 1.5rem
-        height: 1.5rem
-        margin-left: 0.08rem
-        border: 1px solid $orange
+        display: inline-block
+        width: 2rem
+        height: 2rem
+        margin: 0 0.2rem
         border-radius: 50%
-        line-height: 1.5rem
-        text-align: center
         background: $orange
-        color: $white
+        img
+          width: 100%
+          height: 100%
 </style>

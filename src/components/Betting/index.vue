@@ -2,8 +2,8 @@
   <popup :value="active" position="bottom" @on-hide="hidding">
     <div class="guess-vertical-wrap">
       <div class="note">
-        <section-title title="请选择金币"></section-title>
-        <div class="red-font">*多次点击可重复参与</div>
+        <section-title title="请选择金币" titleTip="*多次点击可重复参与"></section-title>
+        <!-- <div class="red-font">*多次点击可重复参与</div> -->
       </div>
       <div class="monoey-list">
         <ul>
@@ -57,10 +57,7 @@
 @import '~assets/sass/color'
 .guess-vertical-wrap
   height: 1.5rem
-  display: flex
-  flex-direction: row
   padding: 0.3rem
-  justify-content: space-between
   .monoey-list
     ul
       list-style: none

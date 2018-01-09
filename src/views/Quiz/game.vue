@@ -5,12 +5,12 @@
       <flexbox class="header-content" :gutter="0">
         <flexbox-item :span="1/3">
           <div class="flex-demo">
-            <div class="box">
-              <img class="header-img" :src="analysisList.opponent[0].img" alt="">
+            <div class="box left">
+              <img class="header-img" :src="analysisList.opponent[1].img" alt="">
               <p>
-                <span>红方</span>
+                <span>蓝方</span>
                 <span> | </span>
-                <span>张志鹏</span>
+                <span>播求</span>
               </p>
             </div>
           </div>
@@ -26,12 +26,12 @@
         </flexbox-item>
         <flexbox-item :span="1/3">
           <div class="flex-demo">
-            <div class="box">
-              <img class="header-img" :src="analysisList.opponent[1].img" alt="">
+            <div class="box right">
+            <img class="header-img" :src="analysisList.opponent[0].img" alt="">
               <p>
-                <span>蓝方</span>
+                <span>红方</span>
                 <span> | </span>
-                <span>播求</span>
+                <span>张志鹏</span>
               </p>
             </div>
           </div>
@@ -97,13 +97,13 @@
           type: '65kg自由搏击',
           time: '2018-1-12 12:00',
           opponent: [{
-            name: '张志鹏',
-            img: jdx,
-            magnification: 1.67
-          }, {
             name: '播求',
             img: bq,
             magnification: 2.67
+          }, {
+            name: '张志鹏',
+            img: jdx,
+            magnification: 1.67
           }]
         },
         playerInfo: [{
@@ -214,6 +214,12 @@
             height: 2.66rem
             border-radius: 50%
             vertical-align: middle
+          span
+            font-size: 0.4rem
+          &.left
+            color: $blue-600
+          &.right
+            color: $red
       .flex-demo.box-center
         .box>p:first-child
           font-size: 1.5rem
@@ -237,11 +243,14 @@
         width: 2rem
         color: $white
         padding: 0.15rem $spacing
-        background: rgba(0,0,0,.35)
         margin: 0 0.3rem
         border-radius: 0.2rem
         +font-dpr(16px)
         line-height: 0.6rem
+        &:first-child
+          background-color: $blue-600
+        &:last-child
+          background-color: $red
         &.active
           background: $blue-grey-500
     .analysis

@@ -2,7 +2,10 @@
   <div class="section-title" :class="{ border: border }">
     <div class="section-title--text">
       <slot>
-        <h3>{{ title }}</h3>
+        <h3>
+          <span>{{ title }}</span>
+          <span class="title-tip">{{titleTip}}</span>
+        </h3>
       </slot>
     </div>
     <div class="section-title--side">
@@ -19,6 +22,10 @@
     props: {
       title: {
         type: String,
+        default: ''
+      },
+      titleTip: {
+        tyep: String,
         default: ''
       },
       text: {
@@ -66,6 +73,10 @@
         padding: 0;
         font-weight: 500;
         color: #3A434F;
+        .title-tip {
+          float: right;
+          font-size: 0.3rem;
+        }
       }
     }
   }

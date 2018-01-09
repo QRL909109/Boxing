@@ -13,7 +13,6 @@
     </div>
     <div class="mg-b-2">
       <title-model title="赛事预告" path="/home">
-        <span slot="right">sss</span>
         <scroller lock-y scrollbar-x class="pd-l-2">
           <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
             <div class="scroller-box-item" v-for="(item, index) in trailerList">

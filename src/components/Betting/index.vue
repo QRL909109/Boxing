@@ -3,7 +3,6 @@
     <div class="guess-vertical-wrap">
       <div class="note">
         <section-title title="请选择金币" titleTip="*多次点击可重复参与"></section-title>
-        <!-- <div class="red-font">*多次点击可重复参与</div> -->
       </div>
       <div class="monoey-list">
         <ul>

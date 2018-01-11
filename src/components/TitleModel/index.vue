@@ -55,7 +55,7 @@
     padding: 5px 0
     justify-content: space-between
   .title-model__title
-    +font-dpr(16px)
+    +font-dpr(14px)
     padding-left: 12px
     border-left: 2px solid $red
   .title-model__right

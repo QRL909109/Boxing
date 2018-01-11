@@ -251,9 +251,9 @@
       .btn
         width: 2rem
         color: $white
-        padding: 0.15rem $spacing
+        padding: 0.3rem 0.7rem
         margin: 0 0.3rem
-        border-radius: 0.2rem
+        border-radius: 4px
         +font-dpr(16px)
         line-height: 0.6rem
         &:first-child

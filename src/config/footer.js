@@ -3,7 +3,11 @@ export const footerNav = [{
   iconClass: 'icon-shouye',
   link: '/home'
 }, {
-  text: '信息',
+  text: '资料',
+  iconClass: 'icon-xinxi',
+  link: '/info'
+}, {
+  text: '活动',
   iconClass: 'icon-xinxi',
   link: '/info'
 }, {

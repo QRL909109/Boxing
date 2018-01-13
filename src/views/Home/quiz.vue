@@ -2,7 +2,7 @@
 <template>
   <div class="quiz-wrap">
     <div class="quiz-model" v-for="(item, index) in quizList">
-      <title-model :title="item.date" path="/home">
+      <title-model :title="item.date" path="/quiz/main/list">
         <div class="card-padding">
            <vs-model :data="item" :statusShow=true vsType="2">
             <span slot="time"></span>
@@ -35,7 +35,7 @@
       return {
         quizList: [{
           title: '城市英雄赛',
-          link: '/quiz/game',
+          link: '/quiz/main/game',
           date: '2018-1-2',
           status: 1,
           palyer: [{
@@ -47,7 +47,7 @@
           }]
         }, {
           title: '城市英雄赛',
-          link: '/quiz/game',
+          link: '/quiz/main/game',
           date: '2018-1-2',
           status: 1,
           palyer: [{

@@ -1,13 +1,112 @@
 <!-- 个人中心 -->
 <template>
-  <div>{{msg}}</div>
+  <div class="personal-info-wrap">
+    <div class="person__info">
+      <div class="person__tou">
+        <img :src="bq" alt="" class="img-tou">
+      </div>
+      <div class="person__name-money">
+        <div class="money">
+          <add-money :money="user.money"/>
+        </div>
+        <div class="nick-name">
+          {{user.nickName}}
+          <!-- <i class="iconfont icon-bianji"></i> -->
+        </div>
+      </div>
+    </div>
+    <div class="person__list">
+      <group>
+        <template v-for="item in cellList">
+          <cell  @click.native="onClick(item)" is-link>
+            <span slot="title">
+              <i class="iconfont" :class="item.icon"></i>
+              <span class="name">{{item.name}}</span>
+              <badge v-show="item.newNum" :text="item.newNum"></badge>
+            </span>
+          </cell>
+        </template>
+      </group>
+    </div>
+  </div>
 </template>
 <script>
+  import addMoney from '@/components/AddMoney'
+  import { Cell, Group, Badge } from 'vux'
+  import bq from '@/assets/img/bq.jpg'
+  import { mapState } from 'vuex'
   export default {
     data () {
       return {
-        msg: '个人中心'
+        msg: '个人中心',
+        bq,
+        cellList: [{
+          name: '消息',
+          newNum: 1,
+          icon: 'icon-xinxi',
+          link: ''
+        }, {
+          name: '竞猜记录',
+          newNum: 0,
+          icon: 'icon-match',
+          link: '/quiz/main/recording'
+        }, {
+          name: '充值记录',
+          newNum: 2,
+          icon: 'icon-chongzhi',
+          link: ''
+        }]
+      }
+    },
+    components: {
+      Group,
+      Cell,
+      Badge,
+      addMoney
+    },
+    computed: {
+      ...mapState({
+        user: state => state.User
+      })
+    },
+    methods: {
+      onClick (item) {
+        this.$router.push({
+          path: item.link
+        })
+      },
+      handleEditName () {
+
       }
     }
   }
 </script>
+<style lang="sass">
+@import '~assets/sass/mixin'
+@import '~assets/sass/color'
+.personal-info-wrap
+  .person__info
+    display: flex
+    flex-direction: column
+    align-items: center
+    background: $grey-800
+    .person__tou
+      justify-content: center
+      padding: 1rem 0 0.5rem 0
+      .img-tou
+        width: 2.5rem
+        border-radius: 50%
+    .person__name-money
+      display: inline-flex
+      align-items: center
+      padding-bottom: 0.5rem
+      color: #dedede
+      .nick-name
+        margin-left: 1.2rem
+        +font-dpr(16px)
+  .person__list
+    .name
+      +font-dpr(14px)
+    .iconfont
+      +font-dpr(20px)
+</style>

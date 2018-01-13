@@ -67,7 +67,7 @@
 @import '~assets/sass/color'
 @import '~assets/sass/mixin'
 .vs-model
-  padding: 0.2rem
+  padding: 0.35rem 0.2rem
   background: $grey-100
   border-radius: 4px;
   border: 1px solid #E4E4E4

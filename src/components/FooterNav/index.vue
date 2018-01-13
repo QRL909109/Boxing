@@ -19,6 +19,22 @@
         currentIndex: 0
       }
     },
+    watch: {
+      $route: {
+        handler (val, old) {
+          console.log(222, val)
+          let path = val.path.split('/')[1]
+          switch (path) {
+            case 'home': this.currentIndex = 0; break
+            case 'info': this.currentIndex = 1; break
+            case 'personal': this.currentIndex = 3; break
+            default: this.currentIndex = 0; break
+          }
+          // this.currentIndex = val.meta.index
+        },
+        immediate: true
+      }
+    },
     components: {
       Tabbar,
       TabbarItem

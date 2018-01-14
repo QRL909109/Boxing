@@ -8,13 +8,13 @@ export const topList = [{
 }, */
 {
   name: '竞猜',
-  link: '/home/main/quiz'
+  link: '/home/main/quizing'
 }, {
   name: '赛程',
   link: '/home/main/quiz'
 }, {
   name: '赛果',
-  link: '/home/main/quiz'
+  link: '/home/main/quized'
 }
 /*, {
   name: '精彩视频',

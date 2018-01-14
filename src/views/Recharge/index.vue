@@ -4,7 +4,7 @@
     <div class="recharge-header recharfe__modal">
       <p class="recharge__title">我的积分： 
         <div class="recharge__money">
-          <img src="./gold@2x.png" alt=""> {{user.money}}
+          <img src="./gold@2x.png" alt=""> {{user.coin}}
         </div>
       </p>
     </div>

@@ -22,7 +22,6 @@
     watch: {
       $route: {
         handler (val, old) {
-          console.log(222, val)
           let path = val.path.split('/')[1]
           switch (path) {
             case 'home': this.currentIndex = 0; break

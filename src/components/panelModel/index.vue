@@ -2,11 +2,11 @@
   <div class="panel-model-wrap">
     <div class="panel-model" v-for="(item, index) in list" @click="handleClick(item)" :class="{reverse: type === 'left' ?  true : false}">
       <div class="panel-img">
-        <img :src="item.src" :alt="item.img" class="img-responsive">
+        <img :src="item.avatar" :alt="item.name" class="img-responsive">
       </div>
       <div class="panel-desc">
-        <p class="name">{{item.title}}</p>
-        <p class="desc">{{item.desc}}</p>
+        <p class="name">{{item.name}}</p>
+        <p class="desc">{{item.intro| limitStrNum(60)}}</p>
       </div>
     </div>
   </div>
@@ -28,7 +28,9 @@
     },
     methods: {
       handleClick (item) {
-  
+        this.$router.push({
+          path: `${this.path}?id=${item.id}`
+        })
       }
     }
   }
@@ -46,8 +48,9 @@
     .panel-img
       // width: 180px
       flex: 1
-      max-height: 100px
+      max-height: 2.6rem
       margin-right: 5px
+      min-height: 2.5rem
     .panel-desc
       flex: 3
       .name

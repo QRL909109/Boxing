@@ -6,11 +6,11 @@
         <flexbox-item :span="1/3">
           <div class="flex-demo">
             <div class="box left">
-              <img class="header-img" :src="analysisList.opponent[1].img" alt="">
+              <img class="header-img" :src="analysisList.blue.avatar" :alt="analysisList.blue.name">
               <p>
                 <span class="bule-font">蓝方</span>
                 <span> | </span>
-                <span>播求</span>
+                <span>{{analysisList.blue.name}}</span>
               </p>
               <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
             </div>
@@ -20,19 +20,19 @@
           <div class="flex-demo box-center">
             <div class="box">
               <p class="vs">VS</p>
-              <p>冠军赛-大足站</p>
-              <p>70KG自由搏击</p>
+              <p>{{analysisList.info.station_name}}</p>
+              <p>{{analysisList.info.kg_level}}KG搏击</p>
             </div>
           </div>
         </flexbox-item>
         <flexbox-item :span="1/3">
           <div class="flex-demo">
             <div class="box right">
-              <img class="header-img" :src="analysisList.opponent[0].img" alt="">
+              <img class="header-img" :src="analysisList.red.avatar" :alt="analysisList.red.name">
               <p>
                 <span class="red-font">红方</span>
                 <span> | </span>
-                <span>张志鹏</span>
+                <span>{{analysisList.red.name}}</span>
               </p>
               <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
             </div>
@@ -46,22 +46,24 @@
         <div class="bg">
           <div class="all-money">
             <img class="glod-icon" src="~/assets/img/gold@2x.png" alt="">
-            <span class="money">325</span>
+            <span class="money">{{ parseInt(analysisList.bet_infos[0].blue_odds_amount + analysisList.bet_infos[0].red_odds_amount) }}</span>
           </div>
           <div class="time">
-            截止时间: {{analysisList.time}}
+            截止时间: {{analysisList.info.bet_end_time | dateFormat('yyyy-mm-dd')}}
           </div>
         </div>
         <div class="result">
-          <div class="btn text-center" v-for="item in analysisList.opponent" @click="handleGuess(item)" 
-          :class="[item.status === 0 ? 'red-50-bg' : 'bule-bg']">
-            <p>{{item.magnification}}</p>
-            <p>{{item.name}}</p>
+          <div class="btn text-center bule-bg" @click="handleGuess('blue', analysisList.blue.name)">
+            <p>{{analysisList.bet_infos[0].blue_odds}}</p>
+            <p>{{analysisList.blue.name}}</p>
+          </div>
+          <div class="btn text-center red-50-bg" @click="handleGuess('red', analysisList.red.name)">
+            <p>{{analysisList.bet_infos[0].red_odds}}</p>
+            <p>{{analysisList.red.name}}</p>
           </div>
         </div>
       </title-model>
     </div>
-
     <!-- 数据 -->
     <div class="guess-wrap">
       <title-model title="数据" :showBottomBorder=true>
@@ -85,107 +87,145 @@
   import betting from '@/components/Betting'
   import titleModel from '@/components/titleModel'
   import { mapState } from 'vuex'
+  import quiz from '@/lib/api/quiz'
+  import home from '@/lib/api/home'
   // 待删除
   import bq from '@/assets/img/bq.jpg'
   import jdx from '@/assets/img/jdx.jpg'
   export default {
     data () {
+      const query = this.$route.query
       return {
         bq,
         jdx,
+        query,
         guessActive: false,
         analysisList: {
-          articleTitle: '城市英雄151大足站',
-          title: '冠军赛 - 大足站',
-          type: '65kg自由搏击',
-          time: '2018-1-12 12:00',
-          opponent: [{
-            name: '张志鹏',
-            img: jdx,
-            magnification: 1.67,
-            status: 0
-          }, {
-            name: '播求',
-            img: bq,
-            magnification: 2.67,
-            status: 1
+          blue: {},
+          red: {},
+          info: {},
+          bet_infos: [{
+            blue_odds_amount: 0,
+            red_odds_amount: 0
           }]
         },
-        playerInfo: [{
-          man1: {
-            name: '身高',
-            value: 110
-          },
-          man2: {
-            name: '身高',
-            value: 178
-          }
-        }, {
-          man1: {
-            name: '体重',
-            value: 176
-          },
-          man2: {
-            name: '体重',
-            value: 178
-          }
-        }, {
-          man1: {
-            name: '年龄',
-            value: 20
-          },
-          man2: {
-            name: '年龄',
-            value: 26
-          }
-        }, {
-          man1: {
-            name: '获胜',
-            value: 11
-          },
-          man2: {
-            name: '获胜',
-            value: 26
-          }
-        }, {
-          man1: {
-            name: '失败',
-            value: 2
-          },
-          man2: {
-            name: '失败',
-            value: 2
-          }
-        }, {
-          man1: {
-            name: 'KO',
-            value: 8
-          },
-          man2: {
-            name: 'KO',
-            value: 0
-          }
-        }],
+        playerInfo: [],
         bettingInfo: {} // 投注信息
       }
     },
     methods: {
-      handleGuess (item) {
-        this.bettingInfo = item
+      handleGuess (type, name) {
+        this.bettingInfo = Object.assign(this.bettingInfo, {
+          type,
+          name
+        })
         this.guessActive = true
       },
       handleHideBetting () {
         this.guessActive = false
-        console.log(33333, this.guessActive)
       },
       handleIntro () {
         this.$router.push({
           path: '/quiz/introduction'
         })
       },
+      /**
+       * [handleGetMatchList 获得数据进行拼接]
+       * @return {[type]} [description]
+       */
+      handleGetMatchList () {
+        const queryData = {
+          page: 1,
+          limit: 1,
+          status: 1
+        }
+        home.GetMatchList(queryData).then(data => {
+          this.playerInfo = []
+          this.analysisList = data[0]
+          this.playerInfo.push({
+            red: {
+              name: '身高',
+              value: data[0].red.height
+            },
+            blue: {
+              name: '身高',
+              value: data[0].blue.height
+            }
+          }, {
+            red: {
+              name: '体重',
+              value: data[0].red.weight
+            },
+            blue: {
+              name: '体重',
+              value: data[0].blue.weight
+            }
+          }, {
+            red: {
+              name: '年龄',
+              value: data[0].red.age
+            },
+            blue: {
+              name: '年龄',
+              value: data[0].blue.age
+            }
+          }, {
+            red: {
+              name: '获胜',
+              value: data[0].red.win_times
+            },
+            blue: {
+              name: '获胜',
+              value: data[0].blue.win_times
+            }
+          }, {
+            red: {
+              name: 'KO',
+              value: data[0].red.ko_times
+            },
+            blue: {
+              name: 'KO',
+              value: data[0].blue.ko_times
+            }
+          }, {
+            red: {
+              name: '失败',
+              value: data[0].red.fail_times
+            },
+            blue: {
+              name: '失败',
+              value: data[0].blue.fail_times
+            }
+          })
+        })
+      },
+      /**
+       * [handleSuccessBetting 调用投注接口]
+       * @return {[type]} [description]
+       */
+      handleSuccessBetting () {
+        let queryData = {
+          game_id: this.query.id,
+          guess: this.bettingInfo.type,
+          coin: this.bettingInfo.coin,
+          bet_type: 1
+        }
+        let _this = this
+        quiz.PostBetGame(queryData).then(data => {
+          this.$vux.alert.show({
+            title: '投注成功',
+            content: `<p>投注: ${_this.bettingInfo.name} ${this.bettingInfo.coin} 金币</p>`
+          })
+        })
+      },
+      /**
+       * [进行投注之前的判断金币]
+       * @param  {[type]} num [金币]
+       * @return {[type]}     [description]
+       */
       handleBetting (num) {
         let _this = this
-        if (this.user.money < num) {
+        if (this.user.coin < num) {
           this.$vux.alert.show({
             title: '金币不足，请及时充值！',
             content: `投注${num}`,
@@ -196,16 +236,8 @@
             }
           })
         } else {
-          this.$vux.alert.show({
-            title: '竞猜成功',
-            content: `<p>投注${num}</p><p>投注${_this.bettingInfo.name}</p>`,
-            onShow () {
-              console.log('Plugin: I\'m show now')
-            },
-            onHide () {
-              console.log('Plugin: I\'m hiding now')
-            }
-          })
+          this.bettingInfo.coin = num // 投注金币
+          this.handleSuccessBetting()
         }
       }
     },
@@ -213,6 +245,10 @@
       ...mapState({
         user: state => state.User
       })
+    },
+    created () {
+      // 获取赛事信息
+      this.handleGetMatchList()
     },
     components: {
       progressBar,

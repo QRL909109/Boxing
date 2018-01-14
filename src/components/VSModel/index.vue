@@ -1,13 +1,13 @@
 <template>
   <div class="vs-model" :style="{backgroundColor: bgColor}">
-    <router-link :to="data.link">
+    <router-link :to="`${link}?id=${data.info.id}`">
       <slot name="header"></slot>
       <div class="wrap">
         <div class="player">
-          <img :src="data.palyer[0].img" class="img-radio" :alt="data.palyer[0].name">
+          <img :src="data.blue.avatar" class="img-radio" :alt="data.blue.name">
           <div class="vs-model__name">
             <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
-            <p class="player__name">{{data.palyer[0].name}}</p>
+            <p class="player__name">{{data.blue.name}}</p>
           </div>
         </div>
         <div class="center">
@@ -17,16 +17,16 @@
             <span>V</span><span>S</span>
           </div>
           <slot name="time"> 
-            <time class="time">{{ data.date }}</time>
+            <time class="time">{{ data.info.game_begin_time }}</time>
           </slot>
           <div v-show="statusShow" class="status text-center" :class="{'active': data.status === 1}">{{ fiterStatus(data.status) }}</div>
           <slot name="footer"></slot>
         </div>
         <div class="player">
-          <img :src="data.palyer[1].img" class="img-radio" :alt="data.palyer[1].name">
+          <img :src="data.red.avatar" class="img-radio" :alt="data.red.name">
           <div class="vs-model__name">
             <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
-            <p class="player__name">{{data.palyer[1].name}}</p>
+            <p class="player__name">{{data.red.name}}</p>
           </div>
         </div>
       </div>
@@ -56,6 +56,9 @@
       },
       vsType: {
         default: 1
+      },
+      link: {
+        default: 'home'
       }
     },
     methods: {
@@ -78,6 +81,7 @@
       text-align: center
       .img-radio
         width: 2rem
+        min-height: 2rem
       .vs-model__name
         display: flex
         justify-content: center

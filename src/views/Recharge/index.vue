@@ -2,37 +2,43 @@
 <template>
   <div class="recharge-wrap">
     <div class="recharge-header recharfe__modal">
-      <p class="recharge__title">我的积分： 
-        <div class="recharge__money">
-          <img src="./gold@2x.png" alt=""> {{user.coin}}
-        </div>
-      </p>
+      <div class="recharge__title">
+        <span>我的积分：</span> 
+        <img class="recharge__money" src="./gold@2x.png" alt=""> {{user.money}}
+      </div>
     </div>
 
     <div class="recharge__select recharfe__modal">
       <p class="recharge__title">请选择充值金额</p>
       <div class="select-money-block">
-        <div v-for="item in rechargeMoneyList" class="select-item">
-          <div>
-            <div class="recharge__money">
-              <img src="./gold@2x.png" alt=""> {{item.money * item.ratio}}
-            </div>
-            <div class="recharge__cache">￥{{item.money}}</div>
-          </div>
-        </div>
+        <flexbox :gutter="0" wrap="wrap">
+            <flexbox-item v-for="(item,index) in rechargeMoneyList" :span="1/2" :key="index">
+              <div class="flex-demo">
+                <div class="recharge__money">
+                  <img src="./gold@2x.png" alt=""> {{item.money * item.ratio}}
+                </div>
+                <div class="recharge__cache">￥{{item.money}}</div>
+              </div>
+            </flexbox-item>
+        </flexbox>
       </div>
-      <p class="recharge__title">其他充值金额 <input type="number" placeholder="元"></input></p>
+      <p class="recharge__title">其他充值金额 </input></p>
+      <div>
+        <input type="number">
+        <span>元</span>
+      </div>
        
     </div>
 
     <div class="recharge__pay recharfe__modal">
       <p class="recharge__title">请选择支付方式</p>
       <div class="pay__choose">
-        <div class="choose" v-for="item in reChargeList" @click="choosePay(item)">
-          <i class="iconfont" :class="item.icon"></i>
-          <p class="desc">{{item.desc}}
-            </p>
-          <check-icon :value="item.payType"></check-icon>
+        <div class="choose" v-for="(item,index) in reChargeList" :key="index" @click="choosePay(item)" >
+          <i class="iconfont pay-way" :class="item.icon"></i>
+          <span class="desc">{{item.desc}}</span>
+          <div class="check-box">
+            <check-icon :value="item.payType"></check-icon>
+          </div>
         </div>
       </div>
     </div>
@@ -50,13 +56,13 @@
   </div>
 </template>
 <script>
-  import { Divider, XDialog, Qrcode, CheckIcon } from 'vux'
+  import { Divider, XDialog, Qrcode, CheckIcon, Flexbox, FlexboxItem } from 'vux'
   import { mapState } from 'vuex'
   import { rechargeMoneyList } from '@/config/rechargeMoney'
   export default {
     data () {
       return {
-        showHideOnBlur: false,
+        showHideOnBlur: true,
         currentDes: '',
         rechargeMoneyList,
         reChargeList: [{
@@ -82,6 +88,9 @@
           this.$set(charge, 'payType', false)
         })
         this.$set(item, 'payType', true)
+      },
+      chooseMoney (item) {
+
       }
     },
     computed: {
@@ -93,7 +102,9 @@
       Divider,
       XDialog,
       Qrcode,
-      CheckIcon
+      CheckIcon,
+      Flexbox,
+      FlexboxItem
     }
   }
 </script>
@@ -101,12 +112,58 @@
 @import '~assets/sass/mixin'
 @import '~assets/sass/color'
 @import '~assets/sass/var'
+
 .recharge-wrap
+  font-size: 0.5rem
   .recharfe__modal
     padding: 0.25rem
     background: $white
     margin-bottom: 0.25rem
   .recharge-header
+    .recharge__money
+      width: 0.7rem
+      height: 0.7rem
+      vertical-align: middle
+  .recharge__select
+    .select-money-block
+      .flex-demo
+        text-align: center;
+        border: 1px solid #c8c8c8
+        border-radius: 4px;
+        background-clip: padding-box;
+        margin: 0.5rem 0.2rem 0 0.2rem
+        padding: 0.2rem
+        .recharge__money
+          color: #FDC72F
+          img
+            width: 0.7rem
+            height: 0.7rem
+            vertical-align: middle
+        .recharge__cache
+          margin-top: 0.2rem
+          color: #999999
+    .recharge__title
+      margin-top: 0.5rem
+      margin-bottom: 0.2rem
+  .recharge__pay
+    .pay__choose
+      margin-top: 0.2rem
+      .choose
+        position: relative
+        padding: 0.5rem 0
+        border-bottom: 1px solid #c8c8c8
+        &:last-child
+          border-bottom: none
+        .check-box
+          position: absolute
+          top: 50%
+          right: 0.2rem
+          transform: translateY(-50%)
+        .pay-way
+          font-size: 1rem
+          display: inline-block
+          vertical-align: middle
+
   .icon-alipay
     color: #02a9f1
   .icon-weixin

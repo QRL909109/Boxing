@@ -1,5 +1,5 @@
 const state = {
-  icon: 560,
+  coin: 560,
   username: 'XXX',
   sex: 1, // 1 男 0 女
   avatar: ''

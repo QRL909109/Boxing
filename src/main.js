@@ -6,6 +6,7 @@ import router from './router'
 import VueResource from 'vue-resource'
 // vuex state管理
 import store from './store'
+import bjFetch from '@/lib/api/fetch.js'
 // 引入css
 import 'normalize.css'
 import 'lib-flexible'
@@ -47,9 +48,20 @@ Object.keys(filters).forEach(filter => {
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
   store,
+  render: h => h('App'),
   template: '<App/>',
-  components: { App }
-})
+  components: {
+    App: resolve => {
+      bjFetch({
+        url: 'v1/user/info'
+      })
+      .then(data => {
+        store.dispatch('updateUser', data)
+        resolve(App)
+      })
+      .catch(e => {})
+    }
+  }
+}).$mount('#app')

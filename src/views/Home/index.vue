@@ -16,7 +16,7 @@
         <scroller lock-y scrollbar-x class="pd-l-2">
           <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
             <div class="scroller-box-item" v-for="(item, index) in trailerList">
-              <vs-model :data="item" ref="vsModel" :statusShow=false></vs-model>
+              <vs-model :data="item" ref="vsModel" :statusShow=false link="/home/main/quiz"></vs-model>
             </div>
           </div>
         </scroller>
@@ -27,8 +27,8 @@
       <title-model title="名人介绍" path="/info">
         <div class="man-wrap pd-l-2">
           <panel-model  
-            :list="list"
-            path="/quiz/introduction"
+            :list="playerList"
+            path="/quiz/main/introduction"
             type="left">
           </panel-model>
         </div>
@@ -43,21 +43,27 @@ import vsModel from '@/components/VSModel'
 import announcement from '@/components/Announcement'
 import titleModel from '@/components/titleModel'
 import panelModel from '@/components/panelModel'
+import home from '@/lib/api/home'
 // 测试图片 后面删除
 import pic1 from '@/assets/img/1.jpeg'
 import pic2 from '@/assets/img/2.png'
 import pic3 from '@/assets/img/3.png'
 import pic4 from '@/assets/img/4.jpeg'
-import bq from '@/assets/img/bq.jpg'
-import jdx from '@/assets/img/jdx.jpg'
-import sbsda from '@/assets/img/sbsda.jpg'
-import wjr from '@/assets/img/wjr.jpg'
-import xczz from '@/assets/img/xczz.jpg'
-import xjp from '@/assets/img/xjp.jpg'
 export default {
   data () {
     return {
-      scrollerWidth: 1300,
+      scrollerWidth: 500,
+      conditions: {
+        playInfo: {
+          page: 1,
+          limit: 6
+        },
+        matchInfo: {
+          page: 1,
+          limit: 6,
+          status: 1
+        }
+      },
       swiperList: [{
         url: 'javascript:',
         img: pic1,
@@ -86,89 +92,8 @@ export default {
       }, {
         name: '恭喜会员求真相竞猜中奖，获得20W现金！'
       }],
-      trailerList: [{
-        link: '',
-        date: '2018-1-2',
-        status: 1,
-        palyer: [{
-          name: '金东秀',
-          img: jdx
-        }, {
-          name: '播求',
-          img: bq
-        }]
-      }, {
-        link: '',
-        date: '2018-1-4',
-        status: 0,
-        palyer: [{
-          name: '谢俊鹏',
-          img: xjp
-        }, {
-          name: '维吉尔',
-          img: wjr
-        }]
-      }, {
-        link: '',
-        date: '2018-1-12',
-        status: 1,
-        palyer: [{
-          name: '西川智之',
-          img: xczz
-        }, {
-          name: '塞巴斯蒂安',
-          img: sbsda
-        }]
-      }, {
-        link: '',
-        date: '2018-1-20',
-        status: 0,
-        palyer: [{
-          name: '金东秀',
-          img: jdx
-        }, {
-          name: '塞巴斯蒂安',
-          img: sbsda
-        }]
-      }, {
-        link: '',
-        status: 1,
-        date: '2018-1-22',
-        palyer: [{
-          name: '维吉尔',
-          img: wjr
-        }, {
-          name: '谢俊鹏',
-          img: xjp
-        }]
-      }],
-      list: [{
-        src: bq,
-        title: '播求',
-        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        id: 123
-      }, {
-        src: sbsda,
-        title: '播求',
-        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        id: 234
-      }, {
-        src: wjr,
-        title: '播求',
-        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        id: 345
-      }, {
-        src: xjp,
-        title: '谢俊鹏',
-        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        id: 678
-      }, {
-        src: bq,
-        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-        title: '播求',
-        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        id: 567
-      }]
+      trailerList: [],
+      playerList: []
     }
   },
   components: {
@@ -182,12 +107,39 @@ export default {
   },
   methods: {
     handleWidth () {
-      this.scrollerWidth = this.$refs.vsModel.map(item => item.$el.clientWidth)
+      this.scrollerWidth = this.$refs.vsModel && this.$refs.vsModel.map(item => item.$el.clientWidth)
         .reduce((x, y) => x + y + 10)
+    },
+    handleGetPlayInfo () {
+      let {page, limit} = this.conditions.playInfo
+      const queryData = {
+        page,
+        limit
+      }
+      home.GetPlayerInfo(queryData).then(data => {
+        this.playerList = data
+      })
+    },
+    handleGetMatchList () {
+      let {page, limit, status} = this.conditions.matchInfo
+      const queryData = {
+        page,
+        limit,
+        status
+      }
+      home.GetMatchList(queryData).then(data => {
+        this.trailerList = data
+        this.$nextTick(() => {
+          this.handleWidth()
+        })
+      })
     }
   },
-  mounted () {
-    this.handleWidth()
+  created () {
+    // 获取选手信息
+    this.handleGetPlayInfo()
+    // 获取赛事信息
+    this.handleGetMatchList()
   }
 }
 </script>
@@ -206,6 +158,7 @@ export default {
     padding: 0.2rem 0 0.2rem 0.2rem
   .scroller-box
     height: 110px
+    padding-bottom: 0.4rem
     position: relative
     .scroller-box-item
       height: 110px

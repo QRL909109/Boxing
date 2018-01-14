@@ -1,4 +1,4 @@
-<!-- 赛程 -->
+<!-- 赛果 -->
 <template>
   <div class="quiz-wrap">
     <div class="quiz-model" v-for="(item, index) in quizList">
@@ -37,7 +37,7 @@
           matchInfo: {
             page: 1,
             limit: 6,
-            status: 0
+            status: 2
           }
         }
       }

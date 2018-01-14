@@ -7,7 +7,8 @@
 *  2) promise
 *  bjFetch(opts).then(data => { ... })
  */
-import Vuw from 'vue'
+import Vue from 'vue'
+import resultCallback from './resultCallback'
 
 const bjFetch = async function ({ vm, type = 'GET', url, data = {}, options = {}, target, loading = false, loadingText = 'Loading...' }, ...args) {
   // fetch 获取结果
@@ -71,10 +72,9 @@ const bjFetch = async function ({ vm, type = 'GET', url, data = {}, options = {}
       }
       return result
     } else {
-      return res.join()
+      return res.json()
     }
   }
-
   switch (TYPE) {
     case 'POST':
       result = await HTTP.post(url, data, options).then(resolve, reject)
@@ -98,24 +98,27 @@ const bjFetch = async function ({ vm, type = 'GET', url, data = {}, options = {}
       // get 拼接data部分参数
       const handleData = Object.keys(data).map(item => `${item}=${data[item]}`)
       const fetchUrl = handleData.length ? [url, url.indexOf('?') > -1 ? '&' : '?', handleData.join('&')].join('') : url
-      // result = await vm.$http.get(fetchUrl, options).then(res => res.json(), reject)
       result = await HTTP.get(fetchUrl, options).then(resolve, reject)
       break
   }
-  return result
+  return resultCallback(vm, result)
 }
 
 // GET 方法
-bjFetch.$get = async (url, data = {}, options = {}) => await bjFetch({ url, data, ...options })
+bjFetch.$get = async (url, data = {}, options = {}) => {
+  let result = await bjFetch({ url, data, ...options })
+  return result
+}
 
 // POST
 bjFetch.$post = async (url, data = {}, options = {}) => {
-  return await bjFetch({
+  let result = await bjFetch({
     type: 'POST',
     url,
     data,
     ...options
   })
+  return result
 }
 
 export default bjFetch

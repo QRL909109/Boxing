@@ -1,12 +1,12 @@
 <template>
   <div class="bj-progress">
-    <div class="progress-left">{{data.man1.name}}</div>
+    <div class="progress-left">{{data.blue.name}}</div>
     <div class="bj-progress__bar">
       <div class="bj-progress__inner-bar" :style="{width: handlePercentage(data)}"></div>
-      <div class="position left">{{data.man1.value}}</div>
-      <div class="position right">{{data.man2.value}}</div>
+      <div class="position left">{{data.blue.value}}</div>
+      <div class="position right">{{data.red.value}}</div>
     </div>
-    <div class="progress-right">{{data.man2.name}}</div>
+    <div class="progress-right">{{data.red.name}}</div>
 </div>
 </template>
 <script>
@@ -18,7 +18,7 @@
       handlePercentage (data) {
         let percent = 0
         let arr = Object.keys(data).map(item => data[item].value)
-        percent = parseInt((arr[0] / (arr[1] + arr[0])) * 100)
+        percent = parseInt((arr[1] / (arr[1] + arr[0])) * 100)
         return `${percent}%`
       }
     },

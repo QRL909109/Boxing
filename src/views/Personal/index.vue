@@ -3,14 +3,14 @@
   <div class="personal-info-wrap">
     <div class="person__info">
       <div class="person__tou">
-        <img :src="bq" alt="" class="img-tou">
+        <img :src="user.avatar" alt="" class="img-tou">
       </div>
       <div class="person__name-money">
         <div class="money">
-          <add-money :money="user.money"/>
+          <add-money :money="user.coin"/>
         </div>
         <div class="nick-name">
-          {{user.nickName}}
+          {{user.username}}
           <!-- <i class="iconfont icon-bianji"></i> -->
         </div>
       </div>

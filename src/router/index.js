@@ -43,6 +43,16 @@ export default new Router({
             meta: {index: 2},
             component: r => require.ensure([], () => r(require(`../views/Home/quiz.vue`)), 'home_quiz')
           }, {
+            path: 'quized',
+            name: 'home_quized',
+            meta: {index: 3},
+            component: r => require.ensure([], () => r(require(`../views/Home/quized.vue`)), 'home_quized')
+          }, {
+            path: 'quizing',
+            name: 'home_quizing',
+            meta: {index: 1},
+            component: r => require.ensure([], () => r(require(`../views/Home/quizing.vue`)), 'home_quizing')
+          }, {
             path: 'super',
             name: 'home_super',
             meta: {index: 3},

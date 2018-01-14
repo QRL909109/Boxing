@@ -2,7 +2,7 @@
   <div class="quiz-wapper height100">
     <!-- 头部 -->
     <div class="header">
-      <add-money :money="user.money"/>
+      <add-money :money="user.coin"/>
       <div class="quiz-tab">
         <ul>
           <li v-for="(item, index) in headerList" class="text-center">

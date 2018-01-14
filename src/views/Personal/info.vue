@@ -1,7 +1,7 @@
-<!-- 资料 -->
+<!-- 消息中心 -->
 <template>
   <div class="info-center-wrap">
-    <title-model title="资料"></title-model>
+    <title-model title="消息记录"></title-model>
     <group>
       <cell v-for="(item, index) in infoList" :key="index" :inline-desc="item.desc" :value="item.date | timeAgo">
         <span slot="title">{{item.title}}<badge v-show="item.num > 0" :text="item.num"></badge></span>

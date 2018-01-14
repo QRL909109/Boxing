@@ -3,7 +3,7 @@
   <div class="title-model-wrap">
     <div :class="[showBottomBorder ? 'title-model__header' : '']" @click="handleLink(path)">
       <cell-box>
-        <div lass="title-model__left">
+        <div class="title-model__left">
           <span class="title-model__title">{{title}}</span>
           <i class="iconfont icon-qianjin" v-show="path != ''"></i>
         </div>
@@ -52,7 +52,7 @@
   .title-model__header
     border-bottom: 1px solid $grey-300
   .weui-cell
-    padding: 5px 0
+    padding: 0.2rem 0
     justify-content: space-between
   .title-model__title
     +font-dpr(14px)

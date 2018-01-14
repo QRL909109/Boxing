@@ -1,4 +1,4 @@
-const status = function (state) {
+const betStatus = function (state) {
   let type = '正在竞猜'
   switch (state) {
     case 0:
@@ -11,4 +11,7 @@ const status = function (state) {
   }
   return type
 }
-export default status
+
+export {
+  betStatus
+}

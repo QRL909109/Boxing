@@ -35,11 +35,71 @@ function turnName (type) {
   }
   return str
 }
+// 判断加减号
+const coinAddDes = function (state) {
+  let type = '+'
+  switch (state) {
+    case 1:
+      type = '+'
+      break
+    case 2:
+      type = '-'
+      break
+    case 3:
+      type = '-'
+      break
+    case 4:
+      type = '+'
+      break
+    default: type = '+'
+  }
+  return type
+}
+// 充值提取
+const coinType = function (state) {
+  let type = '充值'
+  switch (state) {
+    case 1:
+      type = '充值'
+      break
+    case 2:
+      type = '提取'
+      break
+    case 3:
+      type = '投注'
+      break
+    case 4:
+      type = '赢取'
+      break
+    default: type = '充值'
+  }
+  return type
+}
+// 订单的状态
+const orderType = function (state) {
+  let type = '充值'
+  switch (state) {
+    case 1:
+      type = '确认中'
+      break
+    case 2:
+      type = '已确认，并结算'
+      break
+    case 3:
+      type = '已取消'
+      break
+    default: type = '确认中'
+  }
+  return type
+}
 export {
   currency,
   dateFormat,
   timestampToDays,
   timeAgo,
   limitStrNum,
-  turnName
+  turnName,
+  coinAddDes,
+  coinType,
+  orderType
 }

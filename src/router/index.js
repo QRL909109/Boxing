@@ -88,6 +88,18 @@ export default new Router({
         path: 'index',
         name: 'personal_index',
         component: r => require.ensure([], () => r(require(`../views/Personal/index.vue`)), 'personal_index')
+      }, {
+        path: 'info',
+        name: 'personal_info',
+        component: r => require.ensure([], () => r(require(`../views/Personal/info.vue`)), 'personal_info')
+      }, {
+        path: 'coin',
+        name: 'info_coin',
+        component: r => require.ensure([], () => r(require(`../views/Personal/infoCoin.vue`)), 'personal_coin')
+      }, {
+        path: 'order',
+        name: 'info_order',
+        component: r => require.ensure([], () => r(require(`../views/Personal/infoOrder.vue`)), 'personal_order')
       }]
     },
     // --- 充值界面

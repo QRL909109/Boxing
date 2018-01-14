@@ -19,7 +19,7 @@
           <slot name="time"> 
             <time class="time">{{ data.info.game_begin_time }}</time>
           </slot>
-          <div v-show="statusShow" class="status text-center" :class="{'active': data.status === 1}">{{ fiterStatus(data.status) }}</div>
+          <div v-show="statusShow" class="status text-center" :class="{'active': data.status === 1}">{{ betStatus(data.status) }}</div>
           <slot name="footer"></slot>
         </div>
         <div class="player">
@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-  import fiterStatus from '@/lib/utils/fiterStatus'
+  import {betStatus} from '@/lib/utils/fiterStatus'
   export default {
     name: 'vsModel',
     data () {
@@ -62,7 +62,7 @@
       }
     },
     methods: {
-      fiterStatus
+      betStatus
     }
   }
 </script>

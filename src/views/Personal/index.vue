@@ -44,17 +44,22 @@
           name: '消息',
           newNum: 1,
           icon: 'icon-xinxi',
-          link: ''
+          link: '/personal/info'
         }, {
           name: '竞猜记录',
           newNum: 0,
           icon: 'icon-match',
           link: '/quiz/main/recording'
         }, {
-          name: '充值记录',
+          name: '金币记录',
           newNum: 2,
           icon: 'icon-chongzhi',
-          link: ''
+          link: '/personal/coin'
+        }, {
+          name: '订单记录',
+          newNum: 0,
+          icon: 'icon-dingdan',
+          link: '/personal/order'
         }]
       }
     },

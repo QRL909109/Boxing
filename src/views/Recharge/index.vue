@@ -62,7 +62,7 @@
   export default {
     data () {
       return {
-        showHideOnBlur: false,
+        showHideOnBlur: true,
         currentDes: '',
         rechargeMoneyList,
         reChargeList: [{
@@ -88,6 +88,9 @@
           this.$set(charge, 'payType', false)
         })
         this.$set(item, 'payType', true)
+      },
+      chooseMoney (item) {
+
       }
     },
     computed: {

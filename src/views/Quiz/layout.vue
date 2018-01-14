@@ -2,11 +2,7 @@
   <div class="quiz-wapper height100">
     <!-- 头部 -->
     <div class="header">
-      <div class="self-maony">
-        <img class="glod-icon" src="../../assets/img/gold@2x.png" alt="">
-        <span class="money"> 325</span>
-        <i class="iconfont icon-add_c add" @click="handleAddMoney"></i>
-      </div>
+      <add-money :money="user.money"/>
       <div class="quiz-tab">
         <ul>
           <li v-for="(item, index) in headerList" class="text-center">
@@ -27,6 +23,8 @@
 </template>
 <script>
   import { ViewBox } from 'vux'
+  import { mapState } from 'vuex'
+  import addMoney from '@/components/AddMoney'
   export default {
     data () {
       return {
@@ -43,19 +41,21 @@
           }, {
             name: '记录',
             icon: 'icon-jilu1',
-            link: '/quiz/recording'
+            link: '/quiz/main/recording'
           }]
       }
     },
     methods: {
-      handleAddMoney () {
-        this.$router.push({
-          path: '/recharge'
-        })
-      }
+  
+    },
+    computed: {
+      ...mapState({
+        user: state => state.User
+      })
     },
     components: {
-      ViewBox
+      ViewBox,
+      addMoney
     }
   }
 </script>
@@ -71,23 +71,7 @@
     height: 1.06rem
     background-color: #161616
     color: #fdc72f
-    .self-maony
-      height: 0.7rem
-      background-color: #000
-      border-radius: 0.3rem
-      margin-left: 0.1rem
-      padding: 0 0.2rem
-      display: flex
-      align-items: center
-      .glod-icon
-        width: 0.5rem
-      .money
-        margin-left: 0.1rem
-        +font-dpr(18px)
-      .add
-        color: $orange-50
-        margin-left: 0.1rem
-        font-size: 12px
+    
     .quiz-tab
       ul
         list-style: none

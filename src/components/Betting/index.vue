@@ -43,16 +43,7 @@
     },
     methods: {
       handleGuessMoney (num) {
-        this.$vux.alert.show({
-          title: '竞猜成功',
-          content: `投注${num}`,
-          onShow () {
-            console.log('Plugin: I\'m show now')
-          },
-          onHide () {
-            console.log('Plugin: I\'m hiding now')
-          }
-        })
+        this.$emit('on-betting', num)
       },
       hidding () {
         this.$emit('on-hide')

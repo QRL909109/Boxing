@@ -1,23 +1,42 @@
 <!-- 充值界面 -->
 <template>
   <div class="recharge-wrap">
-    <div class="recharge-header box-shadow-model">线下充值</div>
-    <div class="media box-shadow-model">
-      <div class="media-box media-box_text" v-for="(item,index) in reChargeList" @click="handleQrode(item)">
-        <div class="media-box_appmsg">
-          <div class="media-box__hd">
-            <i class="iconfont" :class="item.icon"></i>
-          </div> 
-          <div class="media-box__bd">
-            <p class="media-box__desc">{{item.desc}}
-            </p>
+    <div class="recharge-header recharfe__modal">
+      <p class="recharge__title">我的积分： 
+        <div class="recharge__money">
+          <img src="./gold@2x.png" alt=""> {{user.money}}
+        </div>
+      </p>
+    </div>
+
+    <div class="recharge__select recharfe__modal">
+      <p class="recharge__title">请选择充值金额</p>
+      <div class="select-money-block">
+        <div v-for="item in rechargeMoneyList" class="select-item">
+          <div>
+            <div class="recharge__money">
+              <img src="./gold@2x.png" alt=""> {{item.money * item.ratio}}
+            </div>
+            <div class="recharge__cache">￥{{item.money}}</div>
           </div>
-        </div> 
+        </div>
+      </div>
+      <p class="recharge__title">其他充值金额 <input type="number" placeholder="元"></input></p>
+       
+    </div>
+
+    <div class="recharge__pay recharfe__modal">
+      <p class="recharge__title">请选择支付方式</p>
+      <div class="pay__choose">
+        <div class="choose" v-for="item in reChargeList" @click="choosePay(item)">
+          <i class="iconfont" :class="item.icon"></i>
+          <p class="desc">{{item.desc}}
+            </p>
+          <check-icon :value="item.payType"></check-icon>
+        </div>
       </div>
     </div>
-    <p class="note box-shadow-model">
-      <i class="iconfont icon-zhuyi red-font"></i> 如在充值过程中遇到状况无法充值请联系在线客服，客服将为您解决各种充值难题，感谢您的支持!
-    </p>
+    
     <x-dialog v-model="showHideOnBlur" class="dialog-demo" hide-on-blur>
       <div class="img-box">
         <h2 class="text-center mgb20">长按向财务转账</h2>
@@ -31,20 +50,23 @@
   </div>
 </template>
 <script>
-  import { Divider, XDialog, Qrcode } from 'vux'
+  import { Divider, XDialog, Qrcode, CheckIcon } from 'vux'
+  import { mapState } from 'vuex'
+  import { rechargeMoneyList } from '@/config/rechargeMoney'
   export default {
     data () {
       return {
         showHideOnBlur: false,
         currentDes: '',
+        rechargeMoneyList,
         reChargeList: [{
           icon: 'icon-alipay',
           link: '',
-          desc: '支付宝转账'
+          desc: '支付宝支付'
         }, {
           icon: 'icon-weixin',
           link: '',
-          desc: '微信转账'
+          desc: '微信支付'
         }]
       }
     },
@@ -53,12 +75,25 @@
         console.log(222, item)
         this.currentDes = item.desc
         this.showHideOnBlur = true
+      },
+      choosePay (item) {
+        // 设置全部取消
+        this.reChargeList.forEach(charge => {
+          this.$set(charge, 'payType', false)
+        })
+        this.$set(item, 'payType', true)
       }
+    },
+    computed: {
+      ...mapState({
+        user: state => state.User
+      })
     },
     components: {
       Divider,
       XDialog,
-      Qrcode
+      Qrcode,
+      CheckIcon
     }
   }
 </script>
@@ -67,59 +102,13 @@
 @import '~assets/sass/color'
 @import '~assets/sass/var'
 .recharge-wrap
+  .recharfe__modal
+    padding: 0.25rem
+    background: $white
+    margin-bottom: 0.25rem
   .recharge-header
-    +font-dpr(18px)
-  .media 
-    border-radius: 0.2rem
-    .media-box
-      padding: 15px
-      position: relative
-      &:before
-        content: " "
-        position: absolute
-        left: 0
-        top: 0
-        right: 0
-        height: 1px
-        border-top: 1px solid #E5E5E5
-        color: #E5E5E5
-        -webkit-transform-origin: 0 0
-        transform-origin: 0 0
-        transform: scaleY(0.5)
-        left: 15px
-      &:first-child:before
-        display: none
-      .media-box_appmsg
-        display: flex
-        align-items: center
-        .media-box__hd
-          margin-right: .8em
-          width: 60px
-          height: 60px
-          line-height: 60px
-          text-align: center
-        .media-box__bd
-          flex: 1
-          min-width: 0
-          .media-box__desc
-            color: $grey-900
-            +font-dpr(16px)
-            line-height: 1.2
-            overflow: hidden
-            text-overflow: ellipsis
-            display: -webkit-box
-            -webkit-box-orient: vertical
-            -webkit-line-clamp: 2 
-    .iconfont
-      +font-dpr(66px)
-    .icon-alipay
-      color: #02a9f1
-    .icon-weixin
-      color: #07b906
-  .note
-    +font-dpr(16px)
-  .img-box
-    padding: 20px
-  .mgb20
-    margin: 0.25rem
+  .icon-alipay
+    color: #02a9f1
+  .icon-weixin
+    color: #07b906
 </style>

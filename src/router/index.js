@@ -90,28 +90,32 @@ export default new Router({
     {
       path: '/quiz',
       name: 'Quiz',
-      redirect: '/quiz/index',
-      component: r => require.ensure([], () => r(require(`../views/Quiz/layout.vue`)), 'layout'),
+      redirect: '/quiz/main/index',
+      component: r => require.ensure([], () => r(require(`../views/layout.vue`)), 'layout'),
       children: [{
-        path: 'index',
-        name: 'quiz_index',
-        component: r => require.ensure([], () => r(require(`../views/Quiz/index.vue`)), 'quiz_index')
-      }, {
-        path: 'list',
-        name: 'quiz_list',
-        component: r => require.ensure([], () => r(require(`../views/Quiz/list.vue`)), 'quiz_list')
-      }, {
-        path: 'game',
-        name: 'quiz_game',
-        component: r => require.ensure([], () => r(require(`../views/Quiz/game.vue`)), 'quiz_game')
-      }, {
-        path: 'introduction',
-        name: 'quiz_introduction',
-        component: r => require.ensure([], () => r(require(`../views/Quiz/introduction.vue`)), 'quiz_introduction')
-      }, {
-        path: 'recording',
-        name: 'quiz_recording',
-        component: r => require.ensure([], () => r(require(`../views/Quiz/recording.vue`)), 'quiz_recording')
+        path: 'main',
+        component: r => require.ensure([], () => r(require(`../views/Quiz/layout.vue`)), 'quiz_layout'),
+        children: [{
+          path: 'index',
+          name: 'quiz_index',
+          component: r => require.ensure([], () => r(require(`../views/Quiz/index.vue`)), 'quiz_index')
+        }, {
+          path: 'list',
+          name: 'quiz_list',
+          component: r => require.ensure([], () => r(require(`../views/Quiz/list.vue`)), 'quiz_list')
+        }, {
+          path: 'game',
+          name: 'quiz_game',
+          component: r => require.ensure([], () => r(require(`../views/Quiz/game.vue`)), 'quiz_game')
+        }, {
+          path: 'introduction',
+          name: 'quiz_introduction',
+          component: r => require.ensure([], () => r(require(`../views/Quiz/introduction.vue`)), 'quiz_introduction')
+        }, {
+          path: 'recording',
+          name: 'quiz_recording',
+          component: r => require.ensure([], () => r(require(`../views/Quiz/recording.vue`)), 'quiz_recording')
+        }]
       }]
     }
   ]

@@ -53,14 +53,13 @@
           </div>
         </div>
         <div class="result">
-          <div class="btn text-center" v-for="item in analysisList.opponent" @click="handleGuess" 
+          <div class="btn text-center" v-for="item in analysisList.opponent" @click="handleGuess(item)" 
           :class="[item.status === 0 ? 'red-50-bg' : 'bule-bg']">
             <p>{{item.magnification}}</p>
             <p>{{item.name}}</p>
           </div>
         </div>
       </title-model>
-      
     </div>
 
     <!-- 数据 -->
@@ -77,7 +76,7 @@
     </div>
 
     <!-- 竞猜投钱 -->
-    <betting :active="guessActive" @on-hide="handleHideBetting"/>
+    <betting :active="guessActive" @on-betting="handleBetting" @on-hide="handleHideBetting"/>
   </div>
 </template>
 <script>
@@ -85,6 +84,7 @@
   import { Divider, Flexbox, FlexboxItem } from 'vux'
   import betting from '@/components/Betting'
   import titleModel from '@/components/titleModel'
+  import { mapState } from 'vuex'
   // 待删除
   import bq from '@/assets/img/bq.jpg'
   import jdx from '@/assets/img/jdx.jpg'
@@ -165,11 +165,13 @@
             name: 'KO',
             value: 0
           }
-        }]
+        }],
+        bettingInfo: {} // 投注信息
       }
     },
     methods: {
-      handleGuess () {
+      handleGuess (item) {
+        this.bettingInfo = item
         this.guessActive = true
       },
       handleHideBetting () {
@@ -180,7 +182,37 @@
         this.$router.push({
           path: '/quiz/introduction'
         })
+      },
+      handleBetting (num) {
+        let _this = this
+        if (this.user.money < num) {
+          this.$vux.alert.show({
+            title: '金币不足，请及时充值！',
+            content: `投注${num}`,
+            onHide () {
+              _this.$router.push({
+                path: '/recharge'
+              })
+            }
+          })
+        } else {
+          this.$vux.alert.show({
+            title: '竞猜成功',
+            content: `<p>投注${num}</p><p>投注${_this.bettingInfo.name}</p>`,
+            onShow () {
+              console.log('Plugin: I\'m show now')
+            },
+            onHide () {
+              console.log('Plugin: I\'m hiding now')
+            }
+          })
+        }
       }
+    },
+    computed: {
+      ...mapState({
+        user: state => state.User
+      })
     },
     components: {
       progressBar,
@@ -251,9 +283,9 @@
       .btn
         width: 2rem
         color: $white
-        padding: 0.15rem $spacing
+        padding: 0.3rem 0.7rem
         margin: 0 0.3rem
-        border-radius: 0.2rem
+        border-radius: 4px
         +font-dpr(16px)
         line-height: 0.6rem
         &:first-child

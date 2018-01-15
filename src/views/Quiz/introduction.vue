@@ -1,57 +1,62 @@
 <!-- 选手信息 -->
 <template>
-  <div class="quiz-introduction">
-    <blur :blur-amount=40 :url="url" :height="height">
-      <div class="center">
-        <img :src="url">
-        <div class="intro">
-          <div class="item">
-            <p class="left">姓名: </p>
-            <p>播求</p>
-          </div>
-          <div class="item">
-            <p class="left">身高: </p>
-            <p>178cm</p>
-          </div>
-          <div class="item">
-            <p class="left">体重: </p>
-            <p>67KG</p>
-          </div>
-          <div class="item">
-            <p class="left">KO: </p>
-            <p>30</p>
-          </div>
-          <div class="item">
-            <p class="left">简介: </p>
-            <p>他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄</p>
-          </div>
+  <div class="quiz-introduction height100">
+    <div class="center">
+      <img :src="url">
+      <div class="intro">
+        <div class="item">
+          <p class="left">姓名: </p>
+          <p>播求</p>
+        </div>
+        <div class="item">
+          <p class="left">身高: </p>
+          <p>178cm</p>
+        </div>
+        <div class="item">
+          <p class="left">体重: </p>
+          <p>67KG</p>
+        </div>
+        <div class="item">
+          <p class="left">KO: </p>
+          <p>30</p>
+        </div>
+        <div class="item">
+          <p class="left">简介: </p>
+          <p>他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄</p>
         </div>
       </div>
-    </blur>
+    </div>
   </div>
 </template>
 <script>
-  import { Blur } from 'vux'
   // 待删除
-  import bq from '@/assets/img/bq.jpg'
+  import quiz from '@/lib/api/quiz'
   export default {
     data () {
+      const query = this.$route.query
       return {
-        url: bq,
-        height: 200
+        query
       }
     },
-    components: {
-      Blur
+    methods: {
+      handleGetDetail () {
+        quiz.GetBoxerDetail({
+          id: this.query.id
+        }).then(data => {
+          console.log(3333, data)
+        })
+      }
     },
-    mounted () {
-      this.height = document.getElementById('app').clientHeight
+    created () {
+      this.handleGetDetail()
     }
   }
 </script>
 <style lang="sass">
 @import '~assets/sass/mixin'
+@import '~assets/sass/color'
 .quiz-introduction
+  background-color: $grey-800
   .center
     padding: 1.5rem 0.5rem
     color: #fff
@@ -65,7 +70,7 @@
     .item
       display: flex
       margin-bottom: 0.3rem
-      +font-dpr(15px)
+      +font-dpr(14px)
       line-height: 0.5rem
       .left
         margin-right: 0.2rem

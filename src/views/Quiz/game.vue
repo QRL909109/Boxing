@@ -46,7 +46,7 @@
         <div class="bg">
           <div class="all-money">
             <img class="glod-icon" src="~/assets/img/gold@2x.png" alt="">
-            <span class="money">{{ parseInt(analysisList.bet_infos[0].blue_odds_amount + analysisList.bet_infos[0].red_odds_amount) }}</span>
+            <span class="money">{{ parseInt(analysisList.bet_info.blue_odds_amount + analysisList.bet_info.red_odds_amount) }}</span>
           </div>
           <div class="time">
             截止时间: {{analysisList.info.bet_end_time | dateFormat('yyyy-mm-dd')}}
@@ -54,11 +54,11 @@
         </div>
         <div class="result">
           <div class="btn text-center bule-bg" @click="handleGuess('blue', analysisList.blue.name)">
-            <p>{{analysisList.bet_infos[0].blue_odds}}</p>
+            <p>{{analysisList.bet_info.blue_odds}}</p>
             <p>{{analysisList.blue.name}}</p>
           </div>
           <div class="btn text-center red-50-bg" @click="handleGuess('red', analysisList.red.name)">
-            <p>{{analysisList.bet_infos[0].red_odds}}</p>
+            <p>{{analysisList.bet_info.red_odds}}</p>
             <p>{{analysisList.red.name}}</p>
           </div>
         </div>
@@ -88,7 +88,6 @@
   import titleModel from '@/components/titleModel'
   import { mapState } from 'vuex'
   import quiz from '@/lib/api/quiz'
-  import home from '@/lib/api/home'
   // 待删除
   import bq from '@/assets/img/bq.jpg'
   import jdx from '@/assets/img/jdx.jpg'
@@ -104,10 +103,7 @@
           blue: {},
           red: {},
           info: {},
-          bet_infos: [{
-            blue_odds_amount: 0,
-            red_odds_amount: 0
-          }]
+          bet_info: {}
         },
         playerInfo: [],
         bettingInfo: {} // 投注信息
@@ -135,66 +131,65 @@
        */
       handleGetMatchList () {
         const queryData = {
-          page: 1,
-          limit: 1,
-          status: 1
+          id: this.query.id
         }
-        home.GetMatchList(queryData).then(data => {
+        quiz.GetMatchDetail(queryData).then(data => {
           this.playerInfo = []
-          this.analysisList = data[0]
+          this.analysisList = data
+          this.analysisList.bet_info = data.bet_infos.filter(item => item.bet_type === 1)[0]
           this.playerInfo.push({
             red: {
               name: '身高',
-              value: data[0].red.height
+              value: data.red.height
             },
             blue: {
               name: '身高',
-              value: data[0].blue.height
+              value: data.blue.height
             }
           }, {
             red: {
               name: '体重',
-              value: data[0].red.weight
+              value: data.red.weight
             },
             blue: {
               name: '体重',
-              value: data[0].blue.weight
+              value: data.blue.weight
             }
           }, {
             red: {
               name: '年龄',
-              value: data[0].red.age
+              value: data.red.age
             },
             blue: {
               name: '年龄',
-              value: data[0].blue.age
+              value: data.blue.age
             }
           }, {
             red: {
               name: '获胜',
-              value: data[0].red.win_times
+              value: data.red.win_times
             },
             blue: {
               name: '获胜',
-              value: data[0].blue.win_times
+              value: data.blue.win_times
             }
           }, {
             red: {
               name: 'KO',
-              value: data[0].red.ko_times
+              value: data.red.ko_times
             },
             blue: {
               name: 'KO',
-              value: data[0].blue.ko_times
+              value: data.blue.ko_times
             }
           }, {
             red: {
               name: '失败',
-              value: data[0].red.fail_times
+              value: data.red.fail_times
             },
             blue: {
               name: '失败',
-              value: data[0].blue.fail_times
+              value: data.blue.fail_times
             }
           })
         })

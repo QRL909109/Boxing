@@ -28,7 +28,10 @@
           <input type="number" class="coin-input" :value="payOrderMoney" @input="handleInputMoney"></input> 元
         </div>
       </div>
-
+      <!-- 手机号 -->
+      <group>
+        <x-input title="手机号码" name="mobile" placeholder="请输入手机号码" v-model="phone" keyboard="number" is-type="china-mobile"></x-input>
+      </group>
       <div class="recharge__pay recharfe__modal">
         <p class="recharge__title">请选择支付方式</p>
         <div class="pay__choose">
@@ -52,7 +55,7 @@
       <div class="img-box">
         <h2 class="text-center mgb20">长按向财务转账</h2>
         <qrcode value="https://vux.li?x-page=demo_qrcode" type="img"></qrcode>
-        <p class="text-center mgb20">{{currentDes}}</p>
+        <p class="text-center mgt20">{{currentDes}}</p>
       </div>
       <div @click="showHideOnBlur=false">
         <span class="vux-close"></span>
@@ -61,7 +64,7 @@
   </div>
 </template>
 <script>
-  import { Divider, XDialog, Qrcode, CheckIcon, Flexbox, FlexboxItem, ViewBox } from 'vux'
+  import { Divider, XDialog, Qrcode, CheckIcon, Flexbox, FlexboxItem, ViewBox, XInput, Group, debounce } from 'vux'
   import { mapState } from 'vuex'
   import { rechargeMoneyList } from '@/config/rechargeMoney'
   import personal from '@/lib/api/personal'
@@ -72,6 +75,7 @@
         currentDes: '',
         rechargeMoneyList,
         currentIndex: '',
+        phone: '',
         reChargeList: [{
           icon: 'icon-alipay',
           link: '',
@@ -88,8 +92,9 @@
       }
     },
     methods: {
-      handleQrode (item) {
-        this.currentDes = item.desc
+      handleQrode (desc) {
+        let title = this.reChargeList.filter(item => item.payType)[0].desc
+        this.currentDes = `${title} ${desc} 元`
         this.showHideOnBlur = true
       },
       choosePay (item) {
@@ -104,10 +109,10 @@
         this.payOrderMoney = ''
         this.payMoney = item.money
       },
-      handleInputMoney (val) {
+      handleInputMoney: debounce(function (val) {
         this.currentIndex = ''
         this.payMoney = this.payOrderMoney = val.target.value
-      },
+      }, 500),
       handleRecharge () {
         if (+this.payMoney <= 0) {
           this.$vux.alert.show({
@@ -115,13 +120,20 @@
           })
           return
         }
+
+        if (!/0?(13|14|15|18)[0-9]{9}/.test(this.phone)) {
+          this.$vux.alert.show({
+            title: '手机号码有误'
+          })
+          return
+        }
         let queryData = {
           coin: this.payMoney,
           opr_type: 1, // 1充值 2提现
-          wx_num: '111'
+          phone: this.phone
         }
         personal.PostOrderNew(queryData).then(data => {
-          console.log(3333, data)
+          this.handleQrode(this.payMoney)
         })
       }
     },
@@ -137,7 +149,9 @@
       CheckIcon,
       Flexbox,
       FlexboxItem,
-      ViewBox
+      ViewBox,
+      XInput,
+      Group
     }
   }
 </script>
@@ -205,4 +219,10 @@
     color: $white
     background: $grey-800
     text-align: center
+  .img-box
+    padding: 0.5rem
+  .mgb20
+    margin-bottom: 0.5rem
+  .mgt20
+    margin-top: 0.5rem
 </style>

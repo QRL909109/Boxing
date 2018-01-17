@@ -26,11 +26,20 @@
      <div class="mg-b-2">
       <title-model title="名人介绍" path="/info">
         <div class="man-wrap pd-l-2">
-          <panel-model  
-            :list="playerList"
-            path="/quiz/main/introduction"
-            type="left">
-          </panel-model>
+          <scroller lock-x height="500px" 
+          ref="scrollerUpDown"
+          :use-pulldown=true 
+          :use-pullup=true
+          :pulldown-config="pullDownConfig"
+          :pullup-config="pullUpConfig"
+          @on-pulldown-loading="onPullDown"  
+          @on-pullup-loading="onPullUp">
+            <panel-model  
+              :list="playerList"
+              path="/quiz/main/introduction"
+              type="left">
+            </panel-model>
+          </scroller>
         </div>
       </title-model>
      </div>
@@ -38,12 +47,13 @@
   </section>
 </template>
 <script>
-import { Swiper, Scroller, Divider } from 'vux'
+import { Swiper, Divider } from 'vux'
 import vsModel from '@/components/VSModel'
 import announcement from '@/components/Announcement'
 import titleModel from '@/components/titleModel'
 import panelModel from '@/components/panelModel'
 import home from '@/lib/api/home'
+import pullUpDown from '@/mixin/pullUpDown'
 // 测试图片 后面删除
 import pic1 from '@/assets/img/1.jpeg'
 import pic2 from '@/assets/img/2.png'
@@ -56,11 +66,11 @@ export default {
       conditions: {
         playInfo: {
           page: 1,
-          limit: 6
+          limit: 10
         },
         matchInfo: {
           page: 1,
-          limit: 6,
+          limit: 10,
           status: 1
         }
       },
@@ -96,9 +106,9 @@ export default {
       playerList: []
     }
   },
+  mixins: [pullUpDown],
   components: {
     Swiper,
-    Scroller,
     vsModel,
     Divider,
     announcement,
@@ -110,14 +120,40 @@ export default {
       this.scrollerWidth = this.$refs.vsModel && this.$refs.vsModel.map(item => item.$el.clientWidth)
         .reduce((x, y) => x + y + 10)
     },
-    handleGetPlayInfo () {
+    onPullDown () {
+      this.conditions.playInfo.page = 1
+      this.handleGetPlayInfo()
+      setTimeout(() => {
+        this.$refs.scrollerUpDown.donePulldown() // 加载完成
+        this.$refs.scrollerUpDown.reset({top: 0}) // 重新上高地
+        this.$refs.scrollerUpDown.enablePullup() // 重置上拉加载
+      }, 500)
+    },
+    onPullUp () {
+      this.conditions.playInfo.page += 1
+      this.handleGetPlayInfo(false)
+      this.$nextTick(() => {
+        this.$refs.scrollerUpDown.donePullup()
+        this.$refs.scrollerUpDown.reset()
+      })
+    },
+    handleGetPlayInfo (type = true) {
       let {page, limit} = this.conditions.playInfo
       const queryData = {
         page,
         limit
       }
       home.GetPlayerInfo(queryData).then(data => {
-        this.playerList = data
+        // 判断是更新还是加载  默认更新
+        if (type) {
+          this.playerList = data
+        } else {
+          // 判断数据是否为空  禁止加载
+          this.playerList.push(...data)
+        }
+        if (data.length === 0 || data.length < this.conditions.playInfo.limit) {
+          this.$refs.scrollerUpDown.disablePullup()
+        }
       })
     },
     handleGetMatchList () {
@@ -167,7 +203,4 @@ export default {
       float: left
       &:first-child
         margin-left: 0
-  .man-wrap
-    height: 300px
-    overflow-y: auto
 </style>

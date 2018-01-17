@@ -8,23 +8,32 @@
           {{item.name}}
         </tab-item>
       </tab>
-      <div class="content">
-        <div class="box-shadow-model" v-for="(item, index) in infoList">
-          <div class="info-wrap">
-            <div class="info">
-              <p>编号: {{item.id}}</p>
-              <p v-show="item.opr_type === 1">金币数量: {{item.coin_num}}</p>
-              <p v-show="item.opr_type === 2">金额: {{item.amount}}</p>
-              <p>操作时间: {{item.opr_time * 1000 | dateFormat('yyyy-mm-dd hh-mm')}}</p>
-              <p v-show="item.status === 2">确认时间: {{item.confirm_time * 1000 | dateFormat('yyyy-mm-dd hh-mm')}}</p>
-            </div>
-            <div class="status bule-font">
-              {{item.status | orderType}}
+      <scroller lock-x :height="scrollHeight"
+        ref="scrollerUpDown"
+        :use-pulldown=true 
+        :use-pullup=true
+        :pulldown-config="pullDownConfig"
+        :pullup-config="pullUpConfig"
+        @on-pulldown-loading="onPullDown"  
+        @on-pullup-loading="onPullUp">
+        <div class="content">
+          <div class="box-shadow-model" v-for="(item, index) in infoList">
+            <div class="info-wrap">
+              <div class="info">
+                <p>编号: {{item.id}}</p>
+                <p v-show="item.opr_type === 1">金币数量: {{item.coin_num}}</p>
+                <p v-show="item.opr_type === 2">金额: {{item.amount}}</p>
+                <p>操作时间: {{item.opr_time * 1000 | dateFormat('yyyy-mm-dd hh-mm')}}</p>
+                <p v-show="item.status === 2">确认时间: {{item.confirm_time * 1000 | dateFormat('yyyy-mm-dd hh-mm')}}</p>
+              </div>
+              <div class="status bule-font">
+                {{item.status | orderType}}
+              </div>
             </div>
           </div>
         </div>
+      </scroller>
         <no-result desc="暂无记录" :show="infoList.length <= 0 "/>
-      </div>
     </view-box>
     
   </div>
@@ -34,6 +43,7 @@
   import personal from '@/lib/api/personal'
   import titleModel from '@/components/titleModel'
   import noResult from '@/components/Common/no-result'
+  import pullUpDown from '@/mixin/pullUpDown'
   const orderTypeList = [{
     name: '充值',
     index: 1
@@ -54,6 +64,7 @@
         }
       }
     },
+    mixins: [pullUpDown],
     methods: {
       handleLink (item, index) {
         this.currentIndex = index
@@ -64,7 +75,24 @@
         })
         this.handleGetOrder()
       },
-      handleGetOrder () {
+      onPullDown () {
+        this.conditions.page = 1
+        this.handleGetOrder()
+        setTimeout(() => {
+          this.$refs.scrollerUpDown.donePulldown() // 加载完成
+          this.$refs.scrollerUpDown.reset({top: 0}) // 重新上高地
+          this.$refs.scrollerUpDown.enablePullup() // 重置上拉加载
+        }, 500)
+      },
+      onPullUp () {
+        this.conditions.page += 1
+        this.handleGetOrder(false)
+        this.$nextTick(() => {
+          this.$refs.scrollerUpDown.donePullup()
+          this.$refs.scrollerUpDown.reset()
+        })
+      },
+      handleGetOrder (type = true) {
         let {page, limit, opr_type} = this.conditions
         let queryData = {
           page,
@@ -73,14 +101,25 @@
         }
         this.$vux.loading.show({ text: 'Loading' })
         personal.GetOrderMy(queryData).then(data => {
-          console.log(223311, data)
-          this.infoList = data
+          if (type) {
+            this.infoList = data
+          } else {
+            // 判断数据是否为空  禁止加载
+            this.infoList.push(...data)
+          }
+          if (data.length === 0 || data.length < this.conditions.limit) {
+            this.$refs.scrollerUpDown.disablePullup()
+          }
           this.$vux.loading.hide()
         })
       }
     },
     created () {
       this.handleGetOrder()
+    },
+    mounted () {
+      // 充值头部 40， 开奖 44，底部 50
+      this.scrollHeight = `${document.getElementById('app').clientHeight - 40 - 44 - 50}px`
     },
     components: {
       Group,

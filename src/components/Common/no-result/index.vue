@@ -30,7 +30,13 @@
 
 <style scoped>
   .no-result {
-    margin: 100px 0;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    margin: 30px 0;
+    background-color: #f5f5f5;
   }
 </style>
 

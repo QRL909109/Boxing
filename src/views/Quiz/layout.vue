@@ -68,7 +68,7 @@
     justify-content: space-between
     align-self: center
     align-items: center
-    height: 1.06rem
+    height: 40px
     background-color: #161616
     color: #fdc72f
     

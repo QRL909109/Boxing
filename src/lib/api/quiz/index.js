@@ -6,10 +6,10 @@ export const POST_BET_GAME = '/v1/bet/game' // game_id -- 比赛id  guess -- red
 export const GET_BET_RECORD = '/v1/bet/my' // page=1&limit=5&flag=1
 
 //获取选手详情
-export const GET_BOXER_DETIAL = '/v1/boxer' // id=1
+export const GET_BOXER_DETIAL = '/v1/boxer/info' // id=1
 
 //获取竞猜详情
-export const GET_MATCH_DETIAL = '/v1/match' // id=1
+export const GET_MATCH_DETIAL = '/v1/match/info' // id=1
 
 /**
  * [投注]

@@ -49,7 +49,7 @@
             <span class="money">{{ parseInt(analysisList.bet_info.blue_odds_amount + analysisList.bet_info.red_odds_amount) }}</span>
           </div>
           <div class="time">
-            截止时间: {{analysisList.info.bet_end_time | dateFormat('yyyy-mm-dd')}}
+            截止时间: {{analysisList.info.bet_end_time * 1000 | dateFormat('yyyy-mm-dd')}}
           </div>
         </div>
         <div class="result">
@@ -133,6 +133,7 @@
         const queryData = {
           id: this.query.id
         }
+        this.$store.dispatch('updateLoadingStatus', {isLoading: true})
         quiz.GetMatchDetail(queryData).then(data => {
           this.playerInfo = []
           this.analysisList = data
@@ -192,6 +193,7 @@
               value: data.blue.fail_times
             }
           })
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       },
       /**
@@ -263,7 +265,7 @@
   .game-header
     width: 100%
     height: 5rem
-    background-image: url("../../assets/img/quiz_bg@2x.png")
+    background-image: url("../../assets/img/quiz_bg@2x.jpg")
     background-size: 100% 5rem
     background-repeat: no-repeat
     .header-content

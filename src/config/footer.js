@@ -5,11 +5,11 @@ export const footerNav = [{
 }, {
   text: '资料',
   iconClass: 'icon-xinxi',
-  link: '/info'
+  link: '/home'
 }, {
   text: '活动',
   iconClass: 'icon-xinxi',
-  link: '/info'
+  link: '/home'
 }, {
   text: '个人',
   iconClass: 'icon-geren',

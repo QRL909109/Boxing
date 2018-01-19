@@ -99,7 +99,7 @@
           limit,
           opr_type
         }
-        this.$vux.loading.show({ text: 'Loading' })
+        this.$store.dispatch('updateLoadingStatus', {isLoading: true})
         personal.GetOrderMy(queryData).then(data => {
           if (type) {
             this.infoList = data
@@ -110,7 +110,7 @@
           if (data.length === 0 || data.length < this.conditions.limit) {
             this.$refs.scrollerUpDown.disablePullup()
           }
-          this.$vux.loading.hide()
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       }
     },

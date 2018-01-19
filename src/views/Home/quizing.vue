@@ -11,17 +11,17 @@
       @on-pullup-loading="onPullUp">
       <div class="content">
         <div class="quiz-model" v-for="(item, index) in quizList">
-          <title-model :title="item.info.bet_end_time | dateFormat('yyyy-MM-dd')" path="/quiz/main/list">
+          <title-model :title="item.info.bet_end_time * 1000 | dateFormat('yyyy-MM-dd')" path="/home/main/quizing">
             <div class="card-padding">
                <vs-model :data="item" :statusShow=true vsType="2" link="/quiz/main/game">
                 <span slot="time"></span>
                  <div slot="footer" class="win-model">
                    <div class="deep-bule-bg bule">
-                     <p>{{item.bet_infos[0].blue_odds}}</p>
+                     <p class="text-center">{{item.bet_infos[0].blue_odds}}</p>
                      <p>蓝胜</p>
                    </div>
                    <div class="red-bg red">
-                     <p>{{item.bet_infos[0].red_odds}}</p>
+                     <p class="text-center">{{item.bet_infos[0].red_odds}}</p>
                      <p>红胜</p>
                    </div>
                  </div>
@@ -87,6 +87,7 @@
           limit,
           status
         }
+        this.$store.dispatch('updateLoadingStatus', {isLoading: true})
         home.GetMatchList(queryData).then(data => {
           data = data || []
           // 判断是更新还是加载  默认更新
@@ -99,6 +100,7 @@
           if (data.length === 0 || data.length < this.conditions.matchInfo.limit) {
             this.$refs.scrollerUpDown.disablePullup()
           }
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       }
     },

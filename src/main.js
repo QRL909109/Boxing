@@ -33,14 +33,14 @@ Vue.use(VueResource)
 // 配置以application/x-www-form-urlencoded方式
 Vue.http.options.emulateJSON = true
 // 全局改变 loading
-router.beforeEach(function (to, from, next) {
-  store.commit('updateLoadingStatus', {isLoading: true})
-  next()
-})
+// router.beforeEach(function (to, from, next) {
+//   store.commit('updateLoadingStatus', {isLoading: true})
+//   next()
+// })
 
-router.afterEach(function (to) {
-  store.commit('updateLoadingStatus', {isLoading: false})
-})
+// router.afterEach(function (to) {
+//   store.commit('updateLoadingStatus', {isLoading: false})
+// })
 
 Object.keys(filters).forEach(filter => {
   Vue.filter(filter, filters[filter])

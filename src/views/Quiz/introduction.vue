@@ -2,27 +2,47 @@
 <template>
   <div class="quiz-introduction height100">
     <div class="center">
-      <img :src="url">
+      <img :src="info.avatar" :alt="info.name">
       <div class="intro">
         <div class="item">
           <p class="left">姓名: </p>
-          <p>播求</p>
+          <p>{{info.name}}</p>
+        </div>
+        <div class="item">
+          <p class="left">性别: </p>
+          <p>{{info.sex}}</p>
+        </div>
+        <div class="item">
+          <p class="left">年龄: </p>
+          <p>{{info.age}}</p>
+        </div>
+        <div class="item">
+          <p class="left">生日: </p>
+          <p>{{info.birthday | dateFormat('yyyy-mm-dd')}}</p>
         </div>
         <div class="item">
           <p class="left">身高: </p>
-          <p>178cm</p>
+          <p>{{info.height}}cm</p>
         </div>
         <div class="item">
           <p class="left">体重: </p>
-          <p>67KG</p>
+          <p>{{info.weight}}KG</p>
         </div>
         <div class="item">
           <p class="left">KO: </p>
-          <p>30</p>
+          <p>{{info.ko_times}}</p>
+        </div>
+        <div class="item">
+          <p class="left">胜利: </p>
+          <p>{{info.win_times}}</p>
+        </div>
+        <div class="item">
+          <p class="left">失败: </p>
+          <p>{{info.fail_times}}</p>
         </div>
         <div class="item">
           <p class="left">简介: </p>
-          <p>他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄他是赛场上的英雄</p>
+          <p>{{info.intro}}</p>
         </div>
       </div>
     </div>
@@ -35,15 +55,30 @@
     data () {
       const query = this.$route.query
       return {
-        query
+        query,
+        info: {
+          avatar: '',
+          age: '',
+          birthday: '',
+          fail_times: '',
+          ko_times: '',
+          win_times: '',
+          height: '',
+          intro: '',
+          name: '',
+          sex: '',
+          weight: ''
+        }
       }
     },
     methods: {
       handleGetDetail () {
+        this.$store.dispatch('updateLoadingStatus', {isLoading: true})
         quiz.GetBoxerDetail({
           id: this.query.id
         }).then(data => {
-          console.log(3333, data)
+          this.info = {...data}
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       }
     },
@@ -56,10 +91,12 @@
 @import '~assets/sass/mixin'
 @import '~assets/sass/color'
 .quiz-introduction
-  background-color: $grey-800
+  
   .center
     padding: 1.5rem 0.5rem
+    background-color: $grey-800
     color: #fff
+    margin-bottom: 50px
     img
       width: 100px
       height: 100px
@@ -71,8 +108,8 @@
       display: flex
       margin-bottom: 0.3rem
       +font-dpr(14px)
-      line-height: 0.5rem
+      line-height: 0.65rem
       .left
         margin-right: 0.2rem
-        min-width: 1rem
+        min-width: 1.15rem
 </style>

@@ -26,7 +26,7 @@
      <div class="mg-b-2">
       <title-model title="名人介绍" path="/info">
         <div class="man-wrap pd-l-2">
-          <scroller lock-x height="500px" 
+          <scroller lock-x height="300px" 
           ref="scrollerUpDown"
           :use-pulldown=true 
           :use-pullup=true
@@ -137,13 +137,18 @@ export default {
         this.$refs.scrollerUpDown.reset()
       })
     },
+    /**
+     * [handleGetPlayInfo 获取选手信息]
+     * @param  {Boolean} type [更新还是加载]
+     * @return {[type]}       [description]
+     */
     handleGetPlayInfo (type = true) {
       let {page, limit} = this.conditions.playInfo
       const queryData = {
         page,
         limit
       }
-      home.GetPlayerInfo(queryData).then(data => {
+      return home.GetPlayerInfo(queryData).then(data => {
         // 判断是更新还是加载  默认更新
         if (type) {
           this.playerList = data
@@ -156,6 +161,10 @@ export default {
         }
       })
     },
+    /**
+     * [handleGetMatchList 获取赛事信息]
+     * @return {[type]} [description]
+     */
     handleGetMatchList () {
       let {page, limit, status} = this.conditions.matchInfo
       const queryData = {
@@ -163,19 +172,26 @@ export default {
         limit,
         status
       }
-      home.GetMatchList(queryData).then(data => {
+      return home.GetMatchList(queryData).then(data => {
         this.trailerList = data
         this.$nextTick(() => {
           this.handleWidth()
         })
       })
+    },
+    handleGetAllInfo () {
+      this.$store.dispatch('updateLoadingStatus', {isLoading: true})
+      Promise.all([this.handleGetPlayInfo(), this.handleGetMatchList()])
+      .then(_ => {
+        this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+      })
+      .catch(_ => {
+        this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+      })
     }
   },
   created () {
-    // 获取选手信息
-    this.handleGetPlayInfo()
-    // 获取赛事信息
-    this.handleGetMatchList()
+    this.handleGetAllInfo()
   }
 }
 </script>

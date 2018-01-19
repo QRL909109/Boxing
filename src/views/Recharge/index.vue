@@ -155,74 +155,74 @@
     }
   }
 </script>
-<style lang="sass">
-@import '~assets/sass/mixin'
-@import '~assets/sass/color'
-@import '~assets/sass/var'
-.recharge-wrap
-  +font-dpr(15px)
 
-  .recharge__money
-    display: inline-block
-    color: $orange-50
-    +font-dpr(17px)
-    img
-      width: 0.5rem
-      vertical-align: bottom
-  .coin-input
-    width: 2.5rem
-  .recharfe__modal
-    padding: 0.3rem 0.25rem 
-    background: $white
-    margin-bottom: 0.25rem
-    
-  .recharge__select
-    .select-money-block
-      margin-top: 0.4rem
-      .flex-demo
-        text-align: center;
-        border: 1px solid #c8c8c8
-        border-radius: 4px;
-        margin: 0 0.2rem 0.4rem 0.2rem
-        padding: 0.45rem 0.2rem
-        color: #999999
-        &.active
-          background: $red-50
-          color: $white
-        .recharge__cache
-          margin-top: 0.2rem
-    .recharge__title
-      margin: 0.1rem 0
-  .recharge__pay
-    .pay__choose
-      .choose
-        position: relative
-        padding: 0.45rem 0.25rem
-        border-bottom: 1px solid #c8c8c8
-        &:last-child
-          border-bottom: none
-        .check-box
-          position: absolute
-          top: 50%
-          right: 0.2rem
-          transform: translateY(-50%)
-        .pay-way
-          +font-dpr(25px)
-          display: inline-block
-          vertical-align: middle
-  .icon-alipay
-    color: #02a9f1
-  .icon-weixin
-    color: #07b906
-  .confimPay
-    padding: 0.4rem 1rem
-    color: $white
-    background: $grey-800
-    text-align: center
-  .img-box
-    padding: 0.5rem
-  .mgb20
-    margin-bottom: 0.5rem
-  .mgt20
-    margin-top: 0.5rem
+<style lang="sass">
+  @import '~assets/sass/mixin'
+  @import '~assets/sass/color'
+  @import '~assets/sass/var'
+  .recharge-wrap
+    +font-dpr(15px)
+    .recharge__money
+      display: inline-block
+      color: $orange-50
+      +font-dpr(17px)
+      img
+        width: 0.5rem
+        vertical-align: bottom
+    .coin-input
+      width: 2.5rem
+    .recharfe__modal
+      padding: 0.3rem 0.25rem 
+      background: $white
+      margin-bottom: 0.25rem
+      
+    .recharge__select
+      .select-money-block
+        margin-top: 0.4rem
+        .flex-demo
+          text-align: center;
+          border: 1px solid #c8c8c8
+          border-radius: 4px;
+          margin: 0 0.2rem 0.4rem 0.2rem
+          padding: 0.45rem 0.2rem
+          color: #999999
+          &.active
+            background: $red-50
+            color: $white
+          .recharge__cache
+            margin-top: 0.2rem
+      .recharge__title
+        margin: 0.1rem 0
+    .recharge__pay
+      .pay__choose
+        .choose
+          position: relative
+          padding: 0.45rem 0.25rem
+          border-bottom: 1px solid #c8c8c8
+          &:last-child
+            border-bottom: none
+          .check-box
+            position: absolute
+            top: 50%
+            right: 0.2rem
+            transform: translateY(-50%)
+          .pay-way
+            +font-dpr(25px)
+            display: inline-block
+            vertical-align: middle
+    .icon-alipay
+      color: #02a9f1
+    .icon-weixin
+      color: #07b906
+    .confimPay
+      padding: 0.4rem 1rem
+      color: $white
+      background: $grey-800
+      text-align: center
+    .img-box
+      padding: 0.5rem
+    .mgb20
+      margin-bottom: 0.5rem
+    .mgt20
+      margin-top: 0.5rem
 </style>

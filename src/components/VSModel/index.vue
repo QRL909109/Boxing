@@ -17,7 +17,7 @@
             <span>V</span><span>S</span>
           </div>
           <slot name="time"> 
-            <time class="time">{{ data.info.game_begin_time }}</time>
+            <time class="time">{{ data.info.game_begin_time * 1000 | dateFormat('yyyy-MM-dd') }}</time>
           </slot>
           <div v-show="statusShow" class="status text-center" :class="{'active': data.status === 1}">{{ betStatus(data.status) }}</div>
           <slot name="footer"></slot>

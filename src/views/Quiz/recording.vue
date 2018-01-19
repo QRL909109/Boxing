@@ -76,7 +76,7 @@
     mixins: [pullUpDown],
     methods: {
       turnStatus (status) {
-        return recodingTabList.filter(item => item.index)[0].name
+        return recodingTabList.filter(item => item.index === status)[0].name
       },
       onPullDown () {
         this.conditions.page = 1
@@ -99,12 +99,12 @@
       handleLink (item, index) {
         this.currentIndex = index
         this.recoding = []
+        this.conditions = Object.assign({}, {
+          page: 1,
+          limit: 10,
+          flag: index
+        })
         if (this.recordingTempLits[index].length === 0) {
-          this.conditions = Object.assign({}, {
-            page: 1,
-            limit: 10,
-            flag: index
-          })
           this.handleGetBetRecord()
         } else {
           this.recoding = this.recordingTempLits[index]
@@ -117,7 +117,7 @@
           limit,
           flag
         }
-        this.$vux.loading.show({ text: 'Loading' })
+        this.$store.dispatch('updateLoadingStatus', {isLoading: true})
         quiz.GetBetRecord(queryData).then(data => {
           let tempData = data.map(item => {
             item.record.matchName = `${item.match_info.blue.name} VS ${item.match_info.red.name}`
@@ -135,7 +135,7 @@
           if (tempData.length === 0 || tempData.length < this.conditions.limit) {
             this.$refs.scrollerUpDown.disablePullup()
           }
-          this.$vux.loading.hide()
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       }
     },

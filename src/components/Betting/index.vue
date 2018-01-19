@@ -1,18 +1,6 @@
 <template>
   <popup :value="active" position="bottom" @on-hide="hidding">
     <div class="guess-vertical-wrap">
-      <!-- <div class="note">
-        <section-title title="请选择金币" titleTip="*多次点击可重复参与"></section-title>
-      </div>
-      <div class="monoey-list">
-        <ul>
-          <li v-for="(item, index) in moneyList" class="bin" @click="handleGuessMoney(item)">
-            <img :src="item.src" alt="">
-          </li>
-        </ul>
-      </div>
-        <div class="red-font">*多次点击可重复参与</div>
-      </div> -->
      <title-model title="请选择金币" :showBottomBorder=true>
       <span slot="right">*多次点击可重复参与</span>
         <div class="monoey-list">

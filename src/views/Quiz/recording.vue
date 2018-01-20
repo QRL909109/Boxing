@@ -18,18 +18,19 @@
             <div class="content">
               <div class="box-shadow-model" v-for="(item, index) in recoding">
                 <p class="name">
-                  {{item.matchName}}
+                  {{item.stationName}}
                 </p>
                 <divider>竞猜信息</divider>
                 <div class="info-wrap">
                   <div class="info">
-                   <!--  <p>竞猜编号: {{item.bet_record_id}}</p> -->
+                    <p>竞猜选手: {{item.matchName}}</p>
                     <p>参与时间: {{item.bet_time*1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
                     <p>消耗金币: {{item.bet_amount}}</p>
-                    <p>竞猜选项: {{item.bet_option | turnName}} 方胜</p>
+                    <p>竞猜赔率: {{item.bet_odds}}</p>
+                    <p>竞猜选项: <span :class="`${item.bet_option}-font`">{{item.bet_option | turnName}}</span> 方胜</p>
                     <p>预计开奖: {{item.betTime*1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
                   </div>
-                  <div class="status bule-font">
+                  <div class="status blue-font">
                     {{turnStatus(item.winner_flag)}}
                   </div>
                 </div>
@@ -122,6 +123,7 @@
           let tempData = data.map(item => {
             item.record.matchName = `${item.match_info.blue.name} VS ${item.match_info.red.name}`
             item.record.betTime = item.match_info.info.game_end_time
+            item.record.stationName = item.match_info.info.station_name
             return item.record
           })
 

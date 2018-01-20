@@ -26,7 +26,7 @@
                 <p>操作时间: {{item.opr_time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}}</p>
                 <p v-show="item.status === 2">确认时间: {{item.confirm_time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}}</p>
               </div>
-              <div class="status bule-font">
+              <div class="status blue-font">
                 {{item.status | orderType}}
               </div>
             </div>

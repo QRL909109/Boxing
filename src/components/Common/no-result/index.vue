@@ -31,7 +31,7 @@
 <style scoped>
   .no-result {
     position: fixed;
-    top: 50px;
+    top: 54px;
     left: 0;
     right: 0;
     bottom: 50px;

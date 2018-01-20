@@ -4,48 +4,84 @@
     <div class="center">
       <img :src="info.avatar" :alt="info.name" class="intro__avatar">
       <div class="intro">
-        <div class="item">
-          <p class="left">姓名: </p>
-          <p>{{info.name}}</p>
-        </div>
-        <div class="item">
-          <p class="left">国籍: </p>
-          <p>
-            <img :src="info.country_img" :alt="info.country_name" class="intro__country">{{info.country_name}}
-          </p>
-        </div>
-        <div class="item">
-          <p class="left">性别: </p>
-          <p>{{info.sex}}</p>
-        </div>
-        <div class="item">
-          <p class="left">年龄: </p>
-          <p>{{info.age}}岁</p>
-        </div>
-        <div class="item">
-          <p class="left">生日: </p>
-          <p>{{info.birthday * 1000 | dateFormat('yyyy-MM-dd')}}</p>
-        </div>
-        <div class="item">
-          <p class="left">身高: </p>
-          <p>{{info.height}}cm</p>
-        </div>
-        <div class="item">
-          <p class="left">体重: </p>
-          <p>{{info.weight}}KG</p>
-        </div>
-        <div class="item">
-          <p class="left">KO: </p>
-          <p>{{info.ko_times}} 场</p>
-        </div>
-        <div class="item">
-          <p class="left">胜利: </p>
-          <p>{{info.win_times}} 场</p>
-        </div>
-        <div class="item">
-          <p class="left">失败: </p>
-          <p>{{info.fail_times}} 场</p>
-        </div>
+
+        <flexbox>
+          <flexbox-item>
+            <div class="item">
+              <p class="left">姓名: </p>
+              <p>{{info.name}}</p>
+            </div>
+          </flexbox-item>
+          <flexbox-item>
+            <div class="item">
+              <p class="left">国籍: </p>
+              <p>
+                <img :src="info.country_img" :alt="info.country_name" class="intro__country">{{info.country_name}}
+              </p>
+            </div>
+          </flexbox-item>
+        </flexbox>
+
+       <flexbox>
+          <flexbox-item>
+            <div class="item">
+              <p class="left">性别: </p>
+              <p>{{info.sex}}</p>
+            </div>
+          </flexbox-item>
+          <flexbox-item>
+            <div class="item">
+              <p class="left">年龄: </p>
+              <p>{{info.age}}岁</p>
+            </div>
+          </flexbox-item>
+        </flexbox>
+
+       <flexbox>
+          <flexbox-item>
+            <div class="item">
+              <p class="left">身高: </p>
+              <p>{{info.height}}cm</p>
+            </div>
+          </flexbox-item>
+          <flexbox-item>
+            <div class="item">
+              <p class="left">体重: </p>
+              <p>{{info.weight}}KG</p>
+            </div>
+          </flexbox-item>
+        </flexbox>
+        <flexbox>
+          <flexbox-item>
+            <div class="item">
+              <p class="left">生日: </p>
+              <p>{{info.birthday * 1000 | dateFormat('yyyy-MM-dd')}}</p>
+            </div>
+          </flexbox-item>
+          <flexbox-item>
+            <div class="item">
+              <p class="left">KO: </p>
+              <p>{{info.ko_times}} 场</p>
+            </div>
+          </flexbox-item>
+        </flexbox>
+
+        <flexbox>
+           <flexbox-item>
+            <div class="item">
+              <p class="left">胜利: </p>
+              <p>{{info.win_times}} 场</p>
+            </div>
+          </flexbox-item>
+          <flexbox-item>
+            <div class="item">
+              <p class="left">失败: </p>
+              <p>{{info.fail_times}} 场</p>
+            </div>
+          </flexbox-item>
+        </flexbox>
+        
+        
         <div class="item">
           <p class="left">简介: </p>
           <p>{{info.intro}}</p>
@@ -55,8 +91,8 @@
   </div>
 </template>
 <script>
-  // 待删除
   import quiz from '@/lib/api/quiz'
+  import { Flexbox, FlexboxItem } from 'vux'
   export default {
     data () {
       const query = this.$route.query
@@ -92,6 +128,10 @@
         })
       }
     },
+    components: {
+      Flexbox,
+      FlexboxItem
+    },
     created () {
       this.handleGetDetail()
     }
@@ -101,10 +141,9 @@
 @import '~assets/sass/mixin'
 @import '~assets/sass/color'
 .quiz-introduction
-  
+  background-color: $grey-800
   .center
     padding: 1.5rem 0.5rem
-    background-color: $grey-800
     color: #fff
     margin-bottom: 50px
     .intro__avatar
@@ -123,7 +162,7 @@
       display: flex
       margin-bottom: 0.3rem
       +font-dpr(14px)
-      line-height: 0.65rem
+      line-height: 0.55rem
       .left
         margin-right: 0.2rem
         min-width: 1.15rem

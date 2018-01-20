@@ -8,7 +8,7 @@ const betStatus = function (state) {
       type = '正在竞猜'
       break
     case 2:
-      type = '投注结束'
+      type = '竞猜结束'
       break
     case 3:
       type = '结算完毕'
@@ -39,7 +39,7 @@ const gameResult = function (state) {
     case 2:
       item = {
         type: '蓝方胜',
-        color: 'bule'
+        color: 'blue'
       }
       break
     case 3:

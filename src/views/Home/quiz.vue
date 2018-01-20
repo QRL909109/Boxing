@@ -16,7 +16,7 @@
                <vs-model :data="item" :statusShow=true vsType="2" link="/quiz/main/game">
                 <span slot="time"></span>
                  <div slot="footer" class="win-model">
-                   <div class="deep-bule-bg bule">
+                   <div class="deep-blue-bg blue">
                      <p class="text-center">{{item.bet_infos[0].blue_odds}}</p>
                      <p>蓝胜</p>
                    </div>
@@ -49,8 +49,7 @@
         conditions: {
           matchInfo: {
             page: 1,
-            limit: 10,
-            status: 2
+            limit: 10
           }
         }
       }
@@ -81,14 +80,13 @@
         })
       },
       handleGetMatchList (type = true) {
-        let {page, limit, status} = this.conditions.matchInfo
+        let {page, limit} = this.conditions.matchInfo
         const queryData = {
           page,
-          limit,
-          status
+          limit
         }
         this.$store.dispatch('updateLoadingStatus', {isLoading: true})
-        home.GetMatchList(queryData).then(data => {
+        home.GetMatchAll(queryData).then(data => {
           data = data || []
           // 判断是更新还是加载  默认更新
           if (type) {
@@ -124,9 +122,9 @@
       justify-content: center
       flex-direction: row
       color: #fff
-      .deep-bule-bg
+      .deep-blue-bg
         background-color: $blue-600
-      .bule, .red
+      .blue, .red
         border-radius: 2px
         padding: 0.1rem 0.35rem
         margin-left: 0.2rem

@@ -1,9 +1,11 @@
+<!-- winner  0未结算；1、红方；2、蓝方；3、平局 -->
 <template>
   <div class="vs-model" :style="{backgroundColor: bgColor}" @click="handleLink(data.info.id)">
       <slot name="header"></slot>
       <div class="wrap">
         <div class="player">
-          <img :src="data.blue.avatar" class="img-radio" :alt="data.blue.name">
+          <img :src="data.blue.avatar" class="img-radio img-blue-win" :alt="data.blue.name" :class="{'active': +data.info.winner === 2 || +data.info.winner === 3}">
+          <img src="./blue-win.png" alt="蓝方胜" class="winner-img winner-blue-img" v-show="+data.info.winner === 2 || +data.info.winner === 3">
           <div class="vs-model__name">
             <img :src="data.blue.country_img" :alt="data.blue.country_name" class="icon-countries">
             <p class="player__name">{{data.blue.name}}</p>
@@ -24,7 +26,8 @@
           <slot name="footer"></slot>
         </div>
         <div class="player">
-          <img :src="data.red.avatar" class="img-radio" :alt="data.red.name">
+          <img :src="data.red.avatar" class="img-radio img-red-win" :alt="data.red.name" :class="{'active': +data.info.winner === 1 || +data.info.winner === 3}">
+          <img src="./red-win.png" alt="红方胜" class="winner-img winner-red-img" v-show="+data.info.winner === 1 || +data.info.winner === 3">
           <div class="vs-model__name">
             <img :src="data.red.country_img" :alt="data.red.country_name" class="icon-countries">
             <p class="player__name">{{data.red.name}}</p>
@@ -49,6 +52,9 @@
       },
       bgColor: {
         default: '#fff'
+      },
+      showResult: {
+
       },
       statusShow: {
         default: false
@@ -90,9 +96,22 @@
     .player
       flex: 1
       text-align: center
+      position: relative
+      .winner-img
+        position: absolute
+        top: 0
+        width: 0.7rem
+        &.winner-blue-img
+          left: 0.2rem
+        &.winner-red-img
+          right: 0.2rem
       .img-radio
         width: 2rem
         min-height: 2rem
+        &.active.img-blue-win
+          border: 3px solid $blue
+        &.active.img-red-win
+         border: 3px solid $red
       .vs-model__name
         display: flex
         justify-content: center

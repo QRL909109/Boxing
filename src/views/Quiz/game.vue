@@ -9,7 +9,7 @@
               <router-link :to="`/quiz/main/introduction?id=${analysisInfo.blue.id}`">
                 <img class="header-img" :src="analysisInfo.blue.avatar" :alt="analysisInfo.blue.name">
                 <p>
-                  <span class="bule-font">蓝方</span>
+                  <span class="blue-font">蓝方</span>
                   <span class="font-white"> | </span>
                   <span class="font-white">{{analysisInfo.blue.name}}</span>
                 </p>
@@ -57,11 +57,11 @@
           </div>
         </div>
         <div class="result">
-          <div class="btn text-center bule-bg" @click="handleGuess('blue', analysisInfo.blue.name)">
+          <div class="btn text-center blue-bg" @click="handleGuess('blue', analysisInfo.blue, analysisInfo.bet_info.blue_odds)">
             <p>{{analysisInfo.bet_info.blue_odds}}</p>
             <p>{{analysisInfo.blue.name}}</p>
           </div>
-          <div class="btn text-center red-50-bg" @click="handleGuess('red', analysisInfo.red.name)">
+          <div class="btn text-center red-50-bg" @click="handleGuess('red', analysisInfo.red, analysisInfo.bet_info.red_odds)">
             <p>{{analysisInfo.bet_info.red_odds}}</p>
             <p>{{analysisInfo.red.name}}</p>
           </div>
@@ -80,14 +80,25 @@
         </div>
       </title-model>
     </div>
-
+    <toast v-model="warnVisi" :type="toastType" width="15em" :time="1800">{{warnText}}</toast>
+     <confirm v-model="tipShow"
+      title="确认投注"
+      @on-cancel="onCancel"
+      @on-confirm="onConfirm">
+        <div class="quiz-confirm">
+          <img :src="bettingInfo.avatar" :alt="bettingInfo.name" class="img-radio">
+          <p><span :class="`${bettingInfo.type}-font`">{{bettingInfo.type === 'blue'? '蓝方' : '红方'}}</span>选手: {{bettingInfo.name}}</p>
+          <p>投注赔率: {{bettingInfo.odds}}</p>
+          <p>投注金币: {{bettingInfo.coin}}</p>
+        </div>
+      </confirm>
     <!-- 竞猜投钱 -->
     <betting :active="guessActive" @on-betting="handleBetting" @on-hide="handleHideBetting"/>
   </div>
 </template>
 <script>
   import progressBar from '@/components/ProgressBar'
-  import { Divider, Flexbox, FlexboxItem } from 'vux'
+  import { Divider, Flexbox, FlexboxItem, Toast, Confirm } from 'vux'
   import betting from '@/components/Betting'
   import titleModel from '@/components/titleModel'
   import { mapState } from 'vuex'
@@ -102,7 +113,11 @@
         bq,
         jdx,
         query,
-        guessActive: false,
+        guessActive: false, // 底部竞猜金币
+        warnVisi: false, // 警告提示
+        toastType: 'text',
+        tipShow: false, // 确定投注提示
+        warnText: '出错啦！',
         analysisInfo: {
           blue: {},
           red: {},
@@ -114,12 +129,31 @@
       }
     },
     methods: {
-      handleGuess (type, name) {
-        this.bettingInfo = Object.assign(this.bettingInfo, {
-          type,
-          name
-        })
-        this.guessActive = true
+      handleGuess (type, man, odds) {
+        // 只有 status为1 才能进行投注
+        if (+this.analysisInfo.info.status === 1) {
+          this.bettingInfo = Object.assign(this.bettingInfo, {
+            type,
+            name: man.name,
+            avatar: man.avatar,
+            odds
+          })
+          this.guessActive = true
+        } else {
+          switch (+this.analysisInfo.info.status) {
+            case 0:
+              this.warnText = '竞猜未开始！'
+              break
+            case 2: case 3:
+              this.warnText = '投注已结束！'
+              break
+            default:
+              this.warnText = '出错啦！'
+              break
+          }
+          this.toastType = 'warn'
+          this.warnVisi = true
+        }
       },
       handleHideBetting () {
         this.guessActive = false
@@ -213,12 +247,10 @@
           coin: this.bettingInfo.coin,
           bet_type: 1
         }
-        let _this = this
         quiz.PostBetGame(queryData).then(data => {
-          this.$vux.alert.show({
-            title: '投注成功',
-            content: `<p>投注: ${_this.bettingInfo.name} ${this.bettingInfo.coin} 金币</p>`
-          })
+          this.toastType = 'test'
+          this.warnText = '投注成功'
+          this.warnVisi = true
         })
       },
       /**
@@ -240,8 +272,14 @@
           })
         } else {
           this.bettingInfo.coin = num // 投注金币
-          this.handleSuccessBetting()
+          this.tipShow = true
         }
+      },
+      onCancel () {
+        this.guessActive = false
+      },
+      onConfirm () {
+        this.handleSuccessBetting()
       }
     },
     computed: {
@@ -259,7 +297,9 @@
       titleModel,
       betting,
       Flexbox,
-      FlexboxItem
+      FlexboxItem,
+      Toast,
+      Confirm
     }
   }
 </script>
@@ -338,5 +378,10 @@
       padding: 0.2rem 0.3rem
       .data
         .progress
-          margin-bottom: $spacing    
+          margin-bottom: $spacing
+  .quiz-confirm
+    line-height: 0.8rem
+    text-align: center
+    img
+      width: 2.5rem
 </style>

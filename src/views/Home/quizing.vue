@@ -16,7 +16,7 @@
                <vs-model :data="item" :statusShow=true vsType="2" link="/quiz/main/game">
                 <span slot="time"></span>
                  <div slot="footer" class="win-model">
-                   <div class="deep-bule-bg bule">
+                   <div class="deep-blue-bg blue">
                      <p class="text-center">{{item.bet_infos[0].blue_odds}}</p>
                      <p>蓝胜</p>
                    </div>
@@ -124,9 +124,9 @@
       justify-content: center
       flex-direction: row
       color: #fff
-      .deep-bule-bg
+      .deep-blue-bg
         background-color: $blue-600
-      .bule, .red
+      .blue, .red
         border-radius: 2px
         padding: 0.1rem 0.35rem
         margin-left: 0.2rem

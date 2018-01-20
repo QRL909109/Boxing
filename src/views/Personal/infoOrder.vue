@@ -20,7 +20,7 @@
           <div class="box-shadow-model" v-for="(item, index) in infoList">
             <div class="info-wrap">
               <div class="info">
-                <p>编号: {{item.id}}</p>
+                <!-- <p>编号: {{item.id}}</p> -->
                 <p v-show="item.opr_type === 1">金币数量: {{item.coin_num}}</p>
                 <p v-show="item.opr_type === 2">金额: {{item.amount}}</p>
                 <p>操作时间: {{item.opr_time * 1000 | dateFormat('yyyy-mm-dd hh-mm')}}</p>

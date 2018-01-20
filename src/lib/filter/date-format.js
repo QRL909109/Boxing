@@ -42,9 +42,9 @@ function padLeftZero (str) {
   return ('00' + str).substr(str.length)
 }
 
-export default function (time) {
+export default function (time, fmtm) {
   const d = new Date(+time)
-  let fmt = 'yyyy-MM-dd'
+  let fmt = fmtm || 'yyyy-MM-dd'
   const o = {
     'M+': d.getMonth() + 1,
     'd+': d.getDate(),

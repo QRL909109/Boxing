@@ -16,7 +16,7 @@
         <scroller lock-y scrollbar-x class="pd-l-2" v-if="trailerList.length > 0">
           <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
             <div class="scroller-box-item" v-for="(item, index) in trailerList">
-              <vs-model :data="item" ref="vsModel" :statusShow=false link="/home/main/quiz"></vs-model>
+              <vs-model :data="item" ref="vsModel" :statusShow=false link="/quiz/main/game"></vs-model>
             </div>
           </div>
         </scroller>

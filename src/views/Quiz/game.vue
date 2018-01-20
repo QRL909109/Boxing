@@ -53,7 +53,7 @@
             <span class="money">{{ parseInt(analysisInfo.bet_info.blue_odds_amount + analysisInfo.bet_info.red_odds_amount) }}</span>
           </div>
           <div class="time">
-            截止时间: {{analysisInfo.info.bet_end_time * 1000 | dateFormat('yyyy-mm-dd')}}
+            截止时间: {{analysisInfo.info.bet_end_time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}}
           </div>
         </div>
         <div class="result">

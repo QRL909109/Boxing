@@ -25,7 +25,7 @@
           </flexbox>
         </div>
         <div class="recharge__title">其他充值金额 
-          <input type="number" class="coin-input" :value="payOrderMoney" @input="handleInputMoney"></input> 元
+          <input type="text" class="coin-input" :value="payOrderMoney" @input="handleInputMoney"></input> 元
         </div>
       </div>
       <!-- 手机号 -->
@@ -117,7 +117,7 @@
         this.payMoney = this.payOrderMoney = val.target.value
       }, 500),
       handleRecharge () {
-        if (+this.payMoney <= 0) {
+        if (+this.payMoney <= 0 || !/^(-)?\d+(\.\d+)?$/.test(this.payMoney)) {
           this.$vux.alert.show({
             title: '请选择需要充值的金额'
           })

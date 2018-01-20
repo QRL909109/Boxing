@@ -24,8 +24,10 @@
               </flexbox-item>
           </flexbox>
         </div>
-        <div class="recharge__title">其他充值金额 
-          <input type="text" class="coin-input" :value="payOrderMoney" @input="handleInputMoney"></input> 元
+        <div class="order_money">
+          <group>
+            <x-input title="其他充值金额" name="mobile" type="number" placeholder="元" :value="payOrderMoney" @input="handleInputMoney" keyboard="number"></x-input>
+          </group>
         </div>
       </div>
       <!-- 手机号 -->
@@ -113,8 +115,10 @@
         this.payMoney = item.money
       },
       handleInputMoney: debounce(function (val) {
-        this.currentIndex = ''
-        this.payMoney = this.payOrderMoney = val.target.value
+        if (val !== '') {
+          this.currentIndex = ''
+          this.payMoney = this.payOrderMoney = val
+        }
       }, 500),
       handleRecharge () {
         if (+this.payMoney <= 0 || !/^(-)?\d+(\.\d+)?$/.test(this.payMoney)) {
@@ -174,6 +178,14 @@
         vertical-align: bottom
     .coin-input
       width: 2.5rem
+    .order_money
+      .vux-no-group-title
+        margin-top: 0
+      .weui-cells
+        &:before,&:after
+          border: 0
+      .weui-cell
+        padding-left: 6px
     .recharfe__modal
       padding: 0.3rem 0.25rem 
       background: $white
@@ -228,4 +240,5 @@
       margin-bottom: 0.5rem
     .mgt20
       margin-top: 0.5rem
+
 </style>

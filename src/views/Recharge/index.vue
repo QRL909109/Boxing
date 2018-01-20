@@ -54,7 +54,7 @@
     <x-dialog v-model="showHideOnBlur" class="dialog-demo" hide-on-blur>
       <div class="img-box">
         <h2 class="text-center mgb20">长按向财务转账</h2>
-        <qrcode value="https://vux.li?x-page=demo_qrcode" type="img"></qrcode>
+         <qrcode />
         <p class="text-center mgt20">{{currentDes}}</p>
       </div>
       <div @click="showHideOnBlur=false">
@@ -64,10 +64,11 @@
   </div>
 </template>
 <script>
-  import { Divider, XDialog, Qrcode, CheckIcon, Flexbox, FlexboxItem, ViewBox, XInput, Group, debounce } from 'vux'
+  import { Divider, XDialog, CheckIcon, Flexbox, FlexboxItem, ViewBox, XInput, Group, debounce } from 'vux'
   import { mapState } from 'vuex'
   import { rechargeMoneyList } from '@/config/rechargeMoney'
   import personal from '@/lib/api/personal'
+  import Qrcode from '@/components/Qrcode'
   export default {
     data () {
       return {
@@ -76,17 +77,19 @@
         rechargeMoneyList,
         currentIndex: '',
         phone: '',
-        reChargeList: [{
-          icon: 'icon-alipay',
-          link: '',
-          payType: false,
-          desc: '支付宝支付'
-        }, {
-          icon: 'icon-weixin',
-          link: '',
-          payType: true,
-          desc: '微信支付'
-        }],
+        reChargeList: [
+        // {
+        //   icon: 'icon-alipay',
+        //   link: '',
+        //   payType: false,
+        //   desc: '支付宝支付'
+        // },
+          {
+            icon: 'icon-weixin',
+            link: '',
+            payType: true,
+            desc: '微信支付'
+          }],
         payMoney: '',
         payOrderMoney: ''
       }

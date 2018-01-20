@@ -6,13 +6,15 @@
         <flexbox-item :span="1/3">
           <div class="flex-demo">
             <div class="box left">
-              <img class="header-img" :src="analysisList.blue.avatar" :alt="analysisList.blue.name">
-              <p>
-                <span class="bule-font">蓝方</span>
-                <span> | </span>
-                <span>{{analysisList.blue.name}}</span>
-              </p>
-              <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
+              <router-link :to="`/quiz/main/introduction?id=${analysisInfo.blue.id}`">
+                <img class="header-img" :src="analysisInfo.blue.avatar" :alt="analysisInfo.blue.name">
+                <p>
+                  <span class="bule-font">蓝方</span>
+                  <span class="font-white"> | </span>
+                  <span class="font-white">{{analysisInfo.blue.name}}</span>
+                </p>
+                <img :src="analysisInfo.blue.country_img" alt="analysisInfo.blue.country_name" class="icon-countries">
+              </router-link>
             </div>
           </div>
         </flexbox-item>
@@ -20,21 +22,23 @@
           <div class="flex-demo box-center">
             <div class="box">
               <p class="vs">VS</p>
-              <p>{{analysisList.info.station_name}}</p>
-              <p>{{analysisList.info.kg_level}}KG搏击</p>
+              <p>{{analysisInfo.info.station_name}}</p>
+              <p>{{analysisInfo.info.kg_level}}KG搏击</p>
             </div>
           </div>
         </flexbox-item>
         <flexbox-item :span="1/3">
           <div class="flex-demo">
             <div class="box right">
-              <img class="header-img" :src="analysisList.red.avatar" :alt="analysisList.red.name">
-              <p>
-                <span class="red-font">红方</span>
-                <span> | </span>
-                <span>{{analysisList.red.name}}</span>
-              </p>
-              <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
+              <router-link :to="`/quiz/main/introduction?id=${analysisInfo.red.id}`">
+                <img class="header-img" :src="analysisInfo.red.avatar" :alt="analysisInfo.red.name">
+                <p>
+                  <span class="red-font">红方</span>
+                  <span class="font-white"> | </span>
+                  <span class="font-white">{{analysisInfo.red.name}}</span>
+                </p>
+                <img :src="analysisInfo.red.country_img" :alt="analysisInfo.red.country_name" class="icon-countries">
+              </router-link>
             </div>
           </div>
         </flexbox-item>
@@ -46,20 +50,20 @@
         <div class="bg">
           <div class="all-money">
             <img class="glod-icon" src="~/assets/img/gold@2x.png" alt="">
-            <span class="money">{{ parseInt(analysisList.bet_info.blue_odds_amount + analysisList.bet_info.red_odds_amount) }}</span>
+            <span class="money">{{ parseInt(analysisInfo.bet_info.blue_odds_amount + analysisInfo.bet_info.red_odds_amount) }}</span>
           </div>
           <div class="time">
-            截止时间: {{analysisList.info.bet_end_time * 1000 | dateFormat('yyyy-mm-dd')}}
+            截止时间: {{analysisInfo.info.bet_end_time * 1000 | dateFormat('yyyy-mm-dd')}}
           </div>
         </div>
         <div class="result">
-          <div class="btn text-center bule-bg" @click="handleGuess('blue', analysisList.blue.name)">
-            <p>{{analysisList.bet_info.blue_odds}}</p>
-            <p>{{analysisList.blue.name}}</p>
+          <div class="btn text-center bule-bg" @click="handleGuess('blue', analysisInfo.blue.name)">
+            <p>{{analysisInfo.bet_info.blue_odds}}</p>
+            <p>{{analysisInfo.blue.name}}</p>
           </div>
-          <div class="btn text-center red-50-bg" @click="handleGuess('red', analysisList.red.name)">
-            <p>{{analysisList.bet_info.red_odds}}</p>
-            <p>{{analysisList.red.name}}</p>
+          <div class="btn text-center red-50-bg" @click="handleGuess('red', analysisInfo.red.name)">
+            <p>{{analysisInfo.bet_info.red_odds}}</p>
+            <p>{{analysisInfo.red.name}}</p>
           </div>
         </div>
       </title-model>
@@ -99,7 +103,7 @@
         jdx,
         query,
         guessActive: false,
-        analysisList: {
+        analysisInfo: {
           blue: {},
           red: {},
           info: {},
@@ -136,8 +140,8 @@
         this.$store.dispatch('updateLoadingStatus', {isLoading: true})
         quiz.GetMatchDetail(queryData).then(data => {
           this.playerInfo = []
-          this.analysisList = data
-          this.analysisList.bet_info = data.bet_infos.filter(item => item.bet_type === 1)[0]
+          this.analysisInfo = data
+          this.analysisInfo.bet_info = data.bet_infos.filter(item => item.bet_type === 1)[0]
           this.playerInfo.push({
             red: {
               name: '身高',
@@ -193,6 +197,8 @@
               value: data.blue.fail_times
             }
           })
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+        }).catch(_ => {
           this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       },
@@ -276,7 +282,6 @@
         color: #fff
         border-radius: 4px
         background-clip: padding-box
-        color: #fff
         .box
           line-height: 1.5
           .header-img
@@ -287,6 +292,8 @@
           span
             font-size: 0.4rem
             font-weight: 600
+          .font-white
+            color: #fff
           .icon-countries
             margin-top: 0.2rem
             width: 30px

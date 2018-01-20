@@ -2,11 +2,17 @@
 <template>
   <div class="quiz-introduction height100">
     <div class="center">
-      <img :src="info.avatar" :alt="info.name">
+      <img :src="info.avatar" :alt="info.name" class="intro__avatar">
       <div class="intro">
         <div class="item">
           <p class="left">姓名: </p>
           <p>{{info.name}}</p>
+        </div>
+        <div class="item">
+          <p class="left">国籍: </p>
+          <p>
+            <img :src="info.country_img" :alt="info.country_name" class="intro__country">{{info.country_name}}
+          </p>
         </div>
         <div class="item">
           <p class="left">性别: </p>
@@ -14,11 +20,11 @@
         </div>
         <div class="item">
           <p class="left">年龄: </p>
-          <p>{{info.age}}</p>
+          <p>{{info.age}}岁</p>
         </div>
         <div class="item">
           <p class="left">生日: </p>
-          <p>{{info.birthday | dateFormat('yyyy-mm-dd')}}</p>
+          <p>{{info.birthday * 1000 | dateFormat('yyyy-mm-dd')}}</p>
         </div>
         <div class="item">
           <p class="left">身高: </p>
@@ -30,15 +36,15 @@
         </div>
         <div class="item">
           <p class="left">KO: </p>
-          <p>{{info.ko_times}}</p>
+          <p>{{info.ko_times}} 场</p>
         </div>
         <div class="item">
           <p class="left">胜利: </p>
-          <p>{{info.win_times}}</p>
+          <p>{{info.win_times}} 场</p>
         </div>
         <div class="item">
           <p class="left">失败: </p>
-          <p>{{info.fail_times}}</p>
+          <p>{{info.fail_times}} 场</p>
         </div>
         <div class="item">
           <p class="left">简介: </p>
@@ -67,7 +73,9 @@
           intro: '',
           name: '',
           sex: '',
-          weight: ''
+          weight: '',
+          country_name: '',
+          country_img: ''
         }
       }
     },
@@ -78,6 +86,8 @@
           id: this.query.id
         }).then(data => {
           this.info = {...data}
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+        }).catch(_ => {
           this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       }
@@ -97,11 +107,16 @@
     background-color: $grey-800
     color: #fff
     margin-bottom: 50px
-    img
+    .intro__avatar
       width: 100px
       height: 100px
       border-radius: 50%
       border: 4px solid #ececec
+    .intro__country
+      width: 0.8rem
+      max-height: 0.5rem
+      margin-right: 0.2rem
+      vertical-align: middle
   .intro
     margin-top: 0.5rem
     .item

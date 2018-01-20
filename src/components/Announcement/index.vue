@@ -5,7 +5,7 @@
       <div class="icon kuaibao"></div>
       <marquee :item-height=40>
         <marquee-item v-for="(item,index) in data" :key="index" class="note">
-          {{item.name}}
+          {{item.msg_content}}
         </marquee-item>
       </marquee>
     </div>
@@ -23,7 +23,7 @@
       data: {
         type: Array,
         default: [{
-          name: '黄非红竞猜平台上线！！！'
+          msg_content: '黄非红竞猜平台上线！！！'
         }]
       }
     },

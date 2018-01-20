@@ -101,6 +101,8 @@
             this.$refs.scrollerUpDown.disablePullup()
           }
           this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+        }).catch(_ => {
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       }
     },

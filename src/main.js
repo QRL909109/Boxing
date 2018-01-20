@@ -32,6 +32,11 @@ FastClick.attach(document.body)
 Vue.use(VueResource)
 // 配置以application/x-www-form-urlencoded方式
 Vue.http.options.emulateJSON = true
+Vue.http.interceptors.push(function (request, next) { // 拦截器
+// 跨域携带cookie
+  request.credentials = true
+  next()
+})
 // 全局改变 loading
 // router.beforeEach(function (to, from, next) {
 //   store.commit('updateLoadingStatus', {isLoading: true})
@@ -52,6 +57,7 @@ new Vue({
   store,
   render: h => h('App'),
   template: '<App/>',
+  // components: {App}
   components: {
     App: resolve => {
       bjFetch({

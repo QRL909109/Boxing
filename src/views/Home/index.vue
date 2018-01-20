@@ -13,13 +13,14 @@
     </div>
     <div class="mg-b-2">
       <title-model title="赛事预告" path="/home">
-        <scroller lock-y scrollbar-x class="pd-l-2">
+        <scroller lock-y scrollbar-x class="pd-l-2" v-if="trailerList.length > 0">
           <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
             <div class="scroller-box-item" v-for="(item, index) in trailerList">
               <vs-model :data="item" ref="vsModel" :statusShow=false link="/home/main/quiz"></vs-model>
             </div>
           </div>
         </scroller>
+        <div class="empty-text text-center" v-else>暂无赛事预告</div>
       </title-model>
     </div>
     
@@ -53,6 +54,7 @@ import announcement from '@/components/Announcement'
 import titleModel from '@/components/titleModel'
 import panelModel from '@/components/panelModel'
 import home from '@/lib/api/home'
+import info from '@/lib/api/info'
 import pullUpDown from '@/mixin/pullUpDown'
 // 测试图片 后面删除
 import pic1 from '@/assets/img/1.jpeg'
@@ -71,7 +73,12 @@ export default {
         matchInfo: {
           page: 1,
           limit: 10,
-          status: 1
+          status: 0
+        },
+        msgInfo: {
+          page: 1,
+          limit: 30,
+          msgType: 2 // 轮播信息
         }
       },
       swiperList: [{
@@ -179,9 +186,25 @@ export default {
         })
       })
     },
+    /**
+     * [handleGetMsgList 获取轮播信息]
+     * @return {[type]} [description]
+     */
+    handleGetMsgList () {
+      let { page, limit, msgType: msg_type } = this.conditions.msgInfo
+      const queryData = {
+        page,
+        limit,
+        msg_type
+      }
+      return info.GetMsgList(queryData).then(data => {
+        this.announcementList = data
+        console.log(3333, data)
+      })
+    },
     handleGetAllInfo () {
       this.$store.dispatch('updateLoadingStatus', {isLoading: true})
-      Promise.all([this.handleGetPlayInfo(), this.handleGetMatchList()])
+      Promise.all([this.handleGetPlayInfo(), this.handleGetMatchList(), this.handleGetMsgList()])
       .then(_ => {
         this.$store.dispatch('updateLoadingStatus', {isLoading: false})
       })
@@ -199,6 +222,8 @@ export default {
 @import '~assets/sass/color'
 .home-index-wrap
   margin-bottom: 50px
+  .empty-text
+    padding: 0.8rem
   .vux-slider 
     .vux-indicator-right 
       > a 

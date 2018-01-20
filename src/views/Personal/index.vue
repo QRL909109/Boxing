@@ -42,7 +42,7 @@
         bq,
         cellList: [{
           name: '消息',
-          newNum: 1,
+          newNum: 0,
           icon: 'icon-xinxi',
           link: '/personal/info'
         }, {
@@ -52,7 +52,7 @@
           link: '/quiz/main/recording'
         }, {
           name: '金币记录',
-          newNum: 2,
+          newNum: 0,
           icon: 'icon-chongzhi',
           link: '/personal/coin'
         }, {

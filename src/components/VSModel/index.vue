@@ -1,12 +1,11 @@
 <template>
-  <div class="vs-model" :style="{backgroundColor: bgColor}">
-    <router-link :to="`${link}?id=${data.info.id}`">
+  <div class="vs-model" :style="{backgroundColor: bgColor}" @click="handleLink(data.info.id)">
       <slot name="header"></slot>
       <div class="wrap">
         <div class="player">
           <img :src="data.blue.avatar" class="img-radio" :alt="data.blue.name">
           <div class="vs-model__name">
-            <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
+            <img :src="data.blue.country_img" :alt="data.blue.country_name" class="icon-countries">
             <p class="player__name">{{data.blue.name}}</p>
           </div>
         </div>
@@ -19,23 +18,23 @@
           <slot name="time"> 
             <time class="time">{{ data.info.game_begin_time * 1000 | dateFormat('yyyy-MM-dd') }}</time>
           </slot>
-          <div v-show="statusShow" class="status text-center" :class="{'active': data.status === 1}">{{ betStatus(data.status) }}</div>
+          <div v-show="statusShow" class="status text-center" :class="{'active': data.info.status === 1}">{{ betStatus(data.info.status) }} 
+            <span v-show="statusResult" :class="`${gameResult(data.info.winner).color}-font`"> {{gameResult(data.info.winner).type}}</span>
+          </div>
           <slot name="footer"></slot>
         </div>
         <div class="player">
           <img :src="data.red.avatar" class="img-radio" :alt="data.red.name">
           <div class="vs-model__name">
-            <img src="~/assets/img/china.jpg" alt="" class="icon-countries">
+            <img :src="data.red.country_img" :alt="data.red.country_name" class="icon-countries">
             <p class="player__name">{{data.red.name}}</p>
           </div>
         </div>
       </div>
-      
-    </router-link>
   </div>
 </template>
 <script>
-  import {betStatus} from '@/lib/utils/fiterStatus'
+  import {betStatus, gameResult} from '@/lib/utils/fiterStatus'
   export default {
     name: 'vsModel',
     data () {
@@ -54,15 +53,27 @@
       statusShow: {
         default: false
       },
+      statusResult: {
+        default: false
+      },
       vsType: {
         default: 1
       },
       link: {
-        default: 'home'
+        default: ''
       }
     },
     methods: {
-      betStatus
+      betStatus,
+      gameResult,
+      handleLink (id) {
+        console.log(2222, this.link)
+        if (this.link !== '') {
+          this.$router.push({
+            path: `${this.link}?id=${id}`
+          })
+        }
+      }
     }
   }
 </script>
@@ -96,6 +107,7 @@
       justify-content: center
       align-items: center
       margin: 0 0.25rem 0
+      min-width: 2rem
       .time
         font-size: 12px
         font-family: Arial
@@ -123,4 +135,6 @@
         margin-top: 5px
         margin-bottom: 0.5rem
         color: $grey-600
+        &.active
+          color: $red
 </style>

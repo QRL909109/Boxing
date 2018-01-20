@@ -8,7 +8,6 @@ const actions = {
 }
 const mutations = {
   UPDATELOADING (state, payload) {
-    console.log(33333, state, payload)
     state.isLoading = payload.isLoading
   }
 }

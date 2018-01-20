@@ -50,7 +50,7 @@
           matchInfo: {
             page: 1,
             limit: 10,
-            status: 0
+            status: 2
           }
         }
       }
@@ -100,6 +100,8 @@
           if (data.length === 0 || data.length < this.conditions.matchInfo.limit) {
             this.$refs.scrollerUpDown.disablePullup()
           }
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+        }).catch(_ => {
           this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       }

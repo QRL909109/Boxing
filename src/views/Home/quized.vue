@@ -13,14 +13,14 @@
         <div class="quiz-model" v-for="(item, index) in quizList">
           <title-model :title="item.info.bet_end_time * 1000 | dateFormat('yyyy-MM-dd')" path="/home/main/quized">
             <div class="card-padding">
-               <vs-model :data="item" :statusShow=true vsType="2" link="/quiz/main/game">
+               <vs-model :data="item" :statusShow=true :statusResult=true vsType="2">
                 <span slot="time"></span>
                  <div slot="footer" class="win-model">
-                   <div class="deep-bule-bg bule">
+                   <div class="deep-bule-bg bule" >
                      <p class="text-center">{{item.bet_infos[0].blue_odds}}</p>
                      <p>蓝胜</p>
                    </div>
-                   <div class="red-bg red">
+                   <div class="red-bg red" >
                      <p class="text-center">{{item.bet_infos[0].red_odds}}</p>
                      <p>红胜</p>
                    </div>
@@ -50,7 +50,7 @@
           matchInfo: {
             page: 1,
             limit: 10,
-            status: 2
+            status: 3
           }
         }
       }
@@ -100,6 +100,8 @@
           if (data.length === 0 || data.length < this.conditions.matchInfo.limit) {
             this.$refs.scrollerUpDown.disablePullup()
           }
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+        }).catch(_ => {
           this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       }

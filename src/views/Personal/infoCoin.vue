@@ -19,7 +19,7 @@
               <div slot="content" class="swipe-flex vux-1px-t">
                 <div class="info-coin__text">
                   <p>{{item.opr_type | coinType}}</p>
-                  <p class="time_desc">{{item.create_time * 1000 | dateFormat()}}</p>
+                  <p class="time_desc">{{item.create_time * 1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
                 </div>
                 <div class="info-coin__money">
                   <span class="coin">{{item.opr_type | coinAddDes}} {{item.coin}}</span>

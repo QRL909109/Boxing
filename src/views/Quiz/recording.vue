@@ -23,11 +23,11 @@
                 <divider>竞猜信息</divider>
                 <div class="info-wrap">
                   <div class="info">
-                    <p>竞猜编号: {{item.bet_record_id}}</p>
-                    <p>参与时间: {{item.bet_time*1000 | dateFormat('yyyy-mm-dd hh-mm')}}</p>
+                   <!--  <p>竞猜编号: {{item.bet_record_id}}</p> -->
+                    <p>参与时间: {{item.bet_time*1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
                     <p>消耗金币: {{item.bet_amount}}</p>
                     <p>竞猜选项: {{item.bet_option | turnName}} 方胜</p>
-                    <p>预计开奖: {{item.betTime*1000 | dateFormat('yyyy-mm-dd hh-mm')}}</p>
+                    <p>预计开奖: {{item.betTime*1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
                   </div>
                   <div class="status bule-font">
                     {{turnStatus(item.winner_flag)}}

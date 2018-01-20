@@ -24,7 +24,7 @@
         </div>
         <div class="item">
           <p class="left">生日: </p>
-          <p>{{info.birthday * 1000 | dateFormat('yyyy-mm-dd')}}</p>
+          <p>{{info.birthday * 1000 | dateFormat('yyyy-MM-dd')}}</p>
         </div>
         <div class="item">
           <p class="left">身高: </p>

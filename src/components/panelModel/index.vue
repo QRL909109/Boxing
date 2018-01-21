@@ -46,13 +46,11 @@
       .panel-img
         margin-right: 0
     .panel-img
-      // width: 180px
-      flex: 1
-      max-height: 2.6rem
+      width: 30%
       margin-right: 5px
-      min-height: 2.5rem
+      overflow: hidden
     .panel-desc
-      flex: 3
+      width: 70%
       .name
         +font-dpr(16px)
         margin: 0.3rem 0 0.2rem

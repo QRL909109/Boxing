@@ -2,7 +2,7 @@
 <template>
   <div class="app-container height100">
     <!-- 展示主体界面 -->
-    <router-view/>
+      <router-view/>
     <footer-nav />
   </div>
 </template>

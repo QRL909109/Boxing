@@ -1,6 +1,7 @@
 <!-- 充值界面 -->
 <template>
   <div class="recharge-wrap height100">
+    <view-box ref="viewBoxRecharge">
     <div class="recharge-header recharfe__modal">
       <div class="recharge__title">
         <span>我的积分：</span> 
@@ -9,7 +10,6 @@
         </div>
       </div>
     </div>
-    <view-box ref="viewBox">
       <div class="recharge__select recharfe__modal">
         <p class="recharge__title">请选择充值金额</p>
         <div class="select-money-block">
@@ -50,19 +50,17 @@
       <div class="confimPay" @click="handleRecharge">
         确认支付 ￥{{payMoney}}
       </div>
+      <x-dialog v-model="showHideOnBlur" class="dialog-demo" hide-on-blur>
+        <div class="img-box">
+          <h2 class="text-center mgb20">长按向财务转账</h2>
+           <qrcode />
+          <p class="text-center mgt20">{{currentDes}}</p>
+        </div>
+        <div @click="showHideOnBlur=false">
+          <span class="vux-close"></span>
+        </div>
+      </x-dialog>
     </view-box>
-    
-    
-    <x-dialog v-model="showHideOnBlur" class="dialog-demo" hide-on-blur>
-      <div class="img-box">
-        <h2 class="text-center mgb20">长按向财务转账</h2>
-         <qrcode />
-        <p class="text-center mgt20">{{currentDes}}</p>
-      </div>
-      <div @click="showHideOnBlur=false">
-        <span class="vux-close"></span>
-      </div>
-    </x-dialog>
   </div>
 </template>
 <script>
@@ -184,9 +182,9 @@
         &:before,&:after
           border: 0
       .weui-cell
-        padding-left: 6px
+        padding: 0 6px
     .recharfe__modal
-      padding: 0.3rem 0.25rem 
+      padding: 0.25rem 
       background: $white
       margin-bottom: 0.25rem
       
@@ -211,7 +209,7 @@
       .pay__choose
         .choose
           position: relative
-          padding: 0.45rem 0.25rem
+          padding: 0.5rem 0.25rem 0
           border-bottom: 1px solid #c8c8c8
           &:last-child
             border-bottom: none

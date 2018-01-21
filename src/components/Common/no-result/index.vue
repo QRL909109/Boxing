@@ -34,7 +34,7 @@
     top: 54px;
     left: 0;
     right: 0;
-    bottom: 50px;
+    bottom: 30px;
     margin: 30px 0;
     background-color: #f5f5f5;
   }

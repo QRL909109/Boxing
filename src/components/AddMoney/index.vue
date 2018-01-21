@@ -16,7 +16,7 @@
     methods: {
       handleAddMoney () {
         this.$router.push({
-          path: '/personal/recharge'
+          path: '/recharge'
         })
       }
     }

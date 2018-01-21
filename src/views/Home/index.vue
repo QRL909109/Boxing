@@ -34,7 +34,7 @@
      <div class="mg-b-2">
       <title-model title="资讯头条" path="/home">
         <div class="man-wrap pd-l-2">
-          <scroller lock-x height="300px" 
+          <scroller lock-x height="330px" 
           ref="scrollerUpDown"
           :use-pulldown=true 
           :use-pullup=true
@@ -232,7 +232,6 @@ export default {
 <style lang="sass">
 @import '~assets/sass/color'
 .home-index-wrap
-  margin-bottom: 50px
   .empty-text
     padding: 0.8rem
   .vux-slider 

@@ -144,7 +144,7 @@
       justify-content: center
       align-items: center
       margin: 0 0.25rem 0
-      min-width: 2rem
+      min-width: 2.4rem
       .win-footer-model
         display: flex
         justify-content: center

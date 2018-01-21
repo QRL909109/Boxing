@@ -113,7 +113,6 @@
 @import '~assets/sass/color'
 .quiz-wrap
   padding-top: 0.4rem
-  margin-bottom: 1rem
   .quiz-model
     margin-bottom: 0.3rem
     .weui-cell_link

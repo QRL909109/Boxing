@@ -16,14 +16,31 @@
           <div class="vs-block_1" v-if="vsType == 1">VS</div>
           <div class="vs-block_2" v-if="vsType == 2">
             <span>V</span><span>S</span>
-          </div>
-          <slot name="time"> 
-            <time class="time">{{ data.info.game_begin_time * 1000 | dateFormat('yyyy-MM-dd') }}</time>
-          </slot>
+          </div> 
+          <time class="time" v-show="showTime">{{ data.info.game_begin_time * 1000 | dateFormat('yyyy-MM-dd') }}</time>
           <div v-show="statusShow" class="status text-center" :class="{'active': data.info.status === 1}">{{ betStatus(data.info.status) }} 
-            <span v-show="statusResult" :class="`${gameResult(data.info.winner).color}-font`"> {{gameResult(data.info.winner).type}}</span>
+            <!-- 竞猜结束却未结算 -->
+            <span v-show="+data.info.status == 2 && +data.info.winner == 0" :class="`${gameResult(data.info.winner).color}-font`"> {{gameResult(data.info.winner).type}}</span>
+            
           </div>
-          <slot name="footer"></slot>
+          <slot name="footer">
+            <div class="win-footer-model" v-show="showFootType == 1">
+              <div class="quiz-coin">
+                <img src="~/assets/img/gold@2x.png" alt="下注" >
+              </div>
+              <span>{{+data.bet_info.blue_odds_amount + data.bet_info.red_odds_amount}}</span> 
+            </div>
+            <div class="win-footer-model-2" v-show="showFootType == 2">
+              <div class="deep-blue-bg blue">
+                 <p class="text-center">{{data.bet_info.blue_odds}}</p>
+                 <p>蓝胜</p>
+               </div>
+               <div class="red-bg red">
+                 <p class="text-center">{{data.bet_info.red_odds}}</p>
+                 <p>红胜</p>
+               </div>
+            </div>
+          </slot>
         </div>
         <div class="player">
           <img :src="data.red.avatar" class="img-radio img-red-win" :alt="data.red.name" :class="{'active': +data.info.winner === 1 || +data.info.winner === 3}">
@@ -53,13 +70,13 @@
       bgColor: {
         default: '#fff'
       },
-      showResult: {
-
-      },
-      statusShow: {
+      showTime: {
         default: false
       },
-      statusResult: {
+      showFootType: {
+        default: '0'
+      },
+      statusShow: {
         default: false
       },
       vsType: {
@@ -97,6 +114,7 @@
       flex: 1
       text-align: center
       position: relative
+      
       .winner-img
         position: absolute
         top: 0
@@ -127,6 +145,28 @@
       align-items: center
       margin: 0 0.25rem 0
       min-width: 2rem
+      .win-footer-model
+        display: flex
+        justify-content: center
+        align-items: center
+        .quiz-coin
+          width: 0.5rem
+          margin-right: 0.1rem
+          img
+            width: 100%
+      .win-footer-model-2
+        display: flex
+        justify-content: center
+        flex-direction: row
+        color: #fff
+        .deep-blue-bg
+          background-color: $blue-600
+        .blue, .red
+          border-radius: 2px
+          padding: 0.1rem 0.35rem
+          margin-left: 0.2rem
+          p
+            margin-top: 0.05rem
       .time
         font-size: 12px
         font-family: Arial

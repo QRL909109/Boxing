@@ -16,7 +16,14 @@
         <scroller lock-y scrollbar-x class="pd-l-2" v-if="trailerList.length > 0">
           <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
             <div class="scroller-box-item" v-for="(item, index) in trailerList">
-              <vs-model :data="item" ref="vsModel" :statusShow=false link="/quiz/main/game"></vs-model>
+              <vs-model 
+              :data="item" 
+              ref="vsModel" 
+              :statusShow=false
+              :showTime=true
+              showFootType="0"
+              link="/quiz/main/game">
+              </vs-model>
             </div>
           </div>
         </scroller>
@@ -25,7 +32,7 @@
     </div>
     
      <div class="mg-b-2">
-      <title-model title="名人介绍" path="/info">
+      <title-model title="资讯头条" path="/home">
         <div class="man-wrap pd-l-2">
           <scroller lock-x height="300px" 
           ref="scrollerUpDown"
@@ -180,6 +187,10 @@ export default {
         status
       }
       return home.GetMatchList(queryData).then(data => {
+        data = data.map(item => {
+          item.bet_info = item.bet_infos.filter(bet => +bet.bet_type === 1)[0]
+          return item
+        })
         this.trailerList = data
         this.$nextTick(() => {
           this.handleWidth()

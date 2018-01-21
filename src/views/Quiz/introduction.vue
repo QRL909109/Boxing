@@ -144,6 +144,7 @@
   background-color: $grey-800
   .center
     padding: 1.5rem 0.5rem
+    background-color: $grey-800
     color: #fff
     margin-bottom: 50px
     .intro__avatar

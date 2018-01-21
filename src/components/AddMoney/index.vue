@@ -1,8 +1,8 @@
 <template>
-  <div class="self-money-wrap">
+  <div class="self-money-wrap" @click="handleAddMoney">
     <img class="glod-icon" src="./gold@2x.png" alt="">
     <span class="money"> {{money}}</span>
-    <i class="iconfont icon-add_c add" @click="handleAddMoney"></i>
+    <i class="iconfont icon-add_c add"></i>
   </div>
 </template>
 <script>
@@ -16,7 +16,7 @@
     methods: {
       handleAddMoney () {
         this.$router.push({
-          path: '/recharge'
+          path: '/personal/recharge'
         })
       }
     }

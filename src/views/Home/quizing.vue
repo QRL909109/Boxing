@@ -13,18 +13,13 @@
         <div class="quiz-model" v-for="(item, index) in quizList">
           <title-model :title="item.info.bet_end_time * 1000 | dateFormat('yyyy-MM-dd')" path="/home/main/quizing">
             <div class="card-padding">
-               <vs-model :data="item" :statusShow=true vsType="2" link="/quiz/main/game">
-                <span slot="time"></span>
-                 <div slot="footer" class="win-model">
-                   <div class="deep-blue-bg blue">
-                     <p class="text-center">{{item.bet_infos[0].blue_odds}}</p>
-                     <p>蓝胜</p>
-                   </div>
-                   <div class="red-bg red">
-                     <p class="text-center">{{item.bet_infos[0].red_odds}}</p>
-                     <p>红胜</p>
-                   </div>
-                 </div>
+               <vs-model 
+                 :data="item" 
+                 :statusShow=true 
+                 vsType="2" 
+                 :showTime=false 
+                 showFootType="2"
+                 link="/quiz/main/game">
                </vs-model>
             </div>
           </title-model>
@@ -89,7 +84,10 @@
         }
         this.$store.dispatch('updateLoadingStatus', {isLoading: true})
         home.GetMatchList(queryData).then(data => {
-          data = data || []
+          data = data.map(item => {
+            item.bet_info = item.bet_infos.filter(bet => +bet.bet_type === 1)[0]
+            return item
+          })
           // 判断是更新还是加载  默认更新
           if (type) {
             this.quizList = data
@@ -119,19 +117,6 @@
   margin-bottom: 1rem
   .quiz-model
     margin-bottom: 0.3rem
-    .win-model
-      display: flex
-      justify-content: center
-      flex-direction: row
-      color: #fff
-      .deep-blue-bg
-        background-color: $blue-600
-      .blue, .red
-        border-radius: 2px
-        padding: 0.1rem 0.35rem
-        margin-left: 0.2rem
-        p
-          margin-top: 0.05rem
     .weui-cell_link
       font-size: 12px
       text-align: center

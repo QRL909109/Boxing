@@ -26,7 +26,7 @@
         </div>
         <div class="order_money">
           <group>
-            <x-input title="其他充值金额" name="mobile" type="number" placeholder="元" :value="payOrderMoney" @input="handleInputMoney" keyboard="number"></x-input>
+            <x-input title="其他充值金额" type="number" placeholder="元" :value="payOrderMoney" @input="handleInputMoney" keyboard="number"></x-input>
           </group>
         </div>
       </div>
@@ -66,7 +66,7 @@
   </div>
 </template>
 <script>
-  import { Divider, XDialog, CheckIcon, Flexbox, FlexboxItem, ViewBox, XInput, Group, debounce } from 'vux'
+  import { XDialog, CheckIcon, Flexbox, FlexboxItem, ViewBox, XInput, Group, debounce } from 'vux'
   import { mapState } from 'vuex'
   import { rechargeMoneyList } from '@/config/rechargeMoney'
   import personal from '@/lib/api/personal'
@@ -150,7 +150,6 @@
       })
     },
     components: {
-      Divider,
       XDialog,
       Qrcode,
       CheckIcon,

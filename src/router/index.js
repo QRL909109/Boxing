@@ -100,13 +100,11 @@ export default new Router({
         path: 'order',
         name: 'info_order',
         component: r => require.ensure([], () => r(require(`../views/Personal/infoOrder.vue`)), 'personal_order')
+      }, {
+        path: 'recharge',
+        name: 'personal_recharge',
+        component: r => require.ensure([], () => r(require(`../views/Recharge/index.vue`)), 'personal_recharge')
       }]
-    },
-    // --- 充值界面
-    {
-      path: '/recharge',
-      name: 'Recharge',
-      component: r => require.ensure([], () => r(require(`../views/Recharge/index.vue`)), 'recharge_index')
     },
     // --- 竞猜界面
     {

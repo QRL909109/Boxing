@@ -3,32 +3,34 @@
   <div class="info-coin-wrap height100">
     <title-model title="金币记录"></title-model>
       <view-box ref="viewBox">
-       <scroller lock-x :height="scrollHeight"
-          ref="scrollerUpDown"
-          :use-pulldown=true 
-          :use-pullup=true
-          :pulldown-config="pullDownConfig"
-          :pullup-config="pullUpConfig"
-          @on-pulldown-loading="onPullDown"  
-          @on-pullup-loading="onPullUp">
-          <swipeout> 
-            <swipeout-item :disabled="disabled" v-for="(item, index) in infoList" :key="index" transition-mode="follow">
-              <div slot="right-menu">
-                <swipeout-button @click.native="onButtonClick('delete')" background-color="#D43C33">删除</swipeout-button>
-              </div>
-              <div slot="content" class="swipe-flex vux-1px-t">
-                <div class="info-coin__text">
-                  <p>{{item.opr_type | coinType}}</p>
-                  <p class="time_desc">{{item.create_time * 1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
+        <div style="margin-top: 0.2rem">
+         <scroller lock-x :height="scrollHeight"
+            ref="scrollerUpDown"
+            :use-pulldown=true 
+            :use-pullup=true
+            :pulldown-config="pullDownConfig"
+            :pullup-config="pullUpConfig"
+            @on-pulldown-loading="onPullDown"  
+            @on-pullup-loading="onPullUp">
+            <swipeout> 
+              <swipeout-item :disabled="disabled" v-for="(item, index) in infoList" :key="index" transition-mode="follow">
+                <div slot="right-menu">
+                  <swipeout-button @click.native="onButtonClick('delete')" background-color="#D43C33">删除</swipeout-button>
                 </div>
-                <div class="info-coin__money">
-                  <span class="coin">{{item.opr_type | coinAddDes}} {{item.coin}}</span>
-                  <img src="./gold@2x.png" alt="">
+                <div slot="content" class="swipe-flex vux-1px-t">
+                  <div class="info-coin__text">
+                    <p>{{item.opr_type | coinType}}</p>
+                    <p class="time_desc">{{item.create_time * 1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
+                  </div>
+                  <div class="info-coin__money">
+                    <span class="coin">{{item.opr_type | coinAddDes}} {{item.coin}}</span>
+                    <img src="./gold@2x.png" alt="">
+                  </div>
                 </div>
-              </div>
-            </swipeout-item>
-          </swipeout>
-      </scroller>
+              </swipeout-item>
+            </swipeout>
+        </scroller>
+        </div>
     </view-box>
   </div>
 </template>

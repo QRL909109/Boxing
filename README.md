@@ -1,6 +1,6 @@
 # boxing
 
-> 拳击竞猜
+> 搏击竞猜
 
 ## Build Setup
 

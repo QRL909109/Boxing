@@ -44,6 +44,16 @@
         </flexbox-item>
       </flexbox>
     </div>
+    <!-- 竞猜排行 -->
+    <div class="game-ranking">
+      <announcement-ranking :data="announcementList"/>
+      <div class="game-people">
+        <give-people :list="giveList"/>
+        <div class="game-ranking-btn">
+          <x-button mini type="default" link="/home/ranking">排行榜</x-button>
+        </div>
+      </div>
+    </div>
     <!-- 竞猜 -->
     <div class="guess-wrap">
       <title-model title="猜胜负" :showBottomBorder=true>
@@ -98,11 +108,14 @@
 </template>
 <script>
   import progressBar from '@/components/ProgressBar'
-  import { Divider, Flexbox, FlexboxItem, Toast, Confirm } from 'vux'
+  import givePeople from '@/components/GivePeople'
+  import announcementRanking from '@/components/Announcement/ranking'
+  import { Divider, Flexbox, FlexboxItem, Toast, Confirm, XButton } from 'vux'
   import betting from '@/components/Betting'
   import titleModel from '@/components/titleModel'
   import { mapState } from 'vuex'
   import quiz from '@/lib/api/quiz'
+  import home from '@/lib/api/home'
   // 待删除
   import bq from '@/assets/img/bq.jpg'
   import jdx from '@/assets/img/jdx.jpg'
@@ -125,7 +138,9 @@
           bet_info: {}
         },
         playerInfo: [],
-        bettingInfo: {} // 投注信息
+        bettingInfo: {}, // 投注信息
+        announcementList: [], // 竞猜排行
+        giveList: [] // 点赞人头  7个
       }
     },
     methods: {
@@ -155,6 +170,31 @@
           this.warnVisi = true
         }
       },
+      handleGetBetRanking () {
+        return home.GetRankMatch({
+          match_id: this.query.id
+        }).then(data => {
+          this.giveList = data.slice(0, 7).map(item => {
+            let obj = {
+              img: item.avatar
+            }
+            return obj
+          })
+          // 默认数据
+          if (data.length > 0) {
+            this.announcementList = data.map(item => {
+              let obj = {
+                msg: `${item.username} 竞猜${item.total_amount}金币`
+              }
+              return obj
+            })
+          } else {
+            this.announcementList = [{
+              msg: '精彩赛事，不容错过'
+            }]
+          }
+        })
+      },
       handleHideBetting () {
         this.guessActive = false
       },
@@ -172,7 +212,7 @@
           id: this.query.id
         }
         this.$store.dispatch('updateLoadingStatus', {isLoading: true})
-        quiz.GetMatchDetail(queryData).then(data => {
+        return quiz.GetMatchDetail(queryData).then(data => {
           this.playerInfo = []
           this.analysisInfo = data
           this.analysisInfo.bet_info = data.bet_infos.filter(item => item.bet_type === 1)[0]
@@ -280,6 +320,16 @@
       },
       onConfirm () {
         this.handleSuccessBetting()
+      },
+      handleGetAllResult () {
+        this.$store.dispatch('updateLoadingStatus', {isLoading: true})
+        Promise.all([this.handleGetMatchList(), this.handleGetBetRanking()])
+        .then(_ => {
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+        })
+        .catch(_ => {
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+        })
       }
     },
     computed: {
@@ -288,8 +338,8 @@
       })
     },
     created () {
-      // 获取赛事信息
-      this.handleGetMatchList()
+      // 获取赛事信息获取竞猜列表
+      this.handleGetAllResult()
     },
     components: {
       progressBar,
@@ -299,7 +349,10 @@
       Flexbox,
       FlexboxItem,
       Toast,
-      Confirm
+      Confirm,
+      XButton,
+      givePeople,
+      announcementRanking
     }
   }
 </script>
@@ -384,4 +437,17 @@
     text-align: center
     img
       width: 2.5rem
+  .game-ranking
+    background-color: $white
+    margin-bottom: 0.4rem
+    .game-people
+      display: flex
+      align-items: center
+      justify-content: space-between 
+      .game-ranking-btn
+        margin-right: 0.15rem
+        button.weui-btn_mini
+          width: 1.3rem
+          padding: 0
+          margin: 0.1rem
 </style>

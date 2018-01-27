@@ -3,7 +3,7 @@
   <div class="app-container height100">
     <!-- 展示主体界面 -->
       <router-view/>
-    <footer-nav />
+      <footer-nav />
   </div>
 </template>
 <script>

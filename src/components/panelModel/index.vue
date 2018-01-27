@@ -4,9 +4,19 @@
       <div class="panel-img">
         <img :src="item.avatar" :alt="item.name" class="img-responsive">
       </div>
-      <div class="panel-desc">
+      <div class="panel-desc" v-if="model == 1">
         <p class="name">{{item.name}}</p>
-        <p class="desc">{{item.intro| limitStrNum(60)}}</p>
+        <p class="desc">{{item.intro | limitStrNum(50)}}</p>
+      </div>
+      <div class="panel-desc-2" v-if="model == 2">
+        <p class="desc">{{item.intro | limitStrNum(50)}}</p>
+        <p class="time-watch">
+          <time class="time">{{item.time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}}</time>
+         <!--  <span class="watch-num">
+            <i class="iconfont icon-yanjing"></i> 
+            1234
+          </span> -->
+        </p>
       </div>
     </div>
   </div>
@@ -24,7 +34,8 @@
       type: {
         default: 'left'
       },
-      path: {}
+      path: {},
+      model: {}
     },
     methods: {
       handleClick (item) {
@@ -43,18 +54,31 @@
     border-top: 1px solid #e4e4e4
     &.reverse
       flex-direction: row-reverse
+      min-height: 2.6rem
       .panel-img
         margin-right: 0
     .panel-img
       width: 30%
       margin-right: 5px
       overflow: hidden
-    .panel-desc
+    .panel-desc,.panel-desc-2
       width: 70%
+      position: relative
       .name
         +font-dpr(16px)
-        margin: 0.3rem 0 0.2rem
+        margin: 0.2rem 0 0.2rem
       .desc
         line-height: 15px
+        color: #666
+      .time-watch
+        position: absolute
+        margin-top: 0.1rem
+        bottom: 0.03rem
+        color: #666
+    .panel-desc-2
+      .desc
+        margin: 0.2rem 0 0.2rem
+        line-height: 0.53rem
+        +font-dpr(14px)
         color: #666
 </style>

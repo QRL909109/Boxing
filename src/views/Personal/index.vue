@@ -1,38 +1,51 @@
 <!-- 个人中心 -->
 <template>
-  <div class="personal-info-wrap">
-    <div class="person__info">
-      <div class="person__tou">
-        <img :src="user.avatar" alt="" class="img-tou">
-      </div>
-      <div class="person__name-money">
-        <div class="money">
-          <add-money :money="user.coin"/>
+  <div class="personal-info-wrap height100">
+    <view-box ref="viewBox">
+      <div class="person__info">
+        <div class="person__tou">
+          <img :src="user.avatar" alt="" class="img-tou">
         </div>
-        <div class="nick-name">
-          {{user.username}}
-          <!-- <i class="iconfont icon-bianji"></i> -->
+        <div class="person__name-money">
+          <div class="money">
+            <add-money :money="user.coin"/>
+          </div>
+          <div class="nick-name">
+            {{user.username}}
+            <!-- <i class="iconfont icon-bianji"></i> -->
+          </div>
         </div>
       </div>
-    </div>
-    <div class="person__list">
-      <group>
-        <template v-for="item in cellList">
-          <cell  @click.native="onClick(item)" is-link>
-            <span slot="title">
-              <i class="iconfont" :class="item.icon"></i>
-              <span class="name">{{item.name}}</span>
-              <badge v-show="item.newNum" :text="item.newNum"></badge>
-            </span>
-          </cell>
-        </template>
-      </group>
-    </div>
+      <div class="person__list">
+        <group>
+          <template v-for="item in cellList">
+            <cell  @click.native="onClick(item)" is-link>
+              <span slot="title">
+                <i class="iconfont" :class="item.icon"></i>
+                <span class="name">{{item.name}}</span>
+                <badge v-show="item.newNum" :text="item.newNum"></badge>
+              </span>
+            </cell>
+          </template>
+        </group>
+        <group>
+          <template v-for="item in cellList2">
+            <cell  @click.native="onClick(item)" is-link>
+              <span slot="title">
+                <i class="iconfont" :class="item.icon"></i>
+                <span class="name">{{item.name}}</span>
+                <badge v-show="item.newNum" :text="item.newNum"></badge>
+              </span>
+            </cell>
+          </template>
+        </group>
+      </div>
+    </view-box>
   </div>
 </template>
 <script>
   import addMoney from '@/components/AddMoney'
-  import { Cell, Group, Badge } from 'vux'
+  import { Cell, Group, Badge, ViewBox } from 'vux'
   import bq from '@/assets/img/bq.jpg'
   import { mapState } from 'vuex'
   export default {
@@ -60,6 +73,27 @@
           newNum: 0,
           icon: 'icon-dingdan',
           link: '/personal/order'
+        }],
+        cellList2: [{
+          name: '帮助中心',
+          newNum: 0,
+          icon: 'icon-help',
+          link: '/personal/index'
+        }, {
+          name: '反馈信息',
+          newNum: 0,
+          icon: 'icon-xinfeng',
+          link: '/personal'
+        }, {
+          name: '联系客服',
+          newNum: 0,
+          icon: 'icon-content',
+          link: '/personal'
+        }, {
+          name: '关于我们',
+          newNum: 0,
+          icon: 'icon-about',
+          link: '/personal'
         }]
       }
     },
@@ -67,7 +101,8 @@
       Group,
       Cell,
       Badge,
-      addMoney
+      addMoney,
+      ViewBox
     },
     computed: {
       ...mapState({

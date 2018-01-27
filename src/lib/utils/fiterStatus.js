@@ -2,7 +2,7 @@ const betStatus = function (state) {
   let type = '正在竞猜'
   switch (state) {
     case 0:
-      type = '未投注'
+      type = '未开始竞猜'
       break
     case 1:
       type = '正在竞猜'

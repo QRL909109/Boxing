@@ -3,37 +3,39 @@
   <div class="info-order-wrap height100">
     <title-model title="订单记录"></title-model>
     <view-box ref="viewBox">
-      <tab :line-width=2 active-color='#F44336' slot="header">
-        <tab-item class="vux-center" v-for="(item, index) in orderTypeList" :selected="currentIndex === index + 1" @on-item-click="handleLink(item, index + 1)" :key="index">
-          {{item.name}}
-        </tab-item>
-      </tab>
-      <scroller lock-x :height="scrollHeight"
-        ref="scrollerUpDown"
-        :use-pulldown=true 
-        :use-pullup=true
-        :pulldown-config="pullDownConfig"
-        :pullup-config="pullUpConfig"
-        @on-pulldown-loading="onPullDown"  
-        @on-pullup-loading="onPullUp">
-        <div class="content">
-          <div class="box-shadow-model" v-for="(item, index) in infoList">
-            <div class="info-wrap">
-              <div class="info">
-                <!-- <p>编号: {{item.id}}</p> -->
-                <p v-show="item.opr_type === 1">金币数量: {{item.coin_num}}</p>
-                <p v-show="item.opr_type === 2">金额: {{item.amount}}</p>
-                <p>操作时间: {{item.opr_time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}}</p>
-                <p v-show="item.status === 2">确认时间: {{item.confirm_time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}}</p>
-              </div>
-              <div class="status blue-font">
-                {{item.status | orderType}}
+      <div style="margin-top: 0.2rem">
+        <tab :line-width=2 active-color='#F44336' slot="header">
+          <tab-item class="vux-center" v-for="(item, index) in orderTypeList" :selected="currentIndex === index + 1" @on-item-click="handleLink(item, index + 1)" :key="index">
+            {{item.name}}
+          </tab-item>
+        </tab>
+        <scroller lock-x :height="scrollHeight"
+          ref="scrollerUpDown"
+          :use-pulldown=true 
+          :use-pullup=true
+          :pulldown-config="pullDownConfig"
+          :pullup-config="pullUpConfig"
+          @on-pulldown-loading="onPullDown"  
+          @on-pullup-loading="onPullUp">
+          <div class="content">
+            <div class="box-shadow-model" v-for="(item, index) in infoList">
+              <div class="info-wrap">
+                <div class="info">
+                  <!-- <p>编号: {{item.id}}</p> -->
+                  <p v-show="item.opr_type === 1">金币数量: {{item.coin_num}}</p>
+                  <p v-show="item.opr_type === 2">金额: {{item.amount}}</p>
+                  <p>操作时间: {{item.opr_time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}}</p>
+                  <p v-show="item.status === 2">确认时间: {{item.confirm_time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}}</p>
+                </div>
+                <div class="status blue-font">
+                  {{item.status | orderType}}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </scroller>
-        <no-result desc="暂无记录" :show="infoList.length <= 0 "/>
+        </scroller>
+          <no-result desc="暂无记录" :show="infoList.length <= 0 "/>
+      </div>
     </view-box>
     
   </div>

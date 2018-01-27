@@ -209,7 +209,7 @@
       .pay__choose
         .choose
           position: relative
-          padding: 0.5rem 0.25rem 0
+          padding: 0.5rem 0.25rem 0.1rem
           border-bottom: 1px solid #c8c8c8
           &:last-child
             border-bottom: none

@@ -40,22 +40,22 @@ export default new Router({
           }, {
             path: 'quiz',
             name: 'home_quiz',
-            meta: {index: 2},
+            meta: {index: 3},
             component: r => require.ensure([], () => r(require(`../views/Home/quiz.vue`)), 'home_quiz')
           }, {
             path: 'quized',
             name: 'home_quized',
-            meta: {index: 3},
+            meta: {index: 4},
             component: r => require.ensure([], () => r(require(`../views/Home/quized.vue`)), 'home_quized')
           }, {
             path: 'quizing',
             name: 'home_quizing',
-            meta: {index: 1},
+            meta: {index: 2},
             component: r => require.ensure([], () => r(require(`../views/Home/quizing.vue`)), 'home_quizing')
           }, {
             path: 'super',
             name: 'home_super',
-            meta: {index: 3},
+            meta: {index: 1},
             component: r => require.ensure([], () => r(require(`../views/Home/superVideo.vue`)), 'home_super')
           }, {
             path: 'pic',
@@ -63,6 +63,15 @@ export default new Router({
             meta: {index: 4},
             component: r => require.ensure([], () => r(require(`../views/Home/picGroup.vue`)), 'home_pic')
           }]
+        },
+        {
+          path: 'article',
+          name: 'home_article',
+          component: r => require.ensure([], () => r(require(`../views/Home/article.vue`)), 'home_article')
+        }, {
+          path: 'ranking',
+          name: 'home_ranking',
+          component: r => require.ensure([], () => r(require(`../views/Home/ranking.vue`)), 'home_ranking')
         }
       ]
     },

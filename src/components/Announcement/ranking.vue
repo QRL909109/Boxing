@@ -1,21 +1,18 @@
-<!-- 公告 -->
+<!-- 竞猜推荐 -->
 <template>
   <div class="announcement-wrap">
     <div class="flex-space">
       <div class="icon kuaibao"></div>
       <marquee :item-height=40>
         <marquee-item v-for="(item,index) in data" :key="index" class="note">
-          {{item.msg_content}}
+         <i class="iconfont icon-star"></i> {{item.msg}}
         </marquee-item>
       </marquee>
-        <x-button mini type="default" link="/home/ranking">
-          排行榜
-        </x-button>
     </div>
   </div> 
 </template>
 <script>
-  import { Marquee, MarqueeItem, XButton } from 'vux'
+  import { Marquee, MarqueeItem } from 'vux'
   export default {
     data () {
       return {
@@ -26,14 +23,13 @@
       data: {
         type: Array,
         default: [{
-          msg_content: '黄非红竞猜平台上线！！！'
+          msg: '黄非红竞猜平台上线！！！'
         }]
       }
     },
     components: {
       Marquee,
-      MarqueeItem,
-      XButton
+      MarqueeItem
     }
   }
 </script>
@@ -61,8 +57,4 @@
       line-height: 40px
       +font-dpr(13px)
       +text-overflow
-    button.weui-btn_mini
-      width: 2.3rem
-      padding: 0
-      margin: 0.1rem
 </style>

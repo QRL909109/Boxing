@@ -1,7 +1,7 @@
 {
   "name": "boxing",
   "version": "1.0.0",
-  "description": "拳击竞猜",
+  "description": "搏击竞猜",
   "author": "QRL <qiuruilin@kuaizi.co>",
   "private": true,
   "scripts": {

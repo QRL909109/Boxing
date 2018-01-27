@@ -11,7 +11,7 @@
       @on-pullup-loading="onPullUp">
       <div class="content">
         <div class="quiz-model" v-for="(item, index) in quizList">
-          <title-model :title="item.info.bet_end_time * 1000 | dateFormat('yyyy-MM-dd')" path="/home/main/quiz">
+          <title-model :title="item.info.bet_end_time * 1000 | dateFormat('yyyy-MM-dd hh:mm')" path="/home/main/quiz">
             <div class="card-padding">
                <vs-model 
                  :data="item" 

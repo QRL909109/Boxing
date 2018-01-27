@@ -38,14 +38,14 @@ Vue.http.interceptors.push(function (request, next) { // 拦截器
   next()
 })
 // 全局改变 loading
-// router.beforeEach(function (to, from, next) {
-//   store.commit('updateLoadingStatus', {isLoading: true})
-//   next()
-// })
+router.beforeEach(function (to, from, next) {
+  store.commit('UPDATELOADING', {isLoading: true})
+  next()
+})
 
-// router.afterEach(function (to) {
-//   store.commit('updateLoadingStatus', {isLoading: false})
-// })
+router.afterEach(function (to) {
+  store.commit('UPDATELOADING', {isLoading: false})
+})
 
 Object.keys(filters).forEach(filter => {
   Vue.filter(filter, filters[filter])

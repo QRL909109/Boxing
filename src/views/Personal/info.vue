@@ -2,30 +2,32 @@
 <template>
   <div class="info-center-wrap">
     <title-model title="消息记录"></title-model>
-    <view-box ref="viewBox">
-      <tab :line-width=2 active-color='#F44336' slot="header">
-        <tab-item class="vux-center" v-for="(item, index) in infoTypeList" :selected="currentIndex === item.id" @on-item-click="handleLink(item)" :key="index">
-          {{item.name}}
-        </tab-item>
-      </tab>
-      <scroller lock-x :height="scrollHeight"
-        ref="scrollerUpDown"
-        :use-pulldown=true 
-        :use-pullup=true
-        :pulldown-config="pullDownConfig"
-        :pullup-config="pullUpConfig"
-        @on-pulldown-loading="onPullDown"  
-        @on-pullup-loading="onPullUp">
-        <div class="content">
-         <group>
-            <cell v-for="(item, index) in infoList" :key="index" :inline-desc="item.msg_content" :value="item.create_time * 1000 | dateFormat">
-              <!-- <span slot="title">{{item.title}}</span> -->
-            </cell>
-          </group>
-        </div>
-      </scroller>
-        <no-result desc="暂无记录" :show="infoList.length <= 0 "/>
-    </view-box>
+    <div style="margin-top: 0.2rem">
+      <view-box ref="viewBox">
+        <tab :line-width=2 active-color='#F44336' slot="header">
+          <tab-item class="vux-center" v-for="(item, index) in infoTypeList" :selected="currentIndex === item.id" @on-item-click="handleLink(item)" :key="index">
+            {{item.name}}
+          </tab-item>
+        </tab>
+        <scroller lock-x :height="scrollHeight"
+          ref="scrollerUpDown"
+          :use-pulldown=true 
+          :use-pullup=true
+          :pulldown-config="pullDownConfig"
+          :pullup-config="pullUpConfig"
+          @on-pulldown-loading="onPullDown"  
+          @on-pullup-loading="onPullUp">
+          <div class="content">
+           <group>
+              <cell v-for="(item, index) in infoList" :key="index" :inline-desc="item.msg_content" :value="item.create_time * 1000 | dateFormat">
+                <!-- <span slot="title">{{item.title}}</span> -->
+              </cell>
+            </group>
+          </div>
+        </scroller>
+          <no-result desc="暂无记录" :show="infoList.length <= 0 "/>
+      </view-box>
+    </div>
   </div>
 </template>
 <script>
@@ -38,7 +40,7 @@
    name: '个人',
    id: 3
  }, {
-   name: '全网',
+   name: '系统',
    id: 1
  }]
  export default {

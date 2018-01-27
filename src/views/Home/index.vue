@@ -2,31 +2,41 @@
 <template>
   <section class="home-index-wrap">
     <!-- 轮播图 -->
-    <swiper :list="swiperList" 
-    auto loop 
-    :aspect-ratio="300/800" 
-    height="200px" 
-    dots-class="custom-bottom"/>
+    <swiper :list="bannerList" 
+      auto loop 
+      :aspect-ratio="300/800" 
+      height="160px" 
+      ref="swiper1"
+      dots-class="custom-bottom"/>
 
-    <div class="mg-b-2">
+    <div class="mg-b-2" ref="announcement">
       <announcement :data="announcementList"/>
     </div>
-    <div class="mg-b-2">
+    <div class="mg-b-2" ref="swiper2">
       <title-model title="赛事预告" path="/home">
-        <scroller lock-y scrollbar-x class="pd-l-2" v-if="trailerList.length > 0">
-          <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
-            <div class="scroller-box-item" v-for="(item, index) in trailerList">
-              <vs-model 
+        <swiper 
+          auto 
+          loop 
+          height="3.4rem"
+          :interval=2000
+          dots-class="bj-dots-vertical"
+          direction="vertical" class="pd-l-2" 
+          v-if="trailerList.length > 0">
+          <swiper-item v-for="(item, index) in trailerList" :key="index">
+            <vs-model 
               :data="item" 
-              ref="vsModel" 
               :statusShow=false
               :showTime=true
               showFootType="0"
               link="/quiz/main/game">
               </vs-model>
+          </swiper-item>
+         <!--  <div class="scroller-box" :style="{width: scrollerWidth + 'px'}">
+            <div class="scroller-box-item" >
+              
             </div>
-          </div>
-        </scroller>
+          </div> -->
+        </swiper>
         <div class="empty-text text-center" v-else>暂无赛事预告</div>
       </title-model>
     </div>
@@ -34,7 +44,16 @@
      <div class="mg-b-2">
       <title-model title="资讯头条" path="/home">
         <div class="man-wrap pd-l-2">
-          <scroller lock-x height="330px" 
+         <panel-model  
+            :list="topList"
+            path="/home/article"
+            model=2
+            type="left">
+          </panel-model>
+          <div class="empty-text text-center" v-show="topList.length === 0">
+            暂无资讯
+          </div>
+          <!-- <scroller lock-x :height="scrollHeight" 
           ref="scrollerUpDown"
           :use-pulldown=true 
           :use-pullup=true
@@ -42,12 +61,8 @@
           :pullup-config="pullUpConfig"
           @on-pulldown-loading="onPullDown"  
           @on-pullup-loading="onPullUp">
-            <panel-model  
-              :list="playerList"
-              path="/quiz/main/introduction"
-              type="left">
-            </panel-model>
-          </scroller>
+           
+          </scroller> -->
         </div>
       </title-model>
      </div>
@@ -55,32 +70,26 @@
   </section>
 </template>
 <script>
-import { Swiper, Divider } from 'vux'
+import { Swiper, Divider, SwiperItem } from 'vux'
 import vsModel from '@/components/VSModel'
 import announcement from '@/components/Announcement'
 import titleModel from '@/components/titleModel'
 import panelModel from '@/components/panelModel'
 import home from '@/lib/api/home'
 import info from '@/lib/api/info'
-import pullUpDown from '@/mixin/pullUpDown'
-// 测试图片 后面删除
-import pic1 from '@/assets/img/1.jpeg'
-import pic2 from '@/assets/img/2.png'
-import pic3 from '@/assets/img/3.png'
-import pic4 from '@/assets/img/4.jpeg'
+// import pullUpDown from '@/mixin/pullUpDown'
 export default {
   data () {
     return {
-      scrollerWidth: 500,
       conditions: {
-        playInfo: {
+        portalTop: {
           page: 1,
           limit: 10
         },
         matchInfo: {
           page: 1,
           limit: 10,
-          status: 0
+          status: 1
         },
         msgInfo: {
           page: 1,
@@ -88,23 +97,7 @@ export default {
           msgType: 2 // 轮播信息
         }
       },
-      swiperList: [{
-        url: 'javascript:',
-        img: pic1,
-        title: '拳手赛前应该禁欲吗？'
-      }, {
-        url: 'javascript:',
-        img: pic2,
-        title: '专门狙杀世界冠军，KO安德雷击溃叶翔后，这个伊朗血魔欲制霸重量级'
-      }, {
-        url: 'javascript:',
-        img: pic3,
-        title: '美丽死神和穆塞在这算酱油，这家拳馆的历史让世界膜拜！'
-      }, {
-        url: 'javascript:',
-        img: pic4,
-        title: '擂台上“踹脸狂魔”,台下爱看悬疑小说,她是中国最有气势女拳手！'
-      }],
+      bannerList: [],
       announcementList: [{
         name: '恭喜会员求真相竞猜中奖，获得20W现金！'
       }, {
@@ -117,26 +110,23 @@ export default {
         name: '恭喜会员求真相竞猜中奖，获得20W现金！'
       }],
       trailerList: [],
-      playerList: []
+      topList: []
     }
   },
-  mixins: [pullUpDown],
+  // mixins: [pullUpDown],
   components: {
     Swiper,
     vsModel,
     Divider,
     announcement,
     titleModel,
-    panelModel
+    panelModel,
+    SwiperItem
   },
   methods: {
-    handleWidth () {
-      this.scrollerWidth = this.$refs.vsModel && this.$refs.vsModel.map(item => item.$el.clientWidth)
-        .reduce((x, y) => x + y + 10)
-    },
     onPullDown () {
-      this.conditions.playInfo.page = 1
-      this.handleGetPlayInfo()
+      this.conditions.portalTop.page = 1
+      this.handleGetPortalTop()
       setTimeout(() => {
         this.$refs.scrollerUpDown.donePulldown() // 加载完成
         this.$refs.scrollerUpDown.reset({top: 0}) // 重新上高地
@@ -144,35 +134,44 @@ export default {
       }, 500)
     },
     onPullUp () {
-      this.conditions.playInfo.page += 1
-      this.handleGetPlayInfo(false)
+      this.conditions.portalTop.page += 1
+      this.handleGetPortalTop(false)
       this.$nextTick(() => {
         this.$refs.scrollerUpDown.donePullup()
         this.$refs.scrollerUpDown.reset()
       })
     },
     /**
-     * [handleGetPlayInfo 获取选手信息]
+     * [handleGetPortalTop 获取頭條信息]
      * @param  {Boolean} type [更新还是加载]
      * @return {[type]}       [description]
      */
-    handleGetPlayInfo (type = true) {
-      let {page, limit} = this.conditions.playInfo
+    handleGetPortalTop (type = true) {
+     /* 预留分页 let {page, limit} = this.conditions.portalTop
       const queryData = {
         page,
         limit
-      }
-      return home.GetPlayerInfo(queryData).then(data => {
+      } */
+      return home.GetPortalTop({}).then(data => {
         // 判断是更新还是加载  默认更新
-        if (type) {
-          this.playerList = data
-        } else {
-          // 判断数据是否为空  禁止加载
-          this.playerList.push(...data)
-        }
-        if (data.length === 0 || data.length < this.conditions.playInfo.limit) {
-          this.$refs.scrollerUpDown.disablePullup()
-        }
+        this.topList = data.map(item => {
+          let obj = {
+            name: '',
+            intro: item.post_excerpt || item.post_content,
+            avatar: item.cover_pic,
+            time: item.published_time
+          }
+          return obj
+        })
+        // if (type) {
+        //   this.topList = data
+        // } else {
+        //   // 判断数据是否为空  禁止加载
+        //   this.topList.push(...data)
+        // }
+        // if (data.length === 0 || data.length < this.conditions.portalTop.limit) {
+        //   this.$refs.scrollerUpDown.disablePullup()
+        // }
       })
     },
     /**
@@ -192,9 +191,6 @@ export default {
           return item
         })
         this.trailerList = data
-        this.$nextTick(() => {
-          this.handleWidth()
-        })
       })
     },
     /**
@@ -210,19 +206,43 @@ export default {
       }
       return info.GetMsgList(queryData).then(data => {
         this.announcementList = data
-        console.log(3333, data)
+      })
+    },
+    /**
+     * [handleGetbanner 获取首页banner]
+     * @return {[type]} [description]
+     */
+    handleGetbanner () {
+      return home.GetPortalBanner({}).then(data => {
+        this.bannerList = data.map(item => {
+          let obj = {
+            url: `/home/article?id=${item.id}`,
+            title: item.post_title,
+            img: item.cover_pic
+          }
+          return obj
+        })
       })
     },
     handleGetAllInfo () {
       this.$store.dispatch('updateLoadingStatus', {isLoading: true})
-      Promise.all([this.handleGetPlayInfo(), this.handleGetMatchList(), this.handleGetMsgList()])
+      Promise.all([this.handleGetPortalTop(), this.handleGetMatchList(), this.handleGetMsgList(), this.handleGetbanner()])
       .then(_ => {
         this.$store.dispatch('updateLoadingStatus', {isLoading: false})
       })
       .catch(_ => {
         this.$store.dispatch('updateLoadingStatus', {isLoading: false})
       })
+    },
+    handleGetTopHeight () {
+      let swiper1 = this.$refs.swiper1.$el.offsetHeight
+      let swiper2 = this.$refs.swiper2.clientHeight
+      let announcement = this.$refs.announcement.clientHeight
+      this.scrollHeight = `${document.getElementById('app').clientHeight - swiper1 - swiper2 - announcement}px`
     }
+  },
+  mounted () {
+
   },
   created () {
     this.handleGetAllInfo()
@@ -242,7 +262,7 @@ export default {
   .mg-b-2
     margin-bottom: 0.2rem
   .pd-l-2
-    padding: 0.2rem 0 0.2rem 0.2rem
+    padding: 0.2rem
   .scroller-box
     height: 110px
     padding-bottom: 0.4rem
@@ -254,4 +274,15 @@ export default {
       float: left
       &:first-child
         margin-left: 0
+  .bj-dots-vertical
+    &.vux-indicator
+      top: 50%
+      transform: translateY(-50%)
+      left: 0.25rem
+      bottom: auto
+      a
+        display: block
+        float: none
+  .man-wrap
+    margin-bottom: 45px
 </style>

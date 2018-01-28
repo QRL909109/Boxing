@@ -17,8 +17,8 @@
         <swiper 
           auto 
           loop 
-          height="3.4rem"
-          :interval=2000
+          height="120px"
+          :interval=2500
           dots-class="bj-dots-vertical"
           direction="vertical" class="pd-l-2" 
           v-if="trailerList.length > 0">

@@ -25,14 +25,32 @@
     },
     methods: {
       handlePostContact () {
+        if (this.advice === '') {
+          this.$vux.alert.show({
+            title: '请填写您的反馈'
+          })
+          return
+        }
+        if (this.contact === '') {
+          this.$vux.alert.show({
+            title: '请填写您的联系方式'
+          })
+          return
+        }
         let queryData = {
           content: this.advice,
           contact: this.contact
         }
         personal.PostFeedBack(queryData).then(data => {
+          let _this = this
           this.$vux.alert.show({
             title: '反馈成功',
-            content: '谢谢您的宝贵意见，我们将会认真聆听！'
+            content: '谢谢您的宝贵意见，我们将会认真聆听！',
+            onHide () {
+              _this.$router.push({
+                path: '/personal'
+              })
+            }
           })
         })
       }

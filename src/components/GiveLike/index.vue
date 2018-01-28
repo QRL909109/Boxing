@@ -7,7 +7,7 @@
         <div class="like__num" v-else>{{picList.length}} 人已赞</div>
       </div>
     </div>
-    <give-people :list="picList" />
+    <give-people :list="picList"/>
   </div>
 </template>
 <script>

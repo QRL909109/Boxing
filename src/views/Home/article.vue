@@ -3,7 +3,7 @@
     <view-box ref="articleViewBox">
       <!-- 文章详情 -->
       <article-wrap :data="articleData"/>
-      <give-like :portalId="$route.query.id" :like="isLike" :picList="picList" @change="handleGetLikeList"/>
+      <give-like :portalId="$route.query.id" v-show="isShow" :like="isLike" :picList="picList" @change="handleGetLikeList"/>
 
       <div class="hot-news" v-show="hotNewsList.length > 0">
         <title-model title="热门资讯">
@@ -34,6 +34,7 @@
         hotNewsList: [],
         articleData: {},
         picList: [],
+        isShow: false, // 请求太慢
         isLike: false // 是否点赞了
       }
     },
@@ -50,18 +51,19 @@
     },
     methods: {
       handleGetInfo () {
-        home.GetPortalInfo({
+        return home.GetPortalInfo({
           portal_id: this.$route.query.id
         }).then(data => {
           data.portal.post_content = data.portal && escape2Html(data.portal.post_content)
           this.isLike = data.like
+          this.isShow = true
           this.articleData = data.portal
         })
       },
       // 是否是回调的点赞 type 默认是false 除非点赞后的触发 才是true
       handleGetLikeList (type = false) {
         type && (this.isLike = true) // 是否是点赞后的
-        home.GetLikeList({
+        return home.GetLikeList({
           portal_id: this.$route.query.id
         }).then(data => {
           this.picList = data.map(item => {
@@ -73,7 +75,7 @@
         })
       },
       handleGetPortalHot () {
-        home.GetPortalPopular({}).then(data => {
+        return home.GetPortalPopular({}).then(data => {
           // 判断是更新还是加载  默认更新
           this.hotNewsList = data.map(item => {
             let obj = {
@@ -88,9 +90,14 @@
         })
       },
       handleGetAll () {
-        this.handleGetInfo()
-        this.handleGetLikeList()
-        this.handleGetPortalHot()
+        this.$store.dispatch('updateLoadingStatus', {isLoading: true})
+        Promise.all([this.handleGetInfo(), this.handleGetLikeList(), this.handleGetPortalHot()])
+        .then(_ => {
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+        })
+        .catch(_ => {
+          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
+        })
       }
     },
     components: {

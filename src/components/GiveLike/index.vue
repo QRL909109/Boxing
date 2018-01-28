@@ -2,7 +2,7 @@
   <div class="give-like-wrap">
     <div class="give__like">
       <div class="like__zan text-center">
-        <i class="iconfont icon-zan disable" @click="dianLike"></i>
+        <i class="iconfont icon-zan" :class="like ? 'disable' : ''" @click="dianLike"></i>
         <div class="like__num" v-if="picList.length <= 0">快点赞 抢沙发</div>
         <div class="like__num" v-else>{{picList.length}} 人已赞</div>
       </div>
@@ -13,7 +13,6 @@
 <script>
   import givePeople from '../GivePeople'
   import home from '@/lib/api/home'
-  import { mapState } from 'vuex'
   export default {
     data () {
       return {
@@ -27,21 +26,21 @@
       },
       portalId: {
         default: ''
+      },
+      like: {
+        default: false
       }
-    },
-    computed: {
-      ...mapState({
-        user: state => state.User
-      })
     },
     methods: {
       dianLike () {
-        home.GetLikeList({
-          portal_id: this.portalId,
-          user_id: this.user.Id
+        // 已点赞 没有效果
+        if (this.like) {
+          return
+        }
+        home.GetLikeThis({
+          portal_id: this.portalId
         }).then(data => {
-          console.log(44444, data)
-          this.$emit('change') // 触发一下更新头像
+          this.$emit('change', true) // 触发一下更新头像  参数 手动更改点赞
         })
       }
     },

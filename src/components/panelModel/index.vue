@@ -6,10 +6,10 @@
       </div>
       <div class="panel-desc" v-if="model == 1">
         <p class="name">{{item.name}}</p>
-        <p class="desc">{{item.intro | limitStrNum(50)}}</p>
+        <p class="desc">{{item.intro | limitStrNum(50) | removeHtmlTab}}</p>
       </div>
       <div class="panel-desc-2" v-if="model == 2">
-        <p class="desc">{{item.intro | limitStrNum(50)}}</p>
+        <p class="desc">{{item.intro | limitStrNum(50) | removeHtmlTab}}</p>
         <p class="time-watch">
           <time class="time">{{item.time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}}</time>
          <!--  <span class="watch-num">
@@ -62,8 +62,9 @@
       margin-right: 5px
       overflow: hidden
     .panel-desc,.panel-desc-2
-      width: 70%
+      width: 68%
       position: relative
+      margin-left: 1.5%
       .name
         +font-dpr(16px)
         margin: 0.2rem 0 0.2rem
@@ -80,5 +81,5 @@
         margin: 0.2rem 0 0.2rem
         line-height: 0.53rem
         +font-dpr(14px)
-        color: #666
+        color: #222
 </style>

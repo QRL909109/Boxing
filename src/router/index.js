@@ -109,6 +109,22 @@ export default new Router({
         path: 'order',
         name: 'info_order',
         component: r => require.ensure([], () => r(require(`../views/Personal/infoOrder.vue`)), 'personal_order')
+      }, {
+        path: 'advice',
+        name: 'personal_advice',
+        component: r => require.ensure([], () => r(require(`../views/Personal/advice.vue`)), 'personal_advice')
+      }, {
+        path: 'about',
+        name: 'personal_about',
+        component: r => require.ensure([], () => r(require(`../views/Personal/aboutUs.vue`)), 'personal_advice')
+      }, {
+        path: 'help',
+        name: 'personal_help',
+        component: r => require.ensure([], () => r(require(`../views/Personal/help.vue`)), 'personal_advice')
+      }, {
+        path: 'contact',
+        name: 'personal_contact',
+        component: r => require.ensure([], () => r(require(`../views/Personal/contact.vue`)), 'personal_advice')
       }]
     },
     // --- 充值界面

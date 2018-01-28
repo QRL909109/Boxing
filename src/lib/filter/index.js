@@ -92,6 +92,16 @@ const orderType = function (state) {
   }
   return type
 }
+// 转义字符
+const escape2Html = function (str) {
+  let arrEntities = {'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"'}
+  return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) { return arrEntities[t] })
+}
+
+// 删除所有HTML标签
+const removeHtmlTab = function (tab) {
+  return tab.replace(/<[^<>]+?>/g, '')
+}
 export {
   currency,
   dateFormat,
@@ -101,5 +111,7 @@ export {
   turnName,
   coinAddDes,
   coinType,
-  orderType
+  orderType,
+  escape2Html,
+  removeHtmlTab
 }

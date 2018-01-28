@@ -78,22 +78,22 @@
           name: '帮助中心',
           newNum: 0,
           icon: 'icon-help',
-          link: '/personal/index'
+          link: '/personal/help'
         }, {
           name: '反馈信息',
           newNum: 0,
           icon: 'icon-xinfeng',
-          link: '/personal'
+          link: '/personal/advice'
         }, {
           name: '联系客服',
           newNum: 0,
           icon: 'icon-content',
-          link: '/personal'
+          link: '/personal/contact'
         }, {
           name: '关于我们',
           newNum: 0,
           icon: 'icon-about',
-          link: '/personal'
+          link: '/personal/about'
         }]
       }
     },

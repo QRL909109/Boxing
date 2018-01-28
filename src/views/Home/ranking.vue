@@ -135,15 +135,15 @@
             margin-right: 0.2rem
       .ranking__icon
         display: inline-block
-        vertical-align: top
-        width: 2rem
-        height: 40px
-        background-size: 2rem 40px
+        vertical-align: middle
+        width: 24px
+        height: 30px
+        background-size: 24px 30px
         background-repeat: no-repeat
         &.icon_1
-          background-image: url('../../assets/img/1000@2x.png')
+          background-image: url('../../assets/img/r1.png')
         &.icon_2
-          background-image: url('~assets/img/2000@2x.png')
+          background-image: url('~assets/img/r2.png')
         &.icon_3
-          background-image: url('~assets/img/500@2x.png')
+          background-image: url('~assets/img/r3.png')
 </style>

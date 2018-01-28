@@ -2,18 +2,26 @@
 <template>
   <div class="article-wrap">
     <div class="article__header">
-      <h1 class="article__title">完美的职业生涯也需要一个完美的句号——奇斯辛柯专访</h1>
-      <p class="article__intro">2017-12-41 13:35:18 来源：fighterinterviews.com</p>
+      <h1 class="article__title">{{data.post_title || '暂无内容'}}</h1>
+      <p class="article__intro">{{data.published_time * 1000 | dateFormat('yyyy-MM-dd hh:mm')}} 来源：{{data.post_source}}</p>
     </div>
-    <p class="article__content">
-       作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。作为乌克兰的骄傲，奇斯辛柯是当今全球踢拳界次中量级的翘楚。
-  </p>
+    <p class="article__content" v-html="data.post_content"></p>
   </div>
 </template>
 <script>
   export default {
     data () {
-      return {}
+      return {
+      }
+    },
+    props: {
+      data: {
+        default: {
+          post_title: '暂无内容',
+          published_time: new Date(),
+          post_content: ''
+        }
+      }
     }
   }
 </script>
@@ -26,7 +34,7 @@
     font-size: 0.58rem
     line-height: 0.9rem
     font-weight: 600 
-    margin-top: 0.8rem
+    margin-top: 0.5rem
     color: #474747
   .article__header .header h3 
     font-size: 0.30rem

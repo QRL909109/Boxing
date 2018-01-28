@@ -26,7 +26,7 @@
           switch (path) {
             case 'home': this.currentIndex = 0; break
             case 'info': this.currentIndex = 1; break
-            case 'personal': this.currentIndex = 3; break
+            case 'personal': this.currentIndex = 4; break
             default: this.currentIndex = 0; break
           }
           // this.currentIndex = val.meta.index

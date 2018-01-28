@@ -77,6 +77,7 @@ import titleModel from '@/components/titleModel'
 import panelModel from '@/components/panelModel'
 import home from '@/lib/api/home'
 import info from '@/lib/api/info'
+import { escape2Html } from '@/lib/filter'
 // import pullUpDown from '@/mixin/pullUpDown'
 export default {
   data () {
@@ -157,7 +158,7 @@ export default {
         this.topList = data.map(item => {
           let obj = {
             name: '',
-            intro: item.post_excerpt || item.post_content,
+            intro: escape2Html(item.post_excerpt) || escape2Html(item.post_content),
             avatar: item.cover_pic,
             time: item.published_time
           }

@@ -20,7 +20,7 @@
           <time class="time" v-show="showTime">{{ data.info.game_begin_time * 1000 | dateFormat('yyyy-MM-dd') }}</time>
           <div v-show="statusShow" class="status text-center" :class="{'active': data.info.status === 1}">{{ betStatus(data.info.status) }} 
             <!-- 竞猜结束却未结算 -->
-            <span v-show="+data.info.status == 2 && +data.info.winner == 0" :class="`${gameResult(data.info.winner).color}-font`"> {{gameResult(data.info.winner).type}}</span>
+            <!-- <span v-show="+data.info.status == 2 && +data.info.winner == 0" :class="`${gameResult(data.info.winner).color}-font`"> {{gameResult(data.info.winner).type}}</span> -->
             
           </div>
           <slot name="footer">

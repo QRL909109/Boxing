@@ -3,11 +3,11 @@ import bjFetch from '../fetch'
 export const GET_PLATER_INFO = '/v1/boxer/list' // page=1&limit=1
 
 // 获取竞猜列表
-export const GET_MATCH_LIST = '/v1/match/list' // page=1&limit=3&status=1  0预告，1竞猜中，3赛果 2赛程(比赛中)   
+export const GET_MATCH_LIST = '/v1/match/list' // page=1&limit=3&type=1  0预告，1竞猜中，2赛果  
 // winner  0未结算；1、红方；2、蓝方；3、平局
 
 // 获取赛程列表
-export const GET_MATCH_ALL = '/v1/match/all' // page=1&limit=3
+export const GET_MATCH_ALL = '/v1/match/all' // page=1&limit=3 赛程
 
 // 点赞
 export const GET_LIKE_THIS = '/v1/like/this' // user_id=1&portal_id=3

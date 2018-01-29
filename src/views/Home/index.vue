@@ -89,7 +89,7 @@ export default {
         matchInfo: {
           page: 1,
           limit: 10,
-          status: 1
+          type: 0
         },
         msgInfo: {
           page: 1,
@@ -179,11 +179,11 @@ export default {
      * @return {[type]} [description]
      */
     handleGetMatchList () {
-      let {page, limit, status} = this.conditions.matchInfo
+      let {page, limit, type} = this.conditions.matchInfo
       const queryData = {
         page,
         limit,
-        status
+        type
       }
       return home.GetMatchList(queryData).then(data => {
         data = data.map(item => {

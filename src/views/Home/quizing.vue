@@ -45,7 +45,7 @@
           matchInfo: {
             page: 1,
             limit: 10,
-            status: 1
+            type: 1
           }
         }
       }
@@ -75,12 +75,12 @@
           this.$refs.scrollerUpDown.reset()
         })
       },
-      handleGetMatchList (type = true) {
-        let {page, limit, status} = this.conditions.matchInfo
+      handleGetMatchList (falg = true) {
+        let {page, limit, type} = this.conditions.matchInfo
         const queryData = {
           page,
           limit,
-          status
+          type
         }
         this.$store.dispatch('updateLoadingStatus', {isLoading: true})
         home.GetMatchList(queryData).then(data => {
@@ -89,7 +89,7 @@
             return item
           })
           // 判断是更新还是加载  默认更新
-          if (type) {
+          if (falg) {
             this.quizList = data
           } else {
             // 判断数据是否为空  禁止加载

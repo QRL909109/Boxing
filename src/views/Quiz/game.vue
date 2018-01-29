@@ -45,12 +45,12 @@
       </flexbox>
     </div>
     <!-- 竞猜排行 -->
-    <div class="game-ranking">
+    <div class="game-ranking" v-show="+analysisInfo.info.status !== 0 && giveList.length > 0">
       <announcement-ranking :data="announcementList"/>
       <div class="game-people">
         <give-people :list="giveList"/>
         <div class="game-ranking-btn">
-          <x-button mini type="default" link="/home/ranking">排行榜</x-button>
+          <x-button mini type="default" link="/home/rankingbet">排行榜</x-button>
         </div>
       </div>
     </div>

@@ -22,7 +22,9 @@ function timeAgo (time) {
 // 限制字数
 function limitStrNum (txt, num) {
   let str = txt
-  str = str.substr(0, Math.min(num, str.length)) + '...'
+  if (str.length >= num) {
+    str = str.substr(0, Math.min(num, str.length)) + '...'
+  }
   return str
 }
 // 转化红蓝 名称

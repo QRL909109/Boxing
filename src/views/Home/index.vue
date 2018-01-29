@@ -19,7 +19,6 @@
           loop 
           height="120px"
           :interval=2500
-          dots-class="bj-dots-vertical"
           direction="vertical" class="pd-l-2" 
           v-if="trailerList.length > 0">
           <swiper-item v-for="(item, index) in trailerList" :key="index">
@@ -158,7 +157,7 @@ export default {
         this.topList = data.map(item => {
           let obj = {
             name: '',
-            intro: escape2Html(item.post_excerpt) || escape2Html(item.post_content),
+            intro: escape2Html(item.post_title),
             avatar: item.cover_pic,
             time: item.published_time
           }

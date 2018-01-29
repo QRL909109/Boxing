@@ -72,6 +72,10 @@ export default new Router({
           path: 'ranking',
           name: 'home_ranking',
           component: r => require.ensure([], () => r(require(`../views/Home/ranking.vue`)), 'home_ranking')
+        }, {
+          path: 'rankingbet',
+          name: 'home_rankingbet',
+          component: r => require.ensure([], () => r(require(`../views/Home/rankingBet.vue`)), 'home_rankingbet')
         }
       ]
     },

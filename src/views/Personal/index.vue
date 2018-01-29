@@ -149,4 +149,6 @@
       +font-dpr(14px)
     .iconfont
       +font-dpr(20px)
+  .iconfont
+    vertical-align: middle
 </style>

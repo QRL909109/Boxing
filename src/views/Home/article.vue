@@ -66,7 +66,7 @@
         return home.GetLikeList({
           portal_id: this.$route.query.id
         }).then(data => {
-          this.picList = data.map(item => {
+          this.picList = data.slice(0, 50).map(item => {
             let obj = {
               img: item.avatar
             }
@@ -80,7 +80,7 @@
           this.hotNewsList = data.map(item => {
             let obj = {
               name: '',
-              intro: escape2Html(item.post_excerpt) || escape2Html(item.post_content),
+              intro: escape2Html(item.post_title),
               avatar: item.cover_pic,
               time: item.published_time,
               id: item.id

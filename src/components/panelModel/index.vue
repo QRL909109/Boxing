@@ -78,7 +78,7 @@
       .time-watch
         position: absolute
         margin-top: 0.1rem
-        bottom: 0.03rem
+        bottom: 0.15rem
         color: #666
     .panel-desc-2
       .desc

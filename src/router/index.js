@@ -79,7 +79,7 @@ export default new Router({
         }
       ]
     },
-    // --- 消息
+    // --- 资料库
     {
       path: '/info',
       name: 'Info',
@@ -89,6 +89,30 @@ export default new Router({
         path: 'index',
         name: 'info_index',
         component: r => require.ensure([], () => r(require(`../views/Info/index.vue`)), 'info_index')
+      }]
+    },
+    // --- 商城
+    {
+      path: '/mall',
+      name: 'Mall',
+      redirect: '/mall/index',
+      component: r => require.ensure([], () => r(require(`../views/layout.vue`)), 'layout'),
+      children: [{
+        path: 'index',
+        name: 'mall_index',
+        component: r => require.ensure([], () => r(require(`../views/Mall/index.vue`)), 'mall_index')
+      }]
+    },
+    // --- 互动
+    {
+      path: '/interactive',
+      name: 'Interactive',
+      redirect: '/interactive/index',
+      component: r => require.ensure([], () => r(require(`../views/layout.vue`)), 'layout'),
+      children: [{
+        path: 'index',
+        name: 'interactive_index',
+        component: r => require.ensure([], () => r(require(`../views/Interactive/index.vue`)), 'interactive_index')
       }]
     },
     // --- 个人主页

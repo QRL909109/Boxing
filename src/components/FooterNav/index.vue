@@ -26,6 +26,8 @@
           switch (path) {
             case 'home': this.currentIndex = 0; break
             case 'info': this.currentIndex = 1; break
+            case 'mall': this.currentIndex = 2; break
+            case 'interactive': this.currentIndex = 3; break
             case 'personal': this.currentIndex = 4; break
             default: this.currentIndex = 0; break
           }

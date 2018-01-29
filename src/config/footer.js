@@ -5,15 +5,15 @@ export const footerNav = [{
 }, {
   text: '资料库',
   iconClass: 'icon-xinxi',
-  link: '/home'
+  link: '/info'
 }, {
   text: '商城',
   iconClass: 'icon-shopping',
-  link: '/home'
+  link: '/mall'
 }, {
   text: '互动',
   iconClass: 'icon-hudong',
-  link: '/home'
+  link: '/interactive'
 }, {
   text: '个人',
   iconClass: 'icon-geren',

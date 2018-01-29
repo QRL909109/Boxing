@@ -11,7 +11,7 @@ const betStatus = function (state) {
       type = '竞猜结束'
       break
     case 3:
-      type = '结算中'
+      type = '未结算'
       break
     case 4:
       type = '结算完毕'

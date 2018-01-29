@@ -1,7 +1,7 @@
-<!-- 资料库 -->
+<!-- 互动 -->
 <template>
   <div class="info-wrap">
-    <toast v-model="show" type="text" width="18em" :time="100000">资料库 功能暂未开放，敬请期待！</toast>
+    <toast v-model="show" type="text" width="18em" :time="100000">互动 功能暂未开放，敬请期待！</toast>
   </div>
 </template>
 <script>

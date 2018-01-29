@@ -13,7 +13,9 @@
       }
     },
     created () {
-      this.show = true
+      setTimeout(() => {
+        this.show = true
+      }, 300)
     },
     components: {
       Toast

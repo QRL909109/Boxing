@@ -6,7 +6,7 @@
       <div class="recharge__title">
         <span>我的积分：</span> 
         <div class="recharge__money">
-          <img src="./gold@2x.png" alt=""> {{user.coin}}
+          <img src="./gold@2x.png" alt=""> {{user.coin | currency}}
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="confimPay" @click="handleRecharge">
+      <div class="confimPay" @click="handleRecharge" :class="{'active': +payMoney > 0}">
         确认支付 ￥{{payMoney}}
       </div>
       <x-dialog v-model="showHideOnBlur" class="dialog-demo" hide-on-blur>
@@ -113,10 +113,8 @@
         this.payMoney = item.money
       },
       handleInputMoney: debounce(function (val) {
-        if (val !== '') {
-          this.currentIndex = ''
-          this.payMoney = this.payOrderMoney = val
-        }
+        this.currentIndex = ''
+        this.payMoney = this.payOrderMoney = val
       }, 500),
       handleRecharge () {
         if (+this.payMoney <= 0 || !/^(-)?\d+(\.\d+)?$/.test(this.payMoney)) {
@@ -231,6 +229,8 @@
       color: $white
       background: $grey-800
       text-align: center
+      &.active
+        background: $red
     .img-box
       padding: 0.5rem
     .mgb20

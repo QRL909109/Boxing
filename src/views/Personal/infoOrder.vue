@@ -19,8 +19,8 @@
           @on-pullup-loading="onPullUp">
           <div class="content">
             <div class="box-shadow-model" v-for="(item, index) in infoList">
-              <div class="info-wrap">
-                <div class="info">
+              <div class="info-order__item">
+                <div class="info-order__model">
                   <!-- <p>编号: {{item.id}}</p> -->
                   <p v-show="item.opr_type === 1">金币数量: {{item.coin_num}}</p>
                   <p v-show="item.opr_type === 2">金额: {{item.amount}}</p>
@@ -142,11 +142,11 @@
   .info-order-wrap
     .name
       +font-dpr(18px)
-    .info-wrap
+    .info-order__item
       display: flex
       justify-content: space-between
       align-items: center
-      .info
+      .info-order__model
         line-height: 0.5rem
       .status
     .content

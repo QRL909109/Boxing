@@ -1,7 +1,10 @@
 <!-- 商城 -->
 <template>
-  <div class="info-wrap">
-    <toast v-model="show" type="text" width="18em" :time="100000">商城 功能暂未开放，敬请期待！</toast>
+  <div class="mall-wrap">
+    <toast v-model="show" type="text" width="18em" :time="10000" @on-hide="onHide">商城 功能暂未开放，敬请期待！</toast>
+    <div class="text-center" v-show="textShow">
+      商城 功能暂未开放，敬请期待！
+    </div>
   </div>
 </template>
 <script>
@@ -9,7 +12,8 @@
   export default {
     data () {
       return {
-        show: false
+        show: false,
+        textShow: false
       }
     },
     created () {
@@ -19,11 +23,16 @@
     },
     components: {
       Toast
+    },
+    methods: {
+      onHide () {
+        this.textShow = true
+      }
     }
   }
 </script>
 <style lang="sass">
-  .info-wrap
-    margin: 50px 0
+  .mall-wrap
+    margin: 150px 0
     font-size: 16px
 </style>

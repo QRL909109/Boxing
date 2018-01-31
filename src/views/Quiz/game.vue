@@ -6,7 +6,7 @@
         <flexbox-item :span="1/3">
           <div class="flex-demo">
             <div class="box left">
-              <router-link :to="`/quiz/main/introduction?id=${analysisInfo.blue.id}`">
+              <router-link :to="`/info/introduction?id=${analysisInfo.blue.id}`">
                 <img class="header-img" :src="analysisInfo.blue.avatar" :alt="analysisInfo.blue.name">
                 <p>
                   <span class="blue-font">蓝方</span>
@@ -30,7 +30,7 @@
         <flexbox-item :span="1/3">
           <div class="flex-demo">
             <div class="box right">
-              <router-link :to="`/quiz/main/introduction?id=${analysisInfo.red.id}`">
+              <router-link :to="`/info/introduction?id=${analysisInfo.red.id}`">
                 <img class="header-img" :src="analysisInfo.red.avatar" :alt="analysisInfo.red.name">
                 <p>
                   <span class="red-font">红方</span>
@@ -116,15 +116,10 @@
   import { mapState } from 'vuex'
   import quiz from '@/lib/api/quiz'
   import home from '@/lib/api/home'
-  // 待删除
-  import bq from '@/assets/img/bq.jpg'
-  import jdx from '@/assets/img/jdx.jpg'
   export default {
     data () {
       const query = this.$route.query
       return {
-        bq,
-        jdx,
         query,
         guessActive: false, // 底部竞猜金币
         warnVisi: false, // 警告提示
@@ -211,7 +206,6 @@
         const queryData = {
           id: this.query.id
         }
-        this.$store.dispatch('updateLoadingStatus', {isLoading: true})
         return quiz.GetMatchDetail(queryData).then(data => {
           this.playerInfo = []
           this.analysisInfo = data
@@ -271,9 +265,6 @@
               value: data.blue.fail_times
             }
           })
-          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
-        }).catch(_ => {
-          this.$store.dispatch('updateLoadingStatus', {isLoading: false})
         })
       },
       /**
@@ -291,6 +282,8 @@
           this.toastType = 'test'
           this.warnText = '投注成功'
           this.warnVisi = true
+          this.guessActive = false
+          this.handleGetMatchList()
         })
       },
       /**

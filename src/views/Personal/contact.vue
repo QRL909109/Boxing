@@ -41,7 +41,6 @@
     .about__content
       margin: 0.2rem 0 50px
       img
-        display: block
         max-width: 100%
         height: auto
 </style>

@@ -99,15 +99,7 @@ export default {
       },
       bannerList: [],
       announcementList: [{
-        name: '恭喜会员求真相竞猜中奖，获得20W现金！'
-      }, {
-        name: '恭喜会员裏XX竞猜中奖，获得20W现金！'
-      }, {
-        name: '恭喜会员ppW竞猜中奖，获得20W现金，5万竞猜币！5万竞猜币！'
-      }, {
-        name: '恭喜会员求真相竞猜中奖，获得20W现金！'
-      }, {
-        name: '恭喜会员求真相竞猜中奖，获得20W现金！'
+        name: '恭喜会员'
       }],
       trailerList: [],
       topList: []
@@ -159,7 +151,8 @@ export default {
             name: '',
             intro: escape2Html(item.post_title),
             avatar: item.cover_pic,
-            time: item.published_time
+            time: item.published_time,
+            id: item.id
           }
           return obj
         })

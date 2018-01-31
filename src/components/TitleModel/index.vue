@@ -4,8 +4,10 @@
     <div :class="[showBottomBorder ? 'title-model__header' : '']" @click="handleLink(path)">
       <cell-box>
         <div class="title-model__left">
-          <span class="title-model__title">{{title}}</span>
-          <i class="iconfont icon-qianjin" v-show="path != ''"></i>
+          <slot name="title">
+            <span class="title-model__title">{{title}}</span>
+            <i class="iconfont icon-qianjin" v-show="path != ''"></i>
+          </slot>
         </div>
         <div class="title-model__right">
           <slot name="right"></slot>

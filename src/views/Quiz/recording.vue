@@ -21,13 +21,13 @@
                   {{item.stationName}}
                 </p>
                 <divider>竞猜信息</divider>
-                <div class="info-wrap">
-                  <div class="info">
+                <div class="info-order__item">
+                  <div class="info-order__model">
                     <p>竞猜选手: {{item.matchName}}</p>
                     <p>参与时间: {{item.bet_time*1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
                     <p>消耗金币: {{item.bet_amount}}</p>
                     <p>竞猜赔率: {{item.bet_odds}}</p>
-                    <p>竞猜选项: <span :class="`${item.bet_option}-font`">{{item.bet_option | turnName}}</span> 方胜</p>
+                    <p>竞猜选项: <span :class="`${item.bet_option}-font`">{{item.bet_option | turnName}}</span> ({{item[item.bet_option]}}) 方胜</p>
                     <p>预计开奖: {{item.betTime*1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
                   </div>
                   <div class="status blue-font">
@@ -124,9 +124,10 @@
             item.record.matchName = `${item.match_info.blue.name} VS ${item.match_info.red.name}`
             item.record.betTime = item.match_info.info.game_end_time
             item.record.stationName = item.match_info.info.station_name
+            item.record.blue = item.match_info.blue.name
+            item.record.red = item.match_info.red.name
             return item.record
           })
-
           if (type) {
             this.recoding = tempData
           } else {
@@ -165,11 +166,11 @@
   .quiz-recording-wrap
     .name
       +font-dpr(18px)
-    .info-wrap
+    .info-order__item
       display: flex
       justify-content: space-between
       align-items: center
-      .info
+      .info-order__model
         line-height: 0.5rem
       .status
     .content

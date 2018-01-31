@@ -2,7 +2,7 @@
 <template>
   <div class="announcement-wrap">
     <div class="flex-space">
-      <div class="icon kuaibao"></div>
+      <div class="icon betRanking"></div>
       <marquee :item-height=40>
         <marquee-item v-for="(item,index) in data" :key="index" class="note">
          <i class="iconfont icon-star"></i> {{item.msg}}
@@ -43,12 +43,14 @@
     .icon
       display: inline-block
       vertical-align: top
-      width: 3.3rem
-      height: 40px
-      background-size: 2.5rem 40px
+      width: 110px
+      height: 20px
+      background-size: 80px 20px
       background-repeat: no-repeat
-      &.kuaibao
-        +bg-image('kuaibao')
+      &.betRanking
+        margin-top: 10px
+        margin-left: 0.1rem
+        +bg-image('betRanking')
     .vux-marquee
       margin-left: 5px
     .note

@@ -89,6 +89,10 @@ export default new Router({
         path: 'index',
         name: 'info_index',
         component: r => require.ensure([], () => r(require(`../views/Info/index.vue`)), 'info_index')
+      }, {
+        path: 'introduction',
+        name: 'info_introduction',
+        component: r => require.ensure([], () => r(require(`../views/Info/introduction.vue`)), 'info_introduction')
       }]
     },
     // --- 商城
@@ -182,10 +186,6 @@ export default new Router({
           path: 'game',
           name: 'quiz_game',
           component: r => require.ensure([], () => r(require(`../views/Quiz/game.vue`)), 'quiz_game')
-        }, {
-          path: 'introduction',
-          name: 'quiz_introduction',
-          component: r => require.ensure([], () => r(require(`../views/Quiz/introduction.vue`)), 'quiz_introduction')
         }, {
           path: 'recording',
           name: 'quiz_recording',

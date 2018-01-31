@@ -46,13 +46,11 @@
 <script>
   import addMoney from '@/components/AddMoney'
   import { Cell, Group, Badge, ViewBox } from 'vux'
-  import bq from '@/assets/img/bq.jpg'
   import { mapState } from 'vuex'
   export default {
     data () {
       return {
         msg: '个人中心',
-        bq,
         cellList: [{
           name: '消息',
           newNum: 0,

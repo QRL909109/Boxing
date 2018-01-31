@@ -1,7 +1,7 @@
 <template>
   <div class="self-money-wrap" @click="handleAddMoney">
     <img class="glod-icon" src="./gold@2x.png" alt="">
-    <span class="money"> {{money}}</span>
+    <span class="money"> {{money | currency}}</span>
     <i class="iconfont icon-add_c add"></i>
   </div>
 </template>

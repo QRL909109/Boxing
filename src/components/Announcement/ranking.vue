@@ -2,7 +2,7 @@
 <template>
   <div class="announcement-wrap">
     <div class="flex-space">
-      <div class="icon betRanking"></div>
+      <div class="betRanking-icon betRanking"></div>
       <marquee :item-height=40>
         <marquee-item v-for="(item,index) in data" :key="index" class="note">
          <i class="iconfont icon-star"></i> {{item.msg}}
@@ -40,7 +40,7 @@
   background: $white
   .flex-space
     display: flex
-    .icon
+    .betRanking-icon
       display: inline-block
       vertical-align: top
       width: 110px

@@ -2,7 +2,7 @@
 <template>
   <div class="announcement-wrap">
     <div class="flex-space">
-      <div class="icon kuaibao"></div>
+      <div class="kuaibao-icon kuaibao"></div>
       <marquee :item-height=40>
         <marquee-item v-for="(item,index) in data" :key="index" class="note">
           {{item.msg_content}}
@@ -44,7 +44,7 @@
   background: $white
   .flex-space
     display: flex
-    .icon
+    .kuaibao-icon
       display: inline-block
       vertical-align: top
       width: 3.3rem

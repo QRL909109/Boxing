@@ -11,14 +11,17 @@
             <p class="player__name">{{data.blue.name}}</p>
           </div>
         </div>
-        <div class="center">
-          <!-- <i class="iconfont icon-VS"></i> -->
+        <div class="vs-model__center">
           <div class="vs-block_1" v-if="vsType == 1">VS</div>
           <div class="vs-block_2" v-if="vsType == 2">
             <span>V</span><span>S</span>
           </div> 
           <time class="time" v-show="showTime">{{ data.info.game_begin_time * 1000 | dateFormat('yyyy-MM-dd') }}</time>
-          <div v-show="statusShow" class="status text-center" :class="{'active': data.info.status === 1}">{{ betStatus(data.info.status) }} 
+          <div v-show="statusShow" class="vs-model__status text-center" :class="{'active': data.info.status === 1}">{{ betStatus(data.info.status) }} 
+          <!-- 除了预告 其他都要展示 竞猜多少人 -->
+          <div class="vs-model-total__num" v-show="data.info.status !== 0">
+            <i class="iconfont icon-geren"></i> {{data.info.bet_total_people}}
+          </div>  
             <!-- 竞猜结束却未结算 -->
             <!-- <span v-show="+data.info.status == 2 && +data.info.winner == 0" :class="`${gameResult(data.info.winner).color}-font`"> {{gameResult(data.info.winner).type}}</span> -->
             
@@ -138,7 +141,7 @@
         margin-top: 0.05rem
         .player__name
           margin-left: 0.15rem
-    .center
+    .vs-model__center
       display: flex
       flex-direction: column
       justify-content: center
@@ -187,12 +190,9 @@
             color: $blue-600
           &:last-child
             color: $red
-      .iconfont
-        font-size: 30px
-        color: $red
-      .status
+      .vs-model__status
         margin-top: 5px
-        margin-bottom: 0.5rem
+        margin-bottom: 0.2rem
         color: $grey-600
         &.active
           color: $red

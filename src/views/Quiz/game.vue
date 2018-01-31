@@ -150,11 +150,12 @@
           })
           this.guessActive = true
         } else {
+          console.log(222, this.analysisInfo.info.status)
           switch (+this.analysisInfo.info.status) {
             case 0:
               this.warnText = '竞猜未开始！'
               break
-            case 2: case 3:
+            case 2: case 3: case 4:
               this.warnText = '投注已结束！'
               break
             default:

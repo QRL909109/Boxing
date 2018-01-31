@@ -39,7 +39,6 @@
     },
     methods: {
       handleClick (item) {
-        console.log(1111, item)
         this.$router.push({
           path: `${this.path}?id=${item.id}`
         })

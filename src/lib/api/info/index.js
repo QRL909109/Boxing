@@ -5,12 +5,25 @@ export const GET_MSG_LIST = '/v1/msg/list' // page=1&limit=1&msg_type=1 msg_type
 // 资料库搜索
 export const GET_SEARCH_LIST = '/v1/boxer/search' // text=""
 
+// 资料库搜索
+export const GET_BOXER_HISTORY = '/v1/boxer/history' // id=1&page=1&limit=1
+
 /**
  * [获取选手信息列表]
  */
 export const GetMsgList = async (data, options) => {
   return await bjFetch({
     url: GET_MSG_LIST,
+    data,
+    ...options
+  })
+}
+/**
+ * [获取选手信息列表]
+ */
+export const GetBoxerHistory = async (data, options) => {
+  return await bjFetch({
+    url: GET_BOXER_HISTORY,
     data,
     ...options
   })
@@ -28,5 +41,6 @@ export const GetSearchList = async (data, options) => {
 
 export default {
   GetMsgList,
-  GetSearchList
+  GetSearchList,
+  GetBoxerHistory
 }

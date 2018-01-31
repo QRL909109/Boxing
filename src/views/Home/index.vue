@@ -43,16 +43,7 @@
      <div class="mg-b-2">
       <title-model title="资讯头条" path="/home">
         <div class="man-wrap pd-l-2">
-         <panel-model  
-            :list="topList"
-            path="/home/article"
-            model=2
-            type="left">
-          </panel-model>
-          <div class="empty-text text-center" v-show="topList.length === 0">
-            暂无资讯
-          </div>
-          <!-- <scroller lock-x :height="scrollHeight" 
+          <scroller lock-x :height="scrollHeight" 
           ref="scrollerUpDown"
           :use-pulldown=true 
           :use-pullup=true
@@ -60,8 +51,18 @@
           :pullup-config="pullUpConfig"
           @on-pulldown-loading="onPullDown"  
           @on-pullup-loading="onPullUp">
-           
-          </scroller> -->
+            <div class="content">
+              <panel-model  
+                :list="topList"
+                path="/home/article"
+                model=2
+                type="left">
+              </panel-model>
+              <div class="empty-text text-center" v-show="topList.length === 0">
+                暂无资讯
+              </div>
+            </div>
+          </scroller>
         </div>
       </title-model>
      </div>
@@ -77,10 +78,11 @@ import panelModel from '@/components/panelModel'
 import home from '@/lib/api/home'
 import info from '@/lib/api/info'
 import { escape2Html } from '@/lib/filter'
-// import pullUpDown from '@/mixin/pullUpDown'
+import pullUpDown from '@/mixin/pullUpDown'
 export default {
   data () {
     return {
+      scrollHeight: '330px',
       conditions: {
         portalTop: {
           page: 1,
@@ -105,7 +107,7 @@ export default {
       topList: []
     }
   },
-  // mixins: [pullUpDown],
+  mixins: [pullUpDown],
   components: {
     Swiper,
     vsModel,
@@ -139,14 +141,15 @@ export default {
      * @return {[type]}       [description]
      */
     handleGetPortalTop (type = true) {
-     /* 预留分页 let {page, limit} = this.conditions.portalTop
+     // 预留分页
+      let {page, limit} = this.conditions.portalTop
       const queryData = {
         page,
         limit
-      } */
-      return home.GetPortalTop({}).then(data => {
+      }
+      return home.GetPortalTop(queryData).then(data => {
         // 判断是更新还是加载  默认更新
-        this.topList = data.map(item => {
+        let templateData = data.map(item => {
           let obj = {
             name: '',
             intro: escape2Html(item.post_title),
@@ -156,15 +159,15 @@ export default {
           }
           return obj
         })
-        // if (type) {
-        //   this.topList = data
-        // } else {
-        //   // 判断数据是否为空  禁止加载
-        //   this.topList.push(...data)
-        // }
-        // if (data.length === 0 || data.length < this.conditions.portalTop.limit) {
-        //   this.$refs.scrollerUpDown.disablePullup()
-        // }
+        if (type) {
+          this.topList = templateData
+        } else {
+          // 判断数据是否为空  禁止加载
+          this.topList.push(...templateData)
+        }
+        if (templateData.length === 0 || templateData.length < this.conditions.portalTop.limit) {
+          this.$refs.scrollerUpDown.disablePullup()
+        }
       })
     },
     /**
@@ -231,11 +234,11 @@ export default {
       let swiper1 = this.$refs.swiper1.$el.offsetHeight
       let swiper2 = this.$refs.swiper2.clientHeight
       let announcement = this.$refs.announcement.clientHeight
-      this.scrollHeight = `${document.getElementById('app').clientHeight - swiper1 - swiper2 - announcement}px`
+      this.scrollHeight = `${document.getElementById('app').clientHeight - swiper1 - swiper2 - announcement - 90}px`
     }
   },
   mounted () {
-
+    this.handleGetTopHeight()
   },
   created () {
     this.handleGetAllInfo()
@@ -245,8 +248,6 @@ export default {
 <style lang="sass">
 @import '~assets/sass/color'
 .home-index-wrap
-  .empty-text
-    padding: 0.8rem
   .vux-slider 
     .vux-indicator-right 
       > a 

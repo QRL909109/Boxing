@@ -55,7 +55,7 @@
 .give-like-wrap
   background-color: $white
   .give__like
-    padding: 0.5rem 0.8rem
+    padding: 0.2rem
     display: flex
     justify-content: center
     .icon-zan

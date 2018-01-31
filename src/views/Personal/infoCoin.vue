@@ -23,7 +23,7 @@
                     <p class="time_desc">{{item.create_time * 1000 | dateFormat('yyyy-MM-dd hh:mm:ss')}}</p>
                   </div>
                   <div class="info-coin__money">
-                    <span class="coin">{{item.opr_type | coinAddDes}} {{item.coin}}</span>
+                    <span class="coin" :style="{color: handleChangeColor(item.opr_type)}">{{item.opr_type | coinAddDes}} {{item.coin}}</span>
                     <img src="./gold@2x.png" alt="">
                   </div>
                 </div>
@@ -71,6 +71,25 @@
           this.$refs.scrollerUpDown.donePullup()
           this.$refs.scrollerUpDown.reset()
         })
+      },
+      handleChangeColor (type) {
+        let color = 'grey'
+        switch (type) {
+          case 1:
+            color = 'grey'
+            break
+          case 2:
+            color = 'red'
+            break
+          case 3:
+            color = 'red'
+            break
+          case 4:
+            color = 'grey'
+            break
+          default: type = 'grey'
+        }
+        return color
       },
       handleGetCoin (type = true) {
         let {page, limit} = this.conditions

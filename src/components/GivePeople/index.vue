@@ -24,7 +24,7 @@
 </script>
 <style lang="sass">
   .give__people
-    padding: 0.3rem
+    padding: 0.2rem
     .people__item
       display: inline-block
       margin-left: 0.2rem

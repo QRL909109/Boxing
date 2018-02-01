@@ -2,7 +2,7 @@
   <div class="panel-model-wrap">
     <div class="panel-model" v-for="(item, index) in list" @click="handleClick(item)" :class="{reverse: type === 'left' ?  true : false}">
       <div class="panel-img">
-        <img :src="item.avatar" :alt="item.name" class="img-responsive obj-contain">
+        <img :src="item.avatar" :alt="item.name" class="img-responsive panel-img__item">
       </div>
       <div class="panel-desc" v-if="model == 1">
         <p class="name">{{item.name}}</p>
@@ -61,10 +61,11 @@
       width: 30%
       margin-right: 5px
       overflow: hidden
-      .obj-contain
-        height: 100%
-        width: 100%
-        object-fit: contain
+      position: relative
+      &__item
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
     .panel-desc,.panel-desc-2
       width: 69%
       position: relative

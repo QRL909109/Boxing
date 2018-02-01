@@ -40,6 +40,8 @@
   .about-wrap
     .about__content
       margin: 0.2rem 0 50px
+      word-wrap: break-word
+      overflow: hidden
       img
         max-width: 100%
         height: auto

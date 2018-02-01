@@ -20,7 +20,7 @@
           <div v-show="statusShow" class="vs-model__status text-center" :class="{'active': data.info.status === 1}">{{ betStatus(data.info.status) }} 
           <!-- 除了预告 其他都要展示 竞猜多少人 -->
           <div class="vs-model-total__num" v-show="data.info.status !== 0">
-            <i class="iconfont icon-geren"></i> {{data.info.bet_total_people}}
+            <i class="iconfont icon-geren"></i> {{data.info.bet_total_people}} 人竞猜
           </div>  
             <!-- 竞猜结束却未结算 -->
             <!-- <span v-show="+data.info.status == 2 && +data.info.winner == 0" :class="`${gameResult(data.info.winner).color}-font`"> {{gameResult(data.info.winner).type}}</span> -->

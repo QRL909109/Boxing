@@ -45,4 +45,6 @@
     line-height: 0.6rem
     color: #343434
     margin-top: 0.2rem
+    word-wrap: break-word
+    overflow: hidden
 </style>

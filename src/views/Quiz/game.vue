@@ -284,7 +284,9 @@
           this.warnText = '投注成功'
           this.warnVisi = true
           this.guessActive = false
-          this.handleGetMatchList()
+          this.handleGetMatchList() // 重新获取赛事信息
+          this.handleGetBetRanking() // 重新获取排行
+          this.$store.dispatch('updateUser') // 更新个人金币
         })
       },
       /**

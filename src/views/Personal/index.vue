@@ -107,6 +107,9 @@
         user: state => state.User
       })
     },
+    created () {
+      this.$store.dispatch('updateUser')
+    },
     methods: {
       onClick (item) {
         this.$router.push({

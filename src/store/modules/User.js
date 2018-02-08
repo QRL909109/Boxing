@@ -1,12 +1,16 @@
+import personal from '@/lib/api/personal'
 const state = {
-  coin: 560,
+  coin: 0,
   username: 'XXX',
   sex: 1, // 1 男 0 女
   avatar: ''
 }
 const actions = {
-  updateUser ({ commit }, payload) {
-    commit('UPDATEUSER', payload)
+  updateUser ({ commit }, cb) {
+    personal.GetUserInfo({}).then(data => {
+      cb && cb()
+      commit('UPDATEUSER', data)
+    })
   }
 }
 const mutations = {

@@ -15,6 +15,9 @@ export const POST_FEEDBACK_INFO = '/v1/feedback/info' // content  contact
 // 关于我们
 export const GET_PORTAL_OWN = '/v1/portal/own' // type=2(2:帮助 3:联系客服 4:关于我们)
 
+// 我的资料
+export const GET_USER_INFO = '/v1/user/info'
+
 /**
  * [我的订单]
  */
@@ -70,11 +73,22 @@ export const GetPortalOwn = async (data, options) => {
     ...options
   })
 }
+/**
+ * [获取用户信息]
+ */
+export const GetUserInfo = async (data, options) => {
+  return await bjFetch({
+    url: GET_USER_INFO,
+    data,
+    ...options
+  })
+}
 
 export default {
   GetOrderMy,
   GetCoinMy,
   PostOrderNew,
   PostFeedBack,
-  GetPortalOwn
+  GetPortalOwn,
+  GetUserInfo
 }

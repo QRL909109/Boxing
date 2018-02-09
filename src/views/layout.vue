@@ -8,16 +8,12 @@
 </template>
 <script>
 import footerNav from '@/components/FooterNav'
-import hfh from '@/assets/hfh.jpg'
 import { mapState } from 'vuex'
 export default {
   data () {
     return {
       details: {
-        title: '黄非红搏击',
-        url: 'http://web.hfhboji.com',
-        imgIcon: hfh,
-        desc: '最前沿，最时尚的搏击平台'
+        url: 'http://web.hfhboji.com'
       }
     }
   },
@@ -43,7 +39,7 @@ export default {
   methods: {
     shard () {
       this.$wechat.config({
-        // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: this.wx.config.app_id, // 必填，公众号的唯一标识
         timestamp: this.wx.config.timestamp, // 必填，生成签名的时间戳
         nonceStr: this.wx.config.nonce_str, // 必填，生成签名的随机串
@@ -54,7 +50,7 @@ export default {
         this.$wechat.onMenuShareTimeline({
           title: this.wx.msg.title, // 分享标题
           link: this.details.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: this.wx.msg.imgUrl, // 分享图标
+          imgUrl: this.wx.msg.img_url, // 分享图标
           success () {
             console.log('分享朋友圈成功')  // 用户确认分享后执行的回调函数
           },
@@ -67,7 +63,7 @@ export default {
           title: this.wx.msg.title, // 分享标题
           desc: this.wx.msg.desc, // 分享描述
           link: this.details.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: this.wx.msg.imgUrl, // 分享图标
+          imgUrl: this.wx.msg.img_url, // 分享图标
           type: 'link',
           dataUrl: '',
           success: function () {

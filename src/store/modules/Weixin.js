@@ -8,7 +8,7 @@ const state = {
   },
   msg: {
     desc: '',
-    imgUrl: '',
+    img_url: '',
     title: ''
   }
 }

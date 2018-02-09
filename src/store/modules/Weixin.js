@@ -1,9 +1,16 @@
 import personal from '@/lib/api/personal'
 const state = {
-  app_id: '',
-  nonce_str: '',
-  signature: '',
-  timestamp: ''
+  config: {
+    app_id: '',
+    nonce_str: '',
+    signature: '',
+    timestamp: ''
+  },
+  msg: {
+    desc: '',
+    imgUrl: '',
+    title: ''
+  }
 }
 const actions = {
   getWeixinShare ({ commit }, cb) {

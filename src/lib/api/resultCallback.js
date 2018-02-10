@@ -12,7 +12,10 @@ const resultCallback = (vm, data) => {
     } else {
       Vue.$vux.alert.show({
         title: '出错啦！！',
-        content: `错误：${data.msg}`
+        content: `错误：${data.msg}`,
+        onHide() {
+          window.location.href = 'http://web.hfhboji.com/v1/weixin/oauth'
+        }
       })
       reject(data)
     }

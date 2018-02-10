@@ -13,7 +13,7 @@
       <announcement :data="announcementList"/>
     </div>
     <div class="mg-b-2" ref="swiper2">
-      <title-model title="赛事预告" path="/home">
+      <title-model title="赛事1预告" path="/home">
         <swiper 
           auto 
           loop 

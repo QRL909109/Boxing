@@ -14,7 +14,9 @@ const state = {
 }
 const actions = {
   getWeixinShare ({ commit }, cb) {
-    personal.GetWeixinShare({}).then(data => {
+    personal.GetWeixinShare({
+      url: 'http://web.hfhboji.com'
+    }).then(data => {
       commit('UPDATESHARE', data)
     })
   }

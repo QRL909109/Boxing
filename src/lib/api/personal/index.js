@@ -92,6 +92,7 @@ export const GetUserInfo = async (data, options) => {
 export const GetWeixinShare = async (data, options) => {
   return await bjFetch({
     url: GET_WEIXIN_SHARE,
+    type: 'post',
     data,
     ...options
   })

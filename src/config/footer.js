@@ -1,21 +1,21 @@
 export const footerNav = [{
   text: '首页',
-  iconClass: 'icon-shouye',
+  iconClass: 'icon-weibiaoti--',
   link: '/home'
 }, {
   text: '资料库',
-  iconClass: 'icon-xinxi',
+  iconClass: 'icon-weibiaoti--1',
   link: '/info'
 }, {
   text: '商城',
-  iconClass: 'icon-shopping',
+  iconClass: 'icon-weibiaoti--2',
   link: '/mall'
 }, {
   text: '互动',
-  iconClass: 'icon-hudong',
+  iconClass: 'icon-weibiaoti--3',
   link: '/interactive'
 }, {
   text: '个人',
-  iconClass: 'icon-geren',
+  iconClass: 'icon-weibiaoti--4',
   link: '/personal'
 }]

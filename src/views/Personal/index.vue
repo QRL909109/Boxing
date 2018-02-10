@@ -54,43 +54,43 @@
         cellList: [{
           name: '消息',
           newNum: 0,
-          icon: 'icon-xinxi',
+          icon: 'icon-weibiaoti--5',
           link: '/personal/info'
         }, {
           name: '竞猜记录',
           newNum: 0,
-          icon: 'icon-match',
+          icon: 'icon-weibiaoti--6',
           link: '/quiz/main/recording'
         }, {
           name: '金币记录',
           newNum: 0,
-          icon: 'icon-chongzhi',
+          icon: 'icon-weibiaoti--7',
           link: '/personal/coin'
         }, {
           name: '订单记录',
           newNum: 0,
-          icon: 'icon-dingdan',
+          icon: 'icon-weibiaoti--8',
           link: '/personal/order'
         }],
         cellList2: [{
           name: '帮助中心',
           newNum: 0,
-          icon: 'icon-help',
+          icon: 'icon-weibiaoti--9',
           link: '/personal/help'
         }, {
           name: '反馈信息',
           newNum: 0,
-          icon: 'icon-xinfeng',
+          icon: 'icon-weibiaoti--10',
           link: '/personal/advice'
         }, {
           name: '联系客服',
           newNum: 0,
-          icon: 'icon-content',
+          icon: 'icon-weibiaoti--11',
           link: '/personal/contact'
         }, {
           name: '关于我们',
           newNum: 0,
-          icon: 'icon-about',
+          icon: 'icon-weibiaoti--12',
           link: '/personal/about'
         }]
       }

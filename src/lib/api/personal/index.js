@@ -18,8 +18,6 @@ export const GET_PORTAL_OWN = '/v1/portal/own' // type=2(2:帮助 3:联系客服
 // 我的资料
 export const GET_USER_INFO = '/v1/user/info'
 
-// 微信分享
-export const GET_WEIXIN_SHARE = '/v1/weixin/share'
 
 /**
  * [我的订单]
@@ -86,17 +84,6 @@ export const GetUserInfo = async (data, options) => {
     ...options
   })
 }
-/**
- * [微信分享接口]
- */
-export const GetWeixinShare = async (data, options) => {
-  return await bjFetch({
-    url: GET_WEIXIN_SHARE,
-    type: 'post',
-    data,
-    ...options
-  })
-}
 
 export default {
   GetOrderMy,
@@ -104,6 +91,5 @@ export default {
   PostOrderNew,
   PostFeedBack,
   GetPortalOwn,
-  GetUserInfo,
-  GetWeixinShare
+  GetUserInfo
 }

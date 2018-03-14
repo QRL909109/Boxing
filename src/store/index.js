@@ -7,7 +7,6 @@ import plugins from './plugins'
 
 import Loading from './modules/Loading'
 import User from './modules/User'
-import Weixin from './modules/Weixin'
 Vue.use(Vuex)
 // 开发环境开启 debug 模式
 const debug = process.env.NODE_ENV !== 'production'
@@ -15,8 +14,7 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   modules: {
     Loading,
-    User,
-    Weixin
+    User
   },
   plugins,
   strict: debug

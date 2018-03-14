@@ -14,14 +14,12 @@ import FastClick from 'fastclick'
  // filters
 import * as filters from '@/lib/filter'
 import {
-  WechatPlugin,
   AlertPlugin,
   LoadingPlugin
 } from 'vux'
 
 Vue.use(AlertPlugin)
 Vue.use(LoadingPlugin)
-Vue.use(WechatPlugin)
 
 Vue.config.productionTip = false
 
@@ -61,8 +59,6 @@ new Vue({
     App: resolve => {
       store.dispatch('updateUser', () => {
         resolve(App)
-        // 获取微信分享数据
-        store.dispatch('getWeixinShare')
       })
     }
   }

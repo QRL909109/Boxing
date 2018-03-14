@@ -5,7 +5,7 @@ export const topList = [{
   name: '直播',
   link: '/home/main/super'
 }, {
-  name: '竞猜',
+  name: '即时',
   link: '/home/main/quizing'
 }, {
   name: '赛程',

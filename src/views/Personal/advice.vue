@@ -1,7 +1,7 @@
 <!-- 反馈信息 -->
 <template>
   <div class="advice-wrap">
-    <p>@黄非红搏击，我想反馈: </p>
+    <p>@辉煌搏击，我想反馈: </p>
     <group>
       <x-textarea placeholder="有什么想说的，尽管吐槽吧！" v-model="advice"></x-textarea>
     </group>

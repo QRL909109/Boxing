@@ -23,7 +23,7 @@
       data: {
         type: Array,
         default: [{
-          msg: '黄非红竞猜平台上线！！！'
+          msg: '辉煌竞猜平台上线！！！'
         }]
       }
     },

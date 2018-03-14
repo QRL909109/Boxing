@@ -61,9 +61,9 @@ new Vue({
     App: resolve => {
       store.dispatch('updateUser', () => {
         resolve(App)
+        // 获取微信分享数据
+        store.dispatch('getWeixinShare')
       })
-      // 获取微信分享数据
-      store.dispatch('getWeixinShare')
     }
   }
 }).$mount('#app')

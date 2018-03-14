@@ -10,14 +10,15 @@ const resultCallback = (vm, data) => {
     if (data.result === 'ok') {
       resolve(data['data'])
     } else {
-      Vue.$vux.alert.show({
-        title: '出错啦！！',
-        content: `错误：${data.msg}`,
-        onHide() {
-          window.location.href = 'http://web.hfhboji.com/v1/weixin/oauth'
-        }
-      })
-      reject(data)
+      if (data.msg === '请从微信重新进入') {
+        window.location.href = 'http://web.hfhboji.com/v1/weixin/oauth'
+      } else {
+        Vue.$vux.alert.show({
+          title: '出错啦！！',
+          content: `错误：${data.msg}`
+        })
+        reject(data)
+      }
     }
   })
 }

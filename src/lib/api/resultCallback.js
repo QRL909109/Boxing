@@ -11,7 +11,7 @@ const resultCallback = (vm, data) => {
       resolve(data['data'])
     } else {
       if (data.msg === '请从微信重新进入') {
-        window.location.href = 'http://web.hfhboji.com/v1/weixin/oauth'
+        // window.location.href = 'http://web.hfhboji.com/v1/weixin/oauth'
       } else {
         Vue.$vux.alert.show({
           title: '出错啦！！',

@@ -28,7 +28,8 @@
             case 'info': this.currentIndex = 1; break
             case 'mall': this.currentIndex = 2; break
             case 'interactive': this.currentIndex = 3; break
-            case 'personal': this.currentIndex = 4; break
+            case 'personal': this.currentIndex = 3; break
+            case 'rule': this.currentIndex = 2; break
             default: this.currentIndex = 0; break
           }
           // this.currentIndex = val.meta.index

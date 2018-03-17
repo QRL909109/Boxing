@@ -54,12 +54,12 @@ new Vue({
   store,
   render: h => h('App'),
   template: '<App/>',
-  // components: {App}
-  components: {
+  components: {App}
+  /* components: {
     App: resolve => {
       store.dispatch('updateUser', () => {
         resolve(App)
       })
     }
-  }
+  } */
 }).$mount('#app')

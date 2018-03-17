@@ -6,8 +6,12 @@ export const footerNav = [{
   text: '资料库',
   iconClass: 'icon-weibiaoti--1',
   link: '/info'
-}, 
-/*{
+}, {
+  text: '规则',
+  iconClass: 'icon-rule',
+  link: '/rule'
+},
+/* {
   text: '商城',
   iconClass: 'icon-weibiaoti--2',
   link: '/mall'

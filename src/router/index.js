@@ -192,6 +192,42 @@ export default new Router({
           component: r => require.ensure([], () => r(require(`../views/Quiz/recording.vue`)), 'quiz_recording')
         }]
       }]
+    },
+     // --- 游戏规则
+    {
+      path: '/rule',
+      name: 'Rule',
+      redirect: '/rule/index',
+      component: r => require.ensure([], () => r(require(`../views/layout.vue`)), 'layout'),
+      children: [{
+        path: 'index',
+        name: 'rule_index',
+        component: r => require.ensure([], () => r(require(`../views/Rule/index.vue`)), 'rule_index')
+      }]
+    },
+    // 登录
+    {
+      path: '/login',
+      name: 'Login',
+      component: r => require.ensure([], () => r(require(`../views/Login/login.vue`)), 'login_in')
+    },
+    // 注册
+    {
+      path: '/sign',
+      name: 'Login',
+      component: r => require.ensure([], () => r(require(`../views/Login/sign.vue`)), 'login_sign')
+    },
+    // 找回密码
+    {
+      path: '/findPassword',
+      name: 'Login',
+      component: r => require.ensure([], () => r(require(`../views/Login/find.vue`)), 'login_find')
+    },
+    // 更改密码
+    {
+      path: '/updatePassword',
+      name: 'Login',
+      component: r => require.ensure([], () => r(require(`../views/Login/updatePassword.vue`)), 'login_update_password')
     }
   ]
 })

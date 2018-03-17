@@ -3,9 +3,6 @@
   <div class="personal-info-wrap height100">
     <view-box ref="viewBox">
       <div class="person__info">
-        <div class="person__tou">
-          <img :src="user.avatar" alt="" class="img-tou">
-        </div>
         <div class="person__name-money">
           <div class="money">
             <add-money :money="user.coin"/>
@@ -39,13 +36,16 @@
             </cell>
           </template>
         </group>
+        <group>
+          <x-button v-show="!user.isLoagin" type="default" @click.native="loginOut">退出登录</x-button>
+        </group>
       </div>
     </view-box>
   </div>
 </template>
 <script>
   import addMoney from '@/components/AddMoney'
-  import { Cell, Group, Badge, ViewBox } from 'vux'
+  import { Cell, Group, Badge, ViewBox, XButton } from 'vux'
   import { mapState } from 'vuex'
   export default {
     data () {
@@ -92,6 +92,11 @@
           newNum: 0,
           icon: 'icon-weibiaoti--12',
           link: '/personal/about'
+        }, {
+          name: '密码管理',
+          newNum: 0,
+          icon: 'icon-mima',
+          link: '/updatePassword'
         }]
       }
     },
@@ -100,7 +105,8 @@
       Cell,
       Badge,
       addMoney,
-      ViewBox
+      ViewBox,
+      XButton
     },
     computed: {
       ...mapState({
@@ -108,7 +114,14 @@
       })
     },
     created () {
-      this.$store.dispatch('updateUser')
+      if (!this.user.isLogin) {
+        this.$store.dispatch('updateFlowPath', {
+          flowPath: this.$route.path
+        })
+        this.$router.push('/login')
+      } else {
+        this.$store.dispatch('updateUser')
+      }
     },
     methods: {
       onClick (item) {
@@ -118,6 +131,9 @@
       },
       handleEditName () {
 
+      },
+      loginOut () {
+        console.log('退出')
       }
     }
   }
@@ -131,6 +147,7 @@
     flex-direction: column
     align-items: center
     background: $grey-800
+    padding-top: 0.8rem
     .person__tou
       justify-content: center
       padding: 1rem 0 0.5rem 0
@@ -152,4 +169,6 @@
       +font-dpr(20px)
   .iconfont
     vertical-align: middle
+  .weui-btn_default
+    background-color: $white
 </style>

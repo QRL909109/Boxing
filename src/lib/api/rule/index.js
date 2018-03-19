@@ -1,6 +1,6 @@
 import bjFetch from '../fetch'
-//投注
-export const GET_RULE = '/v1/bet/game' // game_id -- 比赛id  guess -- red/blue coin -- 金币  bet_type -- 投注类型，目前为1
+// 游戏规则
+export const GET_RULE = '/v1/portal/rule' 
 /**
  * [投注]
  */

@@ -36,6 +36,7 @@
     font-weight: 600 
     margin-top: 0.5rem
     color: #474747
+    text-align: center
   .article__header .header h3 
     font-size: 0.30rem
     line-height: 0.5rem

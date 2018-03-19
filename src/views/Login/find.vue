@@ -27,13 +27,13 @@
               <div class="input-name">
                 密码
               </div>
-              <x-input type="password" required :min='6' placeholder="请输入您的密码" class="input-text" v-model="password"></x-input>
+              <x-input type="password" required :min='4' :max='24' placeholder="请输入您的密码" class="input-text" v-model="password"></x-input>
             </div>
              <div class="input-item">
               <div class="input-name">
                 密码确认
               </div>
-              <x-input type="password" required :min='6' placeholder="请再次输入密码确认" class="input-text" v-model="rePassword" :equal-with="password"></x-input>
+              <x-input type="password" required :min='4' :max='24' placeholder="请再次输入密码确认" class="input-text" v-model="rePassword" :equal-with="password"></x-input>
             </div>
           </div>
         </template>

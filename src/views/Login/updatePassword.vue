@@ -8,19 +8,19 @@
               <div class="input-name">
                 原密码
               </div>
-              <x-input type="password" required :min='6' placeholder="请输入您的原密码" class="input-text" v-model="password"></x-input>
+              <x-input type="password" required :min='4' :max='24' placeholder="请输入您的原密码" class="input-text" v-model="password"></x-input>
             </div>
             <div class="input-item">
               <div class="input-name">
                 新密码
               </div>
-              <x-input type="password" required :min='6' placeholder="请输入您的新密码" class="input-text" v-model="newPassword"></x-input>
+              <x-input type="password" required :min='4' :max='24' placeholder="请输入您的新密码" class="input-text" v-model="newPassword"></x-input>
             </div>
              <div class="input-item">
               <div class="input-name">
                 密码确认
               </div>
-              <x-input type="password" required :min='6' placeholder="请再次输入密码确认" class="input-text" v-model="reNewPassword" :equal-with="newPassword"></x-input>
+              <x-input type="password" required :min='4' :max='24' placeholder="请再次输入密码确认" class="input-text" v-model="reNewPassword" :equal-with="newPassword"></x-input>
             </div>
           </div>
         <div class="input-submit">

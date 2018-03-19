@@ -8,14 +8,14 @@
             <div class="input-name">
               账号
             </div>
-            <x-input type="text" required placeholder="请输入您的账号名称" class="input-text" v-model="account"></x-input>
+            <x-input type="text" required :min='4' :max="24" placeholder="请输入您的账号名称" class="input-text" v-model="account" ref="account"></x-input>
           </div>
 
           <div class="input-item">
             <div class="input-name">
               密码
             </div>
-            <x-input type="password" required :min='6' placeholder="请输入密码" class="input-text" v-model="password"></x-input>
+            <x-input type="password" required :min='4' :max='24' placeholder="请输入密码" class="input-text" v-model="password" ref="password"></x-input>
           </div>
         </div>
         <div class="input-note">
@@ -33,23 +33,29 @@
         <div class="fuwu-note text-center">
           登录即代表你同意辉煌搏击服务和隐私条款
         </div>
+        <toast v-model="totatVisi" :type="toastType" width="15em" :time="1800"  @on-hide="onHide">{{warnText}}</toast>
       </div>
     </view-box>
   </div>
 </template>
 <script>
-import { XButton, ViewBox, XInput } from 'vux'
+import { XButton, ViewBox, XInput, Toast } from 'vux'
 import { mapState } from 'vuex'
+import login from '@/lib/api/login'
 export default {
   components: {
     XButton,
     ViewBox,
-    XInput
+    XInput,
+    Toast
   },
   data () {
     return {
       account: '',
-      password: ''
+      password: '',
+      totatVisi: false,
+      toastType: 'text',
+      warnText: ''
     }
   },
   computed: {
@@ -58,12 +64,47 @@ export default {
     })
   },
   methods: {
+    onHide () {
+      if (this.toastType === 'success') {
+        this.$router.push(this.user.flowPath || '/')
+        this.$store.dispatch('updateFlowPath', {
+          flowPath: '',
+          isLogin: true
+        })
+      }
+    },
     handleLogin () {
-      console.log('登陆', this.account, this.password, this.user.flowPath)
-      this.$router.push(this.user.flowPath)
-      this.$store.dispatch('updateFlowPath', {
-        flowPath: '',
-        isLogin: true
+      if (this.account === '') {
+        this.totatVisi = true
+        this.toastType = 'warn'
+        this.warnText = '账号不能为空'
+        return
+      }
+      if (this.account.length < 4) {
+        this.totatVisi = true
+        this.toastType = 'warn'
+        this.warnText = '账号不能少于4位'
+        return
+      }
+      if (this.password === '') {
+        this.totatVisi = true
+        this.toastType = 'warn'
+        this.warnText = '密码不能为空'
+        return
+      }
+      if (this.$refs.password.hasErrors) {
+        this.totatVisi = true
+        this.toastType = 'warn'
+        this.warnText = '请填写正确的密码'
+        return
+      }
+      login.PostLogin({
+        account: this.account,
+        passw: this.password
+      }).then(data => {
+        this.totatVisi = true
+        this.toastType = 'success'
+        this.warnText = '注册成功！'
       })
     }
   }

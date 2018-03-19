@@ -3,33 +3,35 @@
   <div class="rule-wrap height100">
     <title-model title="游戏规则"></title-model>
      <view-box ref="articleViewBox">
-        <div class="about__content" v-html="content"></div>
+       <!-- 文章详情 -->
+        <article-wrap :data="articleData"/>
      </view-box>
   </div>
 </template>
 <script>
   import { ViewBox } from 'vux'
   import titleModel from '@/components/titleModel'
+  import articleWrap from '@/components/ArticleWrap'
   import rule from '@/lib/api/rule'
   import { escape2Html } from '@/lib/filter'
   export default {
     data () {
       return {
-        content: ''
+        articleData: {}
       }
     },
     methods: {
       handleGetInfo () {
-        rule.GetRule({
-          type: 2
-        }).then(data => {
-          this.content = escape2Html(data.post_content)
+        rule.GetRule().then(data => {
+          data.post_content = escape2Html(data.post_content)
+          this.articleData = data
         })
       }
     },
     components: {
       titleModel,
-      ViewBox
+      ViewBox,
+      articleWrap
     },
     created () {
       this.handleGetInfo()

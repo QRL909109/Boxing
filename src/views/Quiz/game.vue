@@ -280,7 +280,7 @@
           bet_type: 1
         }
         quiz.PostBetGame(queryData).then(data => {
-          this.toastType = 'test'
+          this.toastType = 'text'
           this.warnText = '投注成功'
           this.warnVisi = true
           this.guessActive = false

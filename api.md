@@ -754,7 +754,7 @@ response
   "phone":""
 }
 ```
-### 用户找回密码、修改密码
+### 用户找回密码
 ```
 url:  /v1/user/update/passw
 method: post
@@ -777,24 +777,16 @@ response
 }
 ```
 
-### 用户登录
+### 用户修改密码
 ```
-url:  /v1/user/login
+url:  /v1/user/edit/passw
 method: post
 
 
 params:
-    account string: 4-24长度，前端校验一遍
-    passw string: 4-24长度，前端校验一遍
+    new_passw string: 4-24长度，前端校验一遍
+    old_passw string 4-24长度,前端校验一遍
 
 response
-{
-  "username": "随风",
-  "sex": 1,
-  "avatar": "http://wx.qlogo.cn/mmopen/vi_32/oLu3ZaZUfdP0l6vFgDkxG7IOMq9xqUGLG48hNm57ib3lrCdia5SknKqn0l0pkj70AvMJkKCCqztuhDVHzhP0TIVg/0",
-  "coin":1024         # 用户金币数量
-  “account”:"",
-  "passw":"",
-  "phone":""
-}
+
 ```

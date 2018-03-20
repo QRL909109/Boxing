@@ -3,12 +3,15 @@
   <div class="personal-info-wrap height100">
     <view-box ref="viewBox">
       <div class="person__info">
+        <div class="person__tou">
+          <img :src="user.avatar" alt="" class="img-tou">
+        </div>
         <div class="person__name-money">
           <div class="money">
             <add-money :money="user.coin"/>
           </div>
           <div class="nick-name">
-            {{user.username}}
+            {{user.account}}
             <!-- <i class="iconfont icon-bianji"></i> -->
           </div>
         </div>
@@ -36,9 +39,9 @@
             </cell>
           </template>
         </group>
-        <group>
+        <!-- <group>
           <x-button v-show="!user.isLoagin" type="default" @click.native="loginOut">退出登录</x-button>
-        </group>
+        </group> -->
       </div>
     </view-box>
   </div>
@@ -114,14 +117,7 @@
       })
     },
     created () {
-      if (!this.user.isLogin) {
-        this.$store.dispatch('updateFlowPath', {
-          flowPath: this.$route.path
-        })
-        this.$router.push('/login')
-      } else {
-        this.$store.dispatch('updateUser')
-      }
+      this.$store.dispatch('updateUser')
     },
     methods: {
       onClick (item) {

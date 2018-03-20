@@ -40,7 +40,6 @@
 </template>
 <script>
 import { XButton, ViewBox, XInput, Toast } from 'vux'
-import { mapState } from 'vuex'
 import login from '@/lib/api/login'
 export default {
   components: {
@@ -58,19 +57,12 @@ export default {
       warnText: ''
     }
   },
-  computed: {
-    ...mapState({
-      user: state => state.User
-    })
-  },
   methods: {
     onHide () {
       if (this.toastType === 'success') {
-        this.$router.push(this.user.flowPath || '/')
-        this.$store.dispatch('updateFlowPath', {
-          flowPath: '',
-          isLogin: true
-        })
+        let redirectUrl = sessionStorage.getItem('loginKey') || '/'
+        sessionStorage.setItem('loginKey', '/')
+        window.location.href = redirectUrl
       }
     },
     handleLogin () {

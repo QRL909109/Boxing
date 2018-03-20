@@ -145,6 +145,18 @@
         user: state => state.User
       })
     },
+    watch: {
+      user: {
+        handler (val) {
+          this.phone = val.phone
+        },
+        deep: true,
+        immediate: true
+      }
+    },
+    created () {
+      this.$store.dispatch('updateUser')
+    },
     components: {
       XDialog,
       Qrcode,

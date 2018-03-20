@@ -145,6 +145,7 @@
       }
     },
     created () {
+      // this.$store.dispatch('updateUser')
       this.handleGetBetRecord()
     },
     mounted () {

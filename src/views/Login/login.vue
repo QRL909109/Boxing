@@ -60,8 +60,8 @@ export default {
   methods: {
     onHide () {
       if (this.toastType === 'success') {
-        let redirectUrl = sessionStorage.getItem('loginKey') || '/'
-        sessionStorage.setItem('loginKey', '/')
+        let redirectUrl = sessionStorage.getItem('loginKey') || ''
+        sessionStorage.setItem('loginKey', '')
         window.location.href = redirectUrl
       }
     },
@@ -96,7 +96,7 @@ export default {
       }).then(data => {
         this.totatVisi = true
         this.toastType = 'success'
-        this.warnText = '注册成功！'
+        this.warnText = '登录成功！'
       })
     }
   }

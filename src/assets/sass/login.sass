@@ -26,9 +26,19 @@
       margin-top: 0.4rem
       border: none
       border-bottom: 1px solid #DEDEDE
-      input::-webkit-input-placeholder 
-        +font-dpr(19px)
-        color: #D9D9D9
+      input
+        &::-webkit-input-placeholder
+          +font-dpr(18px)
+          color: #D9D9D9
+          line-height: 1.41176471
+        &::-moz-placeholder
+          +font-dpr(18px)
+          color: #D9D9D9
+          line-height: 1.41176471
+        &:-ms-input-placeholder
+          +font-dpr(18px)
+          color: #D9D9D9
+          line-height: 1.41176471
 .input-note
   display: flex
   justify-content: space-between

@@ -142,6 +142,7 @@
       handleGuess (type, man, odds) {
         // 只有 status为1 才能进行投注
         if (+this.analysisInfo.info.status === 1) {
+          this.$store.dispatch('updateUser')
           this.bettingInfo = Object.assign(this.bettingInfo, {
             type,
             name: man.name,

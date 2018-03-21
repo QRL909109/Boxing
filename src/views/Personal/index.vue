@@ -39,9 +39,9 @@
             </cell>
           </template>
         </group>
-        <!-- <group>
-          <x-button v-show="!user.isLoagin" type="default" @click.native="loginOut">退出登录</x-button>
-        </group> -->
+        <group>
+          <x-button type="default" @click.native="loginOut">退出登录</x-button>
+        </group>
       </div>
     </view-box>
   </div>
@@ -50,6 +50,7 @@
   import addMoney from '@/components/AddMoney'
   import { Cell, Group, Badge, ViewBox, XButton } from 'vux'
   import { mapState } from 'vuex'
+  import login from '@/lib/api/login'
   export default {
     data () {
       return {
@@ -129,7 +130,12 @@
 
       },
       loginOut () {
-        console.log('退出')
+        sessionStorage.setItem('loginKey', window.location.hash)
+        login.PostLoginOut({}).then(data => {
+          this.$router.push({
+            path: '/login'
+          })
+        })
       }
     }
   }

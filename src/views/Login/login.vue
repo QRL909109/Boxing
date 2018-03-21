@@ -107,7 +107,6 @@ export default {
       next()
     } else {
       let loginKey = sessionStorage.getItem('loginKey').replace('#', '')
-      console.log(333333, loginKey, to.fullPath, loginKey === to.fullPath)
       if (loginKey === to.fullPath) {
         next({
           path: '/home'

@@ -7,6 +7,8 @@ export const POST_LOGIN = '/v1/user/login'
 export const POST_UPDATE_PASSWORD = '/v1/user/update/passw' 
 // 用户修改密码
 export const POST_EDIT_PASSWORD = '/v1/user/edit/passw' 
+// 用户退出登录
+export const POST_LOGINOUT = '/v1/user/logout'
 /**
  * [用户注册]
  *  account string: 4-24长度，前端校验一遍
@@ -30,6 +32,14 @@ export const PostLogin = async (data, options) => {
   return await bjFetch({
     url: POST_LOGIN,
     type: 'post',
+    data,
+    ...options
+  })
+}
+export const PostLoginOut = async (data, options) => {
+  return await bjFetch({
+    url: POST_LOGINOUT,
+    type: 'get',
     data,
     ...options
   })
@@ -67,5 +77,6 @@ export default {
   PostRegister,
   PostLogin,
   PostUpdatePass,
-  PostEditPass
+  PostEditPass,
+  PostLoginOut
 }

@@ -99,8 +99,15 @@ export default {
         this.warnText = '登录成功！'
       })
     }
+  },
+  beforeRouteLeave (to, from, next) {
+    if (from.path !== '/home') {
+      next()
+    }
+    this.$router.push({
+      path: '/home'
+    })
   }
-
 }
 </script>
 <style lang="sass">

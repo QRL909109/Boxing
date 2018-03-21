@@ -101,12 +101,21 @@ export default {
     }
   },
   beforeRouteLeave (to, from, next) {
-    if (from.path !== '/home') {
+    console.log('to:', to, 'from:', from, sessionStorage.getItem('loginKey'))
+    if (to.name === 'find' || to.name === 'sign') {
+      // 过滤两个跳转的  白名单
       next()
+    } else {
+      let loginKey = sessionStorage.getItem('loginKey').replace('#', '')
+      console.log(333333, loginKey, to.fullPath, loginKey === to.fullPath)
+      if (loginKey === to.fullPath) {
+        next({
+          path: '/home'
+        })
+      } else {
+        next()
+      }
     }
-    this.$router.push({
-      path: '/home'
-    })
   }
 }
 </script>

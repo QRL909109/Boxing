@@ -214,19 +214,19 @@ export default new Router({
     // 注册
     {
       path: '/sign',
-      name: 'Login',
+      name: 'sign',
       component: r => require.ensure([], () => r(require(`../views/Login/sign.vue`)), 'login_sign')
     },
     // 找回密码
     {
       path: '/findPassword',
-      name: 'Login',
+      name: 'find',
       component: r => require.ensure([], () => r(require(`../views/Login/find.vue`)), 'login_find')
     },
     // 更改密码
     {
       path: '/updatePassword',
-      name: 'Login',
+      name: 'update',
       component: r => require.ensure([], () => r(require(`../views/Login/updatePassword.vue`)), 'login_update_password')
     }
   ]

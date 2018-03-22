@@ -1,7 +1,7 @@
-<!-- 金币记录 -->
+<!-- 账户明细 -->
 <template>
   <div class="info-coin-wrap height100">
-    <title-model title="金币记录"></title-model>
+    <title-model title="账户明细"></title-model>
       <view-box ref="viewBox">
         <div style="margin-top: 0.2rem">
          <scroller lock-x :height="scrollHeight"

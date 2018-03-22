@@ -61,12 +61,12 @@
           icon: 'icon-weibiaoti--5',
           link: '/personal/info'
         }, {
-          name: '竞猜记录',
+          name: '投注状况',
           newNum: 0,
           icon: 'icon-weibiaoti--6',
           link: '/quiz/main/recording'
         }, {
-          name: '金币记录',
+          name: '账户明细',
           newNum: 0,
           icon: 'icon-weibiaoti--7',
           link: '/personal/coin'

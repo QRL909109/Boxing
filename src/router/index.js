@@ -21,7 +21,7 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
-      redirect: '/home/main/index',
+      redirect: '/home/main/quizing',
       component: r => require.ensure([], () => r(require(`../views/layout.vue`)), 'layout'),
       children: [
         {

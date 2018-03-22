@@ -2,7 +2,7 @@
   <div class="login-wrap height100">
     <view-box ref="viewBoxRecharge">
       <div class="login-main">
-        <h4 class="login-header text-center">辉煌搏击登录</h4>
+        <h4 class="login-header text-center">辉煌搏击</h4>
         <div class="login-input-wrap">
           <div class="input-item">
             <div class="input-name">

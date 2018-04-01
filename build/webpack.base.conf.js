@@ -19,7 +19,6 @@ const createLintingRule = () => ({
     ,fix: true
   }
 })
-
 const webpackConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {

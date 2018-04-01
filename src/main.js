@@ -34,6 +34,15 @@ Vue.http.interceptors.push(function (request, next) { // 拦截器
   request.credentials = true
   next()
 })
+
+// 欢迎页面
+console.log('查', JSON.parse(window.sessionStorage.getItem('welcomePage')))
+if (!JSON.parse(window.sessionStorage.getItem('welcomePage'))) {
+  let divElement = document.createElement('div')
+  divElement.id = 'welcome-page'
+  document.body.appendChild(divElement)
+  window.sessionStorage.setItem('welcomePage', false)
+}
 // 全局改变 loading
 router.beforeEach(function (to, from, next) {
   store.commit('UPDATELOADING', {isLoading: true})

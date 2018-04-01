@@ -21,7 +21,7 @@ export const footerNav = [{
   link: '/interactive'
 }, */
 {
-  text: '个人',
+  text: '账号',
   iconClass: 'icon-weibiaoti--4',
   link: '/personal'
 }]

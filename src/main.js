@@ -41,7 +41,7 @@ if (!JSON.parse(window.sessionStorage.getItem('welcomePage'))) {
   let divElement = document.createElement('div')
   divElement.id = 'welcome-page'
   document.body.appendChild(divElement)
-  window.sessionStorage.setItem('welcomePage', false)
+  window.sessionStorage.setItem('welcomePage', true)
 }
 // 全局改变 loading
 router.beforeEach(function (to, from, next) {

@@ -25,12 +25,18 @@ export default {
   },
   created () {
     let weclome = document.getElementById('welcome-page')
-    // setTimeout(() => {
-    //   weclome && (weclome.style.opacity = 0.9)
-    // }, 100)
-    setTimeout(() => {
-      weclome && (weclome.style.display = 'none')
-    }, 2000)
+    let num = 3
+    let timer = setInterval(() => {
+      if (weclome) {
+        if (num === 0) {
+          clearInterval(timer)
+          weclome && (weclome.style.display = 'none')
+        }
+        weclome.children[0].innerText = num--
+      } else {
+        clearInterval(timer)
+      }
+    }, 1000)
   }
 }
 </script>

@@ -39,9 +39,13 @@ Vue.http.interceptors.push(function (request, next) { // 拦截器
 console.log('查', JSON.parse(window.sessionStorage.getItem('welcomePage')))
 if (!JSON.parse(window.sessionStorage.getItem('welcomePage'))) {
   let divElement = document.createElement('div')
+  let spanElement = document.createElement('div')
   divElement.id = 'welcome-page'
+  spanElement.className = 'daoshu'
+  spanElement.innerText = '3'
+  divElement.appendChild(spanElement)
   document.body.appendChild(divElement)
-  window.sessionStorage.setItem('welcomePage', true)
+  window.sessionStorage.setItem('welcomePage', false)
 }
 // 全局改变 loading
 router.beforeEach(function (to, from, next) {

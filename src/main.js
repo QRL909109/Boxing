@@ -45,7 +45,7 @@ if (!JSON.parse(window.sessionStorage.getItem('welcomePage'))) {
   spanElement.innerText = '3'
   divElement.appendChild(spanElement)
   document.body.appendChild(divElement)
-  window.sessionStorage.setItem('welcomePage', false)
+  window.sessionStorage.setItem('welcomePage', true)
 }
 // 全局改变 loading
 router.beforeEach(function (to, from, next) {

@@ -9,6 +9,22 @@
     padding: 1rem
   .login-header
     +font-dpr(28px)
+  &.login-bg
+    background-size: cover
+    color: $white
+    .input-item
+      .input-name
+        color: $grey-400
+    .input-note a
+      color: $grey-400
+    .input-text
+      input
+        &::-webkit-input-placeholder
+          color: $grey-200
+        &::-moz-placeholder
+          color: $grey-200
+        &:-ms-input-placeholder
+          color: $grey-200
 .login-input-wrap
   padding-top: 0.5rem
   .weui-cell:before
@@ -50,4 +66,5 @@
   +font-dpr(12px)
   color: #999999
   margin-top: 3rem
+
 

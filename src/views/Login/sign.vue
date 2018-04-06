@@ -1,5 +1,5 @@
 <template>
-  <div class="login-wrap height100">
+  <div class="login-wrap login-bg height100">
     <view-box ref="viewBoxRecharge">
       <div class="login-main">
         <h4 class="login-header text-center">{{msg}}</h4>
@@ -170,4 +170,6 @@ export default {
 </script>
 <style lang="sass">
 @import '~assets/sass/login'
+.login-bg
+  background: url(./bg.jpg) no-repeat !important
 </style>

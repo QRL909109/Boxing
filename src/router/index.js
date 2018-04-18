@@ -30,37 +30,37 @@ export default new Router({
           children: [{
             path: 'index',
             name: 'home_index',
-            meta: {index: 0},
+            meta: {index: 111},
             component: r => require.ensure([], () => r(require(`../views/Home/index.vue`)), 'home_index')
           }, {
             path: 'race',
             name: 'home_race',
-            meta: {index: 1},
+            meta: {index: 222},
             component: r => require.ensure([], () => r(require(`../views/Home/raceVideo.vue`)), 'home_race')
           }, {
             path: 'quiz',
             name: 'home_quiz',
-            meta: {index: 3},
+            meta: {index: 0},
             component: r => require.ensure([], () => r(require(`../views/Home/quiz.vue`)), 'home_quiz')
           }, {
             path: 'quized',
             name: 'home_quized',
-            meta: {index: 4},
+            meta: {index: 2},
             component: r => require.ensure([], () => r(require(`../views/Home/quized.vue`)), 'home_quized')
           }, {
             path: 'quizing',
             name: 'home_quizing',
-            meta: {index: 2},
+            meta: {index: 1},
             component: r => require.ensure([], () => r(require(`../views/Home/quizing.vue`)), 'home_quizing')
           }, {
             path: 'super',
             name: 'home_super',
-            meta: {index: 1},
+            meta: {index: 333},
             component: r => require.ensure([], () => r(require(`../views/Home/superVideo.vue`)), 'home_super')
           }, {
             path: 'pic',
             name: 'home_pic',
-            meta: {index: 4},
+            meta: {index: 444},
             component: r => require.ensure([], () => r(require(`../views/Home/picGroup.vue`)), 'home_pic')
           }]
         },

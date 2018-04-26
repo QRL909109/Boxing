@@ -30,7 +30,7 @@ export default new Router({
           children: [{
             path: 'index',
             name: 'home_index',
-            meta: {index: 111},
+            meta: {index: 0},
             component: r => require.ensure([], () => r(require(`../views/Home/index.vue`)), 'home_index')
           }, {
             path: 'race',
@@ -40,17 +40,17 @@ export default new Router({
           }, {
             path: 'quiz',
             name: 'home_quiz',
-            meta: {index: 0},
+            meta: {index: 1},
             component: r => require.ensure([], () => r(require(`../views/Home/quiz.vue`)), 'home_quiz')
           }, {
             path: 'quized',
             name: 'home_quized',
-            meta: {index: 2},
+            meta: {index: 3},
             component: r => require.ensure([], () => r(require(`../views/Home/quized.vue`)), 'home_quized')
           }, {
             path: 'quizing',
             name: 'home_quizing',
-            meta: {index: 1},
+            meta: {index: 2},
             component: r => require.ensure([], () => r(require(`../views/Home/quizing.vue`)), 'home_quizing')
           }, {
             path: 'super',

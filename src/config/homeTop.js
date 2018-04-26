@@ -1,8 +1,9 @@
 export const topList = [
+  {
+    name: '头条',
+    link: '/home/main/index'
+  },
 // {
-//   name: '头条',
-//   link: '/home/main/index'
-// }, {
 //   name: '直播',
 //   link: '/home/main/super'
 // },

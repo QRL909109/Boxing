@@ -12,11 +12,17 @@
               </div>
               <x-input type="text" :min='4' :max="24" required placeholder="请输入您的账号名称" class="input-text" ref="account" v-model="account"></x-input>
             </div>
-             <div class="input-item">
+            <div class="input-item">
               <div class="input-name">
                 手机号
               </div>
               <x-input type="tel" required placeholder="请输入手机号" class="input-text" v-model="phone" ref="phone" is-type="china-mobile"></x-input>
+            </div>
+            <div class="input-item">
+              <div class="input-name">
+                推荐账号
+              </div>
+              <x-input type="text" :min='4' :max="24" required placeholder="请输入推荐人账号" class="input-text" ref="recommend" v-model="recommend"></x-input>
             </div>
           </div>
           <div class="input-note">
@@ -59,7 +65,7 @@
         </div>
       </div>
     </view-box>
-    <toast v-model="totatVisi" :type="toastType" width="15em" :time="1800"  @on-hide="onHide">{{warnText}}</toast>
+    <toast v-model="totatVisi" :type="toastType" width="15em" :time="2000"  @on-hide="onHide">{{warnText}}</toast>
   </div>
 </template>
 <script>
@@ -81,6 +87,7 @@ export default {
       account: '',
       phone: '',
       password: '',
+      recommend: '',
       rePassword: '',
       totatVisi: false,
       toastType: 'text',
@@ -157,11 +164,12 @@ export default {
       login.PostRegister({
         account: this.account,
         passw: this.password,
-        phone: this.phone
+        phone: this.phone,
+        recommend: this.recommend
       }).then(data => {
         this.totatVisi = true
         this.toastType = 'success'
-        this.warnText = '注册成功！'
+        this.warnText = data.msg || '注册成功！'
       })
     }
   }
